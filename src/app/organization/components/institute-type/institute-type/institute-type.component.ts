@@ -9,26 +9,47 @@ import { Validations } from '../../../../shared/Services/Validations'
   styleUrls: ['./institute-type.component.scss']
 })
 export class InstituteTypeComponent implements OnInit {
-  disableButton : boolean = true
+  disabledButton : boolean = true
   instituteType : string = ''
-  showDangerMessage: boolean = false
   validations : any
+  showMessage : boolean = false
+  message : string
+  class : string = ""
 
   constructor( private activatedRoute : ActivatedRoute, private router : Router) { }
 
   onAddInstituteType( event : Event ){
-    this.disableButton = false
     this.instituteType = (<HTMLInputElement>event.target).value
+    const validationResult = this.validations.validateName(this.instituteType)
+    console.log(validationResult)
+    if(validationResult){
+      this.disabledButton = false
+      this.showMessage = false
+    }
+    else{
+      if(this.instituteType.trim() === ''){
+        this.disabledButton = true
+        this.showMessage = true
+        this.class = 'alert alert-danger'
+        this.message = 'Institute Type Can Not Be Blank'
+      } else{
+        this.disabledButton=true
+        this.showMessage = true
+        this.class = 'alert alert-danger'
+        this.message = 'Numbers And  Special Characters Are Not Allowed . '
+
+      }
+    }
 
   }
 
   onSubmit(){
-    const validationResult = this.validations.validateName(this.instituteType)
-    console.log(validationResult)
-    if(validationResult){
       const instituteTypeObj = {
         instituteType : this.instituteType
       }
+      this.showMessage = true
+      this.class = 'alert alert-success'
+      this.message = 'Institute Type Added Successfully'
   
       console.log(instituteTypeObj)
   
@@ -38,18 +59,13 @@ export class InstituteTypeComponent implements OnInit {
       })
 
       .then(result =>{
+        
         console.log(result)
         this.router.navigate(['/org/list-institute-type'])
         })
       .catch(err => {
         console.log(err)
       })
-
-    }
-    else {
-      this.showDangerMessage = true
-    }
-
   }
 
   ngOnInit(): void {

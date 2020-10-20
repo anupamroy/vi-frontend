@@ -87,9 +87,10 @@
                         <span class="float-right"
                             ><a
                                 class="text-light btn mb-3"
-                                href="edit-dashboard.html"
-                            >
-                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                                (click) = "goToDashboard()">              
+                                <i 
+                                class="fas fa-tachometer-alt"
+                                ></i> Dashboard
                             </a>
                         </span>
                     </h5>
@@ -107,21 +108,23 @@
                                         <span class="float-right"
                                             ><a
                                                 class="btn mb-3"
-                                                href="list-fees-group.html"
-                                            >
+                                                (click) = "goToView()"
+
+                                                >
                                                 <i class="fas fa-eye"></i> View
                                             </a>
                                         </span>
                                         <span class="float-right"
                                             ><a
                                                 class="btn mb-3"
-                                                href="add-fees-group.html"
-                                            >
+                                                (click)='goToAdd()'
+                                                >
                                                 <i class="fas fa-edit"></i> Add
                                             </a>
                                         </span>
                                     </h5>
-                                    <div class= "alert alert-danger" *ngIf = 'showDangerMessage'>Institute Type must not be empty or number</div>
+                                    <div class={{class}} style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;" *ngIf = 'showMessage'>{{message}}</div>
+
                                 </div>
                                 <!--  <div class="col-lg-3 col-sm-12">
                             <button type="submit" class="btn-mat"><span>View Department</span></button>
@@ -147,9 +150,10 @@
                                                 name="feesGroup"
                                                 id="feesGroup"
                                                 class="form-control inputFocus"
-                                                placeholder="Fees Group"
+                                                placeholder="Institute Type"
                                                 required          
                                                 [(ngModel)] = 'newInstituteType'
+                                                (input) = 'onEditInstituteType($event)'
                                             />
                                         </div>
                                         <div
@@ -158,7 +162,7 @@
                                             <button
                                                 type="button"
                                                 id="cusEdit"
-                                                
+                                                [disabled]='disabledButton'
                                                 (click) = "onClick()"
                                                 class="btn btn-warning btn-common-color btn-lg text-white mt-3"
                                             >

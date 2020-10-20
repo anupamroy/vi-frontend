@@ -1,3 +1,4 @@
+import { NumberFormatStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { Validations} from '../../../../shared/Services/Validations'
@@ -13,17 +14,57 @@ export class EditInstituteTypeComponent implements OnInit {
   oldInstituteType = "MTech"
   newInstituteType = ""
   id = ""
-  showDangerMessage : boolean = false
+  
   validations : any
+  disabledButton : boolean = false
+  showMessage : boolean = false
+  message : string
+  class : string = ""
 
   constructor(private activatedRoute : ActivatedRoute, private router : Router ) { }
+  onEditInstituteType( event : Event ){
+    
+    const validationResult = this.validations.validateName(this.newInstituteType)
+    console.log(validationResult)
+    if(validationResult ){
+      this.disabledButton = false
+      this.showMessage = false
+    }
+    else {
+      if(this.newInstituteType.trim() === ''){
+        this.disabledButton = true
+        this.showMessage = true
+        this.class = 'alert alert-danger'
+        this.message = 'Institute Type Can Not Be Blank'
+      } else{
+        this.disabledButton=true
+        this.showMessage = true
+        this.class = 'alert alert-danger'
+        this.message = 'Numbers And  Special Characters Are Not Allowed . '
+
+      }
+      
+    }
+    
+    this.newInstituteType = (<HTMLInputElement>event.target).value
+
+  }
+  goToView(){
+    this.router.navigate(['/org/list-institute-type'])
+  }
+  goToAdd(){
+    this.router.navigate(['/org/add-institute-type'])
+  }
+  goToDashboard(){
+    this.router.navigate(['/org'])
+  }
 
   onClick(){
     console.log(this.newInstituteType)
-    const validationResult = this.validations.validateName(this.newInstituteType)
-    console.log(validationResult)
-    if(validationResult)
-    {
+   
+      this.showMessage = true
+      this.class = 'alert alert-success'
+      this.message = 'Institute Type Updated Successfully'
       if(this.oldInstituteType !== this.newInstituteType)
       {
         console.log(this.oldInstituteType, this.newInstituteType)
@@ -37,18 +78,12 @@ export class EditInstituteTypeComponent implements OnInit {
         })
         .then( result => {
           console.log(result)
-            console.log(result)
-            this.router.navigate(['/org/list-institute-type'])
+          this.router.navigate(['/org/list-institute-type'])
         })
         .catch(err => {
           console.log(err)
         })
-      }
-     
-    }   
-    else {
-      this.showDangerMessage = true
-    }
+      }  
   }
 
   ngOnInit(): void {

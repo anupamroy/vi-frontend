@@ -60,7 +60,10 @@
                 <div class="col-lg-12 col-sm-12">
                     <h5 class="text-white pt-1 text-blue text-left text-capitalize"><i class="fas fa-arrows-alt"></i>
                         View Institute Types <span class="float-right"><a class="btn mb-3 text-white"
-                            routerLink="../view-masters"> <i class="fas fa-tachometer-alt"></i> Dashboard </a></span>
+                            routerLink="../">                     
+                            <i 
+                            class="fas fa-tachometer-alt"
+                            ></i> Dashboard </a></span>
                     </h5>
                     <hr class="hr-white">
                 </div>
@@ -88,7 +91,7 @@
                             <td>{{item.instituteType}}</td>
                             <td>
                                 <button routerLink="../edit-institute-type/{{item.itemId}}/{{item.instituteType}}" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i></button>
-                                <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                <button href="#" id="cusEdit" (click)="onDelete(item.itemId)" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
                                 <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
                             </td>
                           </tr>
@@ -125,49 +128,49 @@
     <script src="assest/js/bootstrap.min.js"></script>
     <script src="assest/js/sweet-alert.min.js"></script>
     
-    <script src="assest/js/jquery.dataTables.min.js"></script>
-    <script src="assest/js/dataTables.bootstrap4.min.js"></script>
-    <script src="assest/js/moment.min.js"></script>
-    <script src="assest/js/jquery.daterangepicker.min.js"></script>
-    <script src="assest/js/chosen.jquery.js"></script>
-    <script src="assest/js/script.js"></script>
-    <script type="text/javascript">
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/js/moment.min.js"></script>
+    <script src="/js/jquery.daterangepicker.min.js"></script>
+    <script src="/js/chosen.jquery.js"></script>
+    <script src="/js/script.js"></script> -->
+    <!-- <script type="text/javascript">
       jq = jQuery.noConflict();
         jq(function(){
           jq(".inputFocus").focus();
         });
-    </script>
+    </script> -->
     
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     
 document.getElementById('cusEdit').onclick = function(){
     swal("Good job!", "You clicked the button!", "success");
 };
 
 </script>
-<script type="text/javascript">
-  // checkAll
-  jq = jQuery.noConflict();
-jq(document).ready(function () {
-    jq('#selectall').click(function () {
-        jq('.selectedId').prop('checked', this.checked);
-    });
+<script type="text/javascript"> -->
+  <!-- // checkAll
+//   jq = jQuery.noConflict();
+// jq(document).ready(function () {
+//     jq('#selectall').click(function () {
+//         jq('.selectedId').prop('checked', this.checked);
+//     });
 
-    jq('.selectedId').change(function () {
-        var check = (jq('.selectedId').filter(":checked").length == jq('.selectedId').length);
-        jq('#selectall').prop("checked", check);
-    });
-});
+//     jq('.selectedId').change(function () {
+//         var check = (jq('.selectedId').filter(":checked").length == jq('.selectedId').length);
+//         jq('#selectall').prop("checked", check);
+//     });
+// });
 
-jq(document).ready(function () {
-    jq('#selectall1').click(function () {
-        jq('.selectedId1').prop('checked', this.checked);
-    });
+// jq(document).ready(function () {
+//     jq('#selectall1').click(function () {
+//         jq('.selectedId1').prop('checked', this.checked);
+//     });
 
-    jq('.selectedId1').change(function () {
-        var check = (jq('.selectedId1').filter(":checked").length == jq('.selectedId1').length);
-        jq('#selectall1').prop("checked", check);
-    });
-});
+//     jq('.selectedId1').change(function () {
+//         var check = (jq('.selectedId1').filter(":checked").length == jq('.selectedId1').length);
+//         jq('#selectall1').prop("checked", check);
+//     });
+// });
 </script> -->
 </div>

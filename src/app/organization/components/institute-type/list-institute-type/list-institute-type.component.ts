@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { InstituteTypeService} from '../../../../institute-type.service'
+import { catchError, tap, map } from 'rxjs/operators'; 
+import { templateJitUrl } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-list-institute-type',
@@ -8,11 +12,27 @@ import { Component, OnInit } from '@angular/core';
 export class ListInstituteTypeComponent implements OnInit {
 
   institute_Type : any;
+  temp=[]
   finalItems : any
-  constructor() { }
+  constructor(private InstituteTypeService : InstituteTypeService) { }
+
+  onDelete(id: string){
+    alert("Are You Sure ?")
+    fetch(`https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/${id}`, {
+      method: 'DELETE'
+    }).then((res) => {
+      console.log(res)
+
+      this.finalItems = this.finalItems.filter((item) => {
+        return item.itemId !== id;
+      })
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
 
   ngOnInit(): void {
-    fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all')
+       fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all')
     .then( res=> res.json())
     .then( res => {
       this.institute_Type = JSON.parse(res).Items;
@@ -29,4 +49,7 @@ export class ListInstituteTypeComponent implements OnInit {
     .catch(err => console.log(err))
   }
 
+    
+
 }
+

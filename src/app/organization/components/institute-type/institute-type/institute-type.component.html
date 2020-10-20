@@ -105,7 +105,7 @@
                         <span class="float-right"
                             ><a
                                 class="text-light btn mb-3"
-                                routerLink="../add-masters"
+                                routerLink="../"
                             >
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
                             </a>
@@ -133,9 +133,9 @@
                                                 routerLink="../list-institute-type"
                                                 ></i> View
                                             </a>
-                                        </span>
+                                        </span> 
                                     </h5>
-                                    <div class= "alert alert-danger" *ngIf = 'showDangerMessage'>Institute Type must not be empty or number</div>
+                                    <div class={{class}} style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;" *ngIf = 'showMessage'>{{message}}</div>
 
                                 </div>
                                 <!--  <div class="col-lg-3 col-sm-12">
@@ -176,6 +176,7 @@
                                                 id="cusEdit"
                                                 class="btn btn-warning btn-common-color btn-lg mt-3 text-white"
                                                 (click) = 'onSubmit()'
+                                                [disabled]='disabledButton'
 
                                             >
                                                 <span>
