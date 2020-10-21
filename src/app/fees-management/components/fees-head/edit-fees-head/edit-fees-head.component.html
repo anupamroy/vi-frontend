@@ -122,7 +122,8 @@
                     *ngIf="
                       (feesHeadName.dirty || feesHeadName.touched) &&
                       feesHeadName.errors &&
-                      feesHeadName.errors.required
+                      (feesHeadName.errors.required ||
+                        feesHeadName.errors.emptyvalidator)
                     "
                   >
                     Fees Head is required
@@ -173,13 +174,15 @@
                         name="instituteType"
                         formControlName="instituteType"
                       >
-                        <!-- <option selected value="null">Institute Type</option> -->
                         <option
-                          *ngFor="let item of finalItems"
-                          [value]="item.instituteType.toString()"
+                          *ngFor="let item of instituteTypeList"
+                          [value]="
+                            item.instituteType && item.instituteType.toString()
+                          "
                           [selected]="
-                            item.instituteType === instituteType &&
-                            instituteType.get('instituteType').value
+                            selectedFeesHead &&
+                            selectedFeesHead.instituteType ===
+                              item.instituteType
                           "
                         >
                           {{ item.instituteType }}
@@ -197,96 +200,32 @@
                         id="feesHead"
                         class="form-control inputFocus"
                         placeholder="Fees Head"
-                        required
-                        minlength="1"
-                        maxlength="50"
                         formControlName="feesHeadName"
                       />
                     </div>
 
                     <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
                       <label for="parentFees"> Parent Fees</label><br />
-                      <!-- <button
-                        class="btn form-control text-left bg-white dropdown-toggle"
-                        type="button"
-                        data-toggle="dropdown"
-                      >
-                        Select fees type
-                        <span class="caret"></span>
-                      </button> -->
-                      <input
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Demo tooltip text"
-                        type="text"
-                        name="parentFees"
+                      <select
+                        class="form-control"
                         id="parentFees"
-                        class="form-control inputFocus"
-                        placeholder="Parent Fees"
-                        required
-                        minlength="1"
-                        maxlength="50"
+                        name="parentFees"
                         formControlName="parentFees"
-                      />
-                      <ul class="dropdown-menu">
-                        <li>
-                          <a href="#"
-                            ><input type="checkbox" id="selectall" /> Fruit</a
-                          >
-                          <ul class="list-style-none pl-3">
-                            <li>
-                              <a href="#"
-                                ><input
-                                  type="checkbox"
-                                  class="selectedId"
-                                  name="selectedId"
-                                />
-                                Apple</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><input
-                                  type="checkbox"
-                                  class="selectedId"
-                                  name="selectedId"
-                                />
-                                Guava</a
-                              >
-                            </li>
-                          </ul>
-                        </li>
-
-                        <div class="dropdown-divider"></div>
-
-                        <li>
-                          <a href="#"
-                            ><input type="checkbox" id="selectall1" /> Flower</a
-                          >
-                          <ul class="list-style-none pl-3">
-                            <li>
-                              <a href="#"
-                                ><input
-                                  type="checkbox"
-                                  class="selectedId1"
-                                  name="selectedId1"
-                                />
-                                Lily</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><input
-                                  type="checkbox"
-                                  class="selectedId1"
-                                  name="selectedId1"
-                                />
-                                Rose</a
-                              >
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
+                      >
+                        <option
+                          *ngFor="let item of parentFeesList"
+                          [value]="
+                            item.feesHeadName && item.feesHeadName.toString()
+                          "
+                          [selected]="
+                            selectedFeesHead &&
+                            selectedFeesHead.parentFees === item.feesHeadName
+                          "
+                        >
+                          {{ item.feesHeadName }}
+                        </option>
+                        <option value="">None</option>
+                      </select>
                     </div>
                     <div
                       class="col-lg-2 offset-lg-5 button-container mt-3 text-center"

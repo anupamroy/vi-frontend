@@ -1,4 +1,4 @@
-<div class="bg-semester">
+<div class="bg-semester bg-light-blue">
   <nav
     class="navbar navbar-expand-lg navbar-light bg-light-yellow navbar-nav p-0"
     id="mainNav"
@@ -68,7 +68,12 @@
         <div class="col-lg-12 col-sm-12">
           <h5 class="text-white pt-1 text-blue text-left text-capitalize">
             <i class="fas fa-arrows-alt"></i> list fees head
-            <span class="float-right"
+            <span class="float-right">
+              <a
+                class="btn mb-3 text-white"
+                routerLink="/fees-management/fees-head/add"
+              >
+                <i class="fas fa-edit"></i> Add Fees Head </a
               ><a class="btn mb-3 text-white" routerLink="/org">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
               </a></span
@@ -118,22 +123,29 @@
                   <td>
                     <a
                       routerLink="/fees-management/fees-head/edit/{{
-                        fees.fees_head_id
-                      }}/{{ fees.feesHeadName }}/{{ fees.parentFees }}/{{
-                        fees.instituteType
+                        fees.feesHeadId
                       }}"
                       id="cusEdit"
-                      class="btn-dark-blue-light btn btn-sm"
+                      class="btn-dark-blue-light btn btn-sm mx-2"
                       ><i class="fas fa-edit"></i
                     ></a>
                     <a
                       id="cusEdit1"
-                      (click)="onDelete(fees.fees_head_id)"
-                      class="btn-dark-blue-light btn btn-sm"
+                      (click)="onDelete(fees.feesHeadId)"
+                      class="btn-dark-blue-light btn btn-sm mx-2"
                       ><i class="far fa-trash-alt"></i
                     ></a>
-                    <a href="#" class="btn-dark-blue-light btn btn-sm"
+                    <a
+                      (click)="deactivateFeesHead(fees.feesHeadId)"
+                      *ngIf="fees.isActivated === true"
+                      class="btn-dark-blue-light btn btn-sm mx-2"
                       ><i class="fas fa-ban"></i
+                    ></a>
+                    <a
+                      (click)="activateFeesHead(fees.feesHeadId)"
+                      *ngIf="fees.isActivated === false"
+                      class="btn-dark-blue-light btn btn-sm mx-2"
+                      ><i class="far fa-check-circle"></i
                     ></a>
                   </td>
                 </tr>

@@ -109,7 +109,8 @@
                     *ngIf="
                       (feesHeadName.dirty || feesHeadName.touched) &&
                       feesHeadName.errors &&
-                      feesHeadName.errors.required
+                      (feesHeadName.errors.required ||
+                        feesHeadName.errors.emptyvalidator)
                     "
                   >
                     Fees Head is required
@@ -123,6 +124,17 @@
                     "
                   >
                     Fees Head should not have numbers or special characters
+                  </div>
+                  <div
+                    class="m-1 p-2 alert alert-danger"
+                    *ngIf="
+                      (feesHeadName.dirty || feesHeadName.touched) &&
+                      feesHeadName.errors &&
+                      feesHeadName.errors.maxlength
+                    "
+                  >
+                    Fees Head should not have more than 25 characters including
+                    spaces
                   </div>
                   <div
                     class="m-1 p-2 alert alert-danger"
@@ -160,11 +172,13 @@
                         name="instituteType"
                         formControlName="instituteType"
                       >
-                        <option selected value="null">Institute Type</option>
-                        <option *ngFor="let item of finalItems">
-                          {{ item.instituteType.toString() }}
-                        </option>
+                        <option selected value="">Institute Type</option>
+                        <option
+                          *ngFor="let item of instituteTypeList"
+                          [value]="item.instituteType.toString()"
                         >
+                          {{ item.instituteType }}
+                        </option>
                       </select>
                     </div>
                     <div class="col-lg-5 cl-sm-12 mb-3 form-group">
@@ -178,97 +192,24 @@
                         id="feesHead"
                         class="form-control inputFocus"
                         placeholder="Fees Head"
+                        [value]="feesHeadName.value.trim()"
                         formControlName="feesHeadName"
                       />
                     </div>
 
                     <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
                       <label for="parentFees"> Parent Fees</label><br />
-                      <!-- <button
-                        class="btn form-control text-left bg-white dropdown-toggle"
-                        type="button"
-                        data-toggle="dropdown"
-                      >
-                        Select fees type
-                        <span class="caret"></span>
-                      </button> -->
-                      <input
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Demo tooltip text"
-                        type="text"
-                        name="parentFees"
+                      <select
+                        class="form-control"
                         id="parentFees"
-                        class="form-control inputFocus"
-                        placeholder="Parent Fees"
-                        required
-                        minlength="1"
-                        maxlength="50"
+                        name="institparentFees"
                         formControlName="parentFees"
-                      />
-
-                      <ul class="dropdown-menu">
-                        <li>
-                          <a href="#"
-                            ><input
-                              type="checkbox"
-                              id="selectall"
-                            />Organization</a
-                          >
-                          <ul class="list-style-none pl-3">
-                            <li>
-                              <a href="#"
-                                ><input
-                                  type="checkbox"
-                                  class="selectedId"
-                                  name="selectedId"
-                                />
-                                Library</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><input
-                                  type="checkbox"
-                                  class="selectedId"
-                                  name="selectedId"
-                                />
-                                Bill</a
-                              >
-                            </li>
-                          </ul>
-                        </li>
-
-                        <div class="dropdown-divider"></div>
-
-                        <li>
-                          <a href="#"
-                            ><input type="checkbox" id="selectall1" />Canteen</a
-                          >
-                          <ul class="list-style-none pl-3">
-                            <li>
-                              <a href="#"
-                                ><input
-                                  type="checkbox"
-                                  class="selectedId1"
-                                  name="selectedId1"
-                                />
-                                Cafeteria</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><input
-                                  type="checkbox"
-                                  class="selectedId1"
-                                  name="selectedId1"
-                                />
-                                Office</a
-                              >
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
+                      >
+                        <option selected value="">None</option>
+                        <option *ngFor="let item of parentFeesList">
+                          {{ item.feesHeadName }}
+                        </option>
+                      </select>
                     </div>
                     <div
                       class="col-lg-2 offset-lg-5 button-container mt-3 text-center"
@@ -285,7 +226,10 @@
                         type="button"
                         id="cusEdit"
                         class="btn btn-block btn-common-color btn-lg text-white"
-                        [disabled]="!addFeesHeadForm.valid"
+                        [disabled]="
+                          !addFeesHeadForm.valid ||
+                          feesHeadName.value.trim() === ''
+                        "
                         (click)="onSubmit()"
                       >
                         <span>

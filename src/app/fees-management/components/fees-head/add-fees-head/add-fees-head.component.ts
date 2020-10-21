@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
+import FeesHeadModel from '../../../models/fees-head.model';
+
 import {
-  FormControl,
   FormBuilder,
   FormGroup,
   Validators,
   AbstractControl,
+  ValidatorFn,
 } from '@angular/forms';
+
 import { Router } from '@angular/router';
+import { FeesService } from 'src/app/fees-management/services/fees.service';
 
 @Component({
   selector: 'app-add-fees-head',
@@ -16,9 +21,13 @@ import { Router } from '@angular/router';
 export class AddFeesHeadComponent implements OnInit {
   addFeesHeadForm: FormGroup;
   instituteTypeList = [];
-  finalItems = [];
+  parentFeesList: Array<FeesHeadModel> = [];
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private feesService: FeesService
+  ) {}
 
   ngOnInit(): void {
     this.addFeesHeadForm = this.formBuilder.group({
@@ -30,39 +39,73 @@ export class AddFeesHeadComponent implements OnInit {
           Validators.nullValidator,
           Validators.maxLength(25),
           Validators.pattern(RegExp(`^[a-zA-Z_ ]*$`)),
+          this.emptyValidator(),
         ],
       ],
-      parentFees: ['', [Validators.required, Validators.nullValidator]],
+      parentFees: ['', [Validators.nullValidator]],
     });
 
-    fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all')
-      .then((res) => res.json())
-      .then((res) => {
-        this.instituteTypeList = JSON.parse(res).Items;
+    this.feesService.getInstituteTypes().subscribe(
+      (res) => {
+        const data = JSON.parse(res).Items;
         const temp = [];
-        this.instituteTypeList.forEach((record) => {
-          if (record.instituteType) {
-            temp.push(record);
+        data.map((item) => {
+          if (item.instituteType) {
+            temp.push(item);
           }
         });
-        this.finalItems = temp;
-      })
-      .catch((err) => console.log(err));
+        this.instituteTypeList = temp;
+      },
+      (error) => console.error(error)
+    );
+
+    // Get data to populate parent fees Dropdown
+    this.feesService.getFeesHeads().subscribe(
+      (data) => {
+        this.parentFeesList = JSON.parse(data).Items.map((item) => {
+          return new FeesHeadModel({
+            feesHeadId: item.fees_head_id,
+            feesHeadName: item.feesHeadName,
+            instituteType: item.instituteType,
+            isActivated: item.isActivated,
+            parentFees: item.parentFees,
+          });
+        });
+      },
+      (error) => console.error(error)
+    );
   }
 
   // tslint:disable-next-line: typedef
   onSubmit() {
-    // console.log(this.addFeesHeadForm.value);
-    fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/fees', {
-      method: 'POST',
-      body: JSON.stringify(this.addFeesHeadForm.value),
-    })
-      .then((data) => {
-        this.router.navigate(['/fees-management/fees-head']);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    const feesHeadObject = new FeesHeadModel({
+      feesHeadName: this.feesHeadName.value.trim(),
+      instituteType: this.instituteType.value,
+      parentFees: this.parentFees.value,
+    });
+    this.feesService.addFeesHead(feesHeadObject).subscribe(
+      (data) => {
+        Swal.fire(
+          'Congratulations!',
+          'Fees Head has been saved successfully',
+          'success'
+        ).then(() => {
+          this.router.navigate(['/fees-management/fees-head']);
+        });
+      },
+      (error) => console.error(error)
+    );
+  }
+
+  emptyValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      if (control.value.trim() === '') {
+        // tslint:disable-next-line: object-literal-key-quotes
+        return { emptyvalidator: true };
+      } else {
+        return null;
+      }
+    };
   }
 
   get feesHeadName(): AbstractControl {

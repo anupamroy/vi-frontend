@@ -17,7 +17,7 @@ const routes: Routes = [
           { path: 'add', component: AddFeesHeadComponent },
           { path: '', component: ListFeesHeadComponent },
           {
-            path: 'edit/:id/:feesHeadName/:parentFees/:instituteType',
+            path: 'edit/:id',
             component: EditFeesHeadComponent,
           },
         ],

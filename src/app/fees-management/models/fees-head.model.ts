@@ -1,20 +1,23 @@
 export interface FeesHeadProperties {
-    feesHeadId: string;
-    parentId: string;
-    feesHeadname: string;
-    instituteType: string;
+  feesHeadId?: string;
+  parentFees?: string;
+  feesHeadName: string;
+  instituteType: string;
+  isActivated?: boolean;
 }
 
 export default class FeesHead {
-    feesHeadId: string;
-    parentId: string;
-    feesHeadname: string;
-    instituteType: string;
+  feesHeadId: string | undefined;
+  parentFees: string;
+  feesHeadName: string;
+  instituteType: string;
+  isActivated: boolean;
 
-    constructor(params: FeesHeadProperties) {
-        this.feesHeadId = params.feesHeadId;
-        this.feesHeadname = params.feesHeadname;
-        this.parentId = params.parentId;
-        this.instituteType = params.instituteType;
-    }
+  constructor(params: FeesHeadProperties) {
+    this.feesHeadId = params.feesHeadId || undefined;
+    this.feesHeadName = params.feesHeadName;
+    this.parentFees = params.parentFees || '';
+    this.instituteType = params.instituteType;
+    this.isActivated = params.isActivated || true;
+  }
 }

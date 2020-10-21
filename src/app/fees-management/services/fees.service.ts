@@ -10,26 +10,29 @@ export class FeesService {
 
   constructor(private http: HttpClient) {}
 
-  // tslint:disable-next-line: typedef
-  getFeesHeadById(id: string) {
+  getFeesHeadById(id: string): Observable<any> {
     return this.http.get(`${this.api}/${id}`);
   }
 
   updateFeesHeadById(id: string, body: any): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': '*',
-      }),
-    };
+    return this.http.put<any>(`${this.api}/${id}`, body);
+  }
 
-    return this.http.put<any>(
-      `${this.api}/${id}`,
-      {
-        body,
-      },
-      httpOptions
+  deleteFeesHeadById(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.api}/${id}`);
+  }
+
+  addFeesHead(body: any): Observable<any> {
+    return this.http.post<any>(`${this.api}`, body);
+  }
+
+  getFeesHeads(): Observable<any> {
+    return this.http.get<any>(`${this.api}/all`);
+  }
+
+  getInstituteTypes(): Observable<any> {
+    return this.http.get<any>(
+      'https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all'
     );
   }
 }
