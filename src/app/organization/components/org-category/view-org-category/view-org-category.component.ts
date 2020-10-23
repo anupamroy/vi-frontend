@@ -47,7 +47,7 @@ export class ViewOrgCategoryComponent implements OnInit {
    
   }
 
-  onDeactivate(){
+  onDeactivate(id: string){
     Swal.fire({
       title: 'Are you sure you want to deactivate?',
       icon: 'warning',
@@ -58,7 +58,21 @@ export class ViewOrgCategoryComponent implements OnInit {
     }).then((result) => {
       if(result.isConfirmed) {
         // Deactivate Logic
-        console.log('Deactivate')
+        console.log('Deactivate');
+
+        this.organizationService.updateOrganizationById(id, {
+          attribute: ['isActivated'],
+          value: [false]
+        }).subscribe((data) => {
+          console.log(data)
+          this.finalItems = this.finalItems.map((item) => {
+            if (item.itemId === id){
+              item.isActivated = false;
+            }
+
+            return item;
+          })
+        })
 
         Swal.fire('Deactivated!', 'Your Organization Category has been deactivated', 'success');
       } else if(result.isDismissed) {
@@ -67,7 +81,7 @@ export class ViewOrgCategoryComponent implements OnInit {
     })
   }
 
-  onActivate(){
+  onActivate(id: string){
     Swal.fire({
       title: 'Are you sure you want to activate?',
       icon: 'warning',
@@ -78,7 +92,22 @@ export class ViewOrgCategoryComponent implements OnInit {
     }).then((result) => {
       if(result.isConfirmed) {
         // Activate Logic
-        console.log('Activate')
+        console.log('Activate');
+
+        this.organizationService.updateOrganizationById(id, {
+          attribute: ['isActivated'],
+          value: [true]
+        }).subscribe((data) => {
+          console.log(data);
+
+          this.finalItems = this.finalItems.map((item) => {
+            if (item.itemId === id){
+              item.isActivated = true;
+            }
+
+            return item;
+          })
+        })
 
         Swal.fire('Activated!', 'Your Organization Category has been activated', 'success');
       } else if(result.isDismissed) {

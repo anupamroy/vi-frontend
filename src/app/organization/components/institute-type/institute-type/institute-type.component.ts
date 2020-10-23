@@ -26,7 +26,7 @@ export class InstituteTypeComponent implements OnInit {
   onAddInstituteType( event : Event ){
     this.instituteType = (<HTMLInputElement>event.target).value
     const validationResult = this.validations.validateName(this.instituteType)
-    console.log(validationResult)
+    // console.log(validationResult)
     if(validationResult){
       this.disabledButton = false
       this.showMessage = false
@@ -55,7 +55,8 @@ export class InstituteTypeComponent implements OnInit {
           'success'
         )
       const instituteTypeObj = {
-        instituteType : this.instituteType
+        instituteType : this.instituteType,
+        isActivated: true
       }
       this.InstituteTypeService.postInstituteType(instituteTypeObj)
       .subscribe({

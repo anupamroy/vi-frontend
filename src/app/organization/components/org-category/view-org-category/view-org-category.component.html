@@ -84,11 +84,20 @@
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                     <button
-                                    (click)="onDeactivate()" 
+                                    *ngIf="item.isActivated==true"
+                                    (click)="onDeactivate(item.itemId)" 
                                     href="#" 
                                     id="cusEdit" 
                                     class="btn-dark-blue-light btn btn-sm">
                                         <i class="fas fa-ban"></i>
+                                    </button>
+                                    <button
+                                    *ngIf="item.isActivated==false"
+                                    (click)="onActivate(item.itemId)" 
+                                    href="#" 
+                                    id="cusEdit" 
+                                    class="btn-dark-blue-light btn btn-sm">
+                                        <i class="fas fa-check-circle"></i>
                                     </button>
                                 </td>
                             </tr>

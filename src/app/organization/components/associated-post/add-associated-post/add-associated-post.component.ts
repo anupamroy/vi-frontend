@@ -35,7 +35,8 @@ export class AddAssociatedPostComponent implements OnInit {
   onClick() {
     console.log(this.associatedPost);
     const associatedPostObj = {
-      associated_post : this.associatedPost
+      associated_post : this.associatedPost,
+      isActivated: true
     }
     this.associatedPostService
         .addAssociatedPost(associatedPostObj)

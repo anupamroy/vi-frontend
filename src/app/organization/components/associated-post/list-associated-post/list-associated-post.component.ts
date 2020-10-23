@@ -55,7 +55,7 @@ export class ListAssociatedPostComponent implements OnInit {
     this.router.navigate(["/org/add-associated-post"])
   }
 
-  onDeactivate(){
+  onDeactivate(id: string){
     Swal.fire({
       title: 'Are you sure you want to deactivate?',
       icon: 'warning',
@@ -68,6 +68,21 @@ export class ListAssociatedPostComponent implements OnInit {
         // Deactivate Logic
         console.log('Deactivate')
 
+        this.associatedPostService.updateAssociatedPostById(id, {
+          attribute: ['isActivated'],
+          value: [false]
+        }).subscribe((data) => {
+          console.log(data);
+
+          this.final_items = this.final_items.map((item) => {
+            if (item.itemId === id){
+              item.isActivated = false
+            }
+
+            return item;
+          })
+        })
+
         Swal.fire('Deactivated!', 'Your Associated Post has been deactivated', 'success');
       } else if(result.isDismissed) {
         Swal.fire('Cancelled!', 'Your Associated Post is not deactivated', 'error');
@@ -75,7 +90,7 @@ export class ListAssociatedPostComponent implements OnInit {
     })
   }
 
-  onActivate(){
+  onActivate(id: string){
     Swal.fire({
       title: 'Are you sure you want to activate?',
       icon: 'warning',
@@ -86,7 +101,22 @@ export class ListAssociatedPostComponent implements OnInit {
     }).then((result) => {
       if(result.isConfirmed) {
         // Activate Logic
-        console.log('Activate')
+        console.log('Activate');
+
+        this.associatedPostService.updateAssociatedPostById(id, {
+          attribute: ['isActivated'],
+          value: [true]
+        }).subscribe((data) => {
+          console.log(data);
+
+          this.final_items = this.final_items.map((item) => {
+            if (item.itemId === id){
+              item.isActivated = true;
+            }
+
+            return item;
+          })
+        })
 
         Swal.fire('Activated!', 'Your Associated Post has been activated', 'success');
       } else if(result.isDismissed) {
