@@ -56,6 +56,46 @@ export class ListInstituteTypeComponent implements OnInit {
   })
   }
 
+  onDeactivate(){
+    Swal.fire({
+      title: 'Are you sure you want to deactivate?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonColor: "#DD6B55"
+    }).then((result) => {
+      if(result.isConfirmed) {
+        // Deactivate Logic
+        console.log('Deactivate')
+
+        Swal.fire('Deactivated!', 'Your Institute Type has been deactivated', 'success');
+      } else if(result.isDismissed) {
+        Swal.fire('Cancelled!', 'Your Institiute Type is not deactivated', 'error');
+      }
+    })
+  }
+
+  onActivate(){
+    Swal.fire({
+      title: 'Are you sure you want to activate?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonColor: "#DD6B55"
+    }).then((result) => {
+      if(result.isConfirmed) {
+        // Activate Logic
+        console.log('Activate')
+
+        Swal.fire('Activated!', 'Your Institute Type has been activated', 'success');
+      } else if(result.isDismissed) {
+        Swal.fire('Cancelled!', 'Your Institute Type is not activated', 'error');
+      }
+    })
+  }
+
   ngOnInit(): void {
     this.InstituteTypeService.getInstituteType().subscribe(responseData => {
       this.institute_Type = JSON.parse(responseData).Items

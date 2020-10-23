@@ -55,6 +55,46 @@ export class ListAssociatedPostComponent implements OnInit {
     this.router.navigate(["/org/add-associated-post"])
   }
 
+  onDeactivate(){
+    Swal.fire({
+      title: 'Are you sure you want to deactivate?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonColor: "#DD6B55"
+    }).then((result) => {
+      if(result.isConfirmed) {
+        // Deactivate Logic
+        console.log('Deactivate')
+
+        Swal.fire('Deactivated!', 'Your Associated Post has been deactivated', 'success');
+      } else if(result.isDismissed) {
+        Swal.fire('Cancelled!', 'Your Associated Post is not deactivated', 'error');
+      }
+    })
+  }
+
+  onActivate(){
+    Swal.fire({
+      title: 'Are you sure you want to activate?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonColor: "#DD6B55"
+    }).then((result) => {
+      if(result.isConfirmed) {
+        // Activate Logic
+        console.log('Activate')
+
+        Swal.fire('Activated!', 'Your Associated Post has been activated', 'success');
+      } else if(result.isDismissed) {
+        Swal.fire('Cancelled!', 'Your Associated Post is not activated', 'error');
+      }
+    })
+  }
+
   ngOnInit(): void {
     this.associatedPostService.getAssociatedPost().subscribe(responseData => {
       this.associated_Post = JSON.parse(responseData).Items

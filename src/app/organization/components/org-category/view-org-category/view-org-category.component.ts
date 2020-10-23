@@ -47,6 +47,46 @@ export class ViewOrgCategoryComponent implements OnInit {
    
   }
 
+  onDeactivate(){
+    Swal.fire({
+      title: 'Are you sure you want to deactivate?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonColor: "#DD6B55"
+    }).then((result) => {
+      if(result.isConfirmed) {
+        // Deactivate Logic
+        console.log('Deactivate')
+
+        Swal.fire('Deactivated!', 'Your Organization Category has been deactivated', 'success');
+      } else if(result.isDismissed) {
+        Swal.fire('Cancelled!', 'Your Organization Category is not deactivated', 'error');
+      }
+    })
+  }
+
+  onActivate(){
+    Swal.fire({
+      title: 'Are you sure you want to activate?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonColor: "#DD6B55"
+    }).then((result) => {
+      if(result.isConfirmed) {
+        // Activate Logic
+        console.log('Activate')
+
+        Swal.fire('Activated!', 'Your Organization Category has been activated', 'success');
+      } else if(result.isDismissed) {
+        Swal.fire('Cancelled!', 'Your Organization Category is not activated', 'error');
+      }
+    })
+  }
+
 
   ngOnInit(): void {
     this.organizationService.getOrganizationCategory().subscribe(responseData => {
