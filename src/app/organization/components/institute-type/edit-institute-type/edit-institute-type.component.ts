@@ -19,7 +19,7 @@ export class EditInstituteTypeComponent implements OnInit {
     private InstituteTypeService : InstituteTypeService) { }
 
     enableButton() {
-      if(this.newInstituteType.trim() === '') {
+      if(this.newInstituteType && this.newInstituteType.trim() === '') {
         return true
       }
       else {

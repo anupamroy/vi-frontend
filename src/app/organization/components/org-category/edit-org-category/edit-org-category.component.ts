@@ -16,7 +16,7 @@ export class EditOrgCategoryComponent implements OnInit {
   constructor(private activatedRoute : ActivatedRoute, private router : Router, private organizationService : OrganizationCategoryService ) { }
 
   enableButton() {
-    if(this.OrgCategory.trim() === '') {
+    if(this.OrgCategory && this.OrgCategory.trim() === '') {
       return true
     }
     else {

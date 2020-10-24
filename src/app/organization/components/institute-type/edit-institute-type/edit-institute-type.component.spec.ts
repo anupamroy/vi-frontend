@@ -1,14 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditInstituteTypeComponent } from './edit-institute-type.component';
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {FormsModule} from '@angular/forms';
 
 describe('EditInstituteTypeComponent', () => {
   let component: EditInstituteTypeComponent;
   let fixture: ComponentFixture<EditInstituteTypeComponent>;
+  let httpmock: HttpTestingController;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditInstituteTypeComponent ]
+      imports:[RouterTestingModule,HttpClientTestingModule,FormsModule],
+      declarations: [ EditInstituteTypeComponent ],
+      providers:[EditInstituteTypeComponent]
+
     })
     .compileComponents();
   }));
@@ -20,6 +27,7 @@ describe('EditInstituteTypeComponent', () => {
   });
 
   it('should create', () => {
+    component.newInstituteType='text';
     expect(component).toBeTruthy();
   });
 });

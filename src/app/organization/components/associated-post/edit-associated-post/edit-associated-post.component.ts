@@ -10,13 +10,14 @@ import {AssociatedPostService} from '../services/associated-post.service'
 })
 export class EditAssociatedPostComponent implements OnInit {
 
-  associated_post = "";
-  id = "";
+  associated_post :string= '';
+  id:string;
 
   instituteType = "MTech";
 
   enableButton(){
-    if(this.associated_post.trim() === '') {
+    if(this.associated_post && 
+      this.associated_post.trim() === '') {
       return true
     }
     else {
