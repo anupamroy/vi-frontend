@@ -62,14 +62,15 @@
                                     </h5>
                                 </div>
                             </div>
-                            <div [hidden]="!enableButton()||!associateControl.dirty" class="alert alert-danger" role="alert">
-                                Null field not allowed .
+
+                            <div [hidden]="!enableButton()||!associateControl.dirty" class="m-1 p-2 alert alert-danger" role="alert">
+                                Associate Post is required!
                              </div>
-                            <div [hidden]="enableAlert()" class="alert alert-danger" role="alert">
-                                This field accept only ['A-Z','a-z','_',' ']
+                            <div [hidden]="enableAlert()" class="m-1 p-2 alert alert-danger" role="alert">
+                                Associate Post should not have numbers or special characters!
                              </div>
 
-                             <div [hidden]="true" class="alert alert-success" id="alert" role="alert">
+                             <div [hidden]="true" class="m-1 p-2 alert alert-success" id="alert" role="alert">
                                 Data Saved Successfully!!
                              </div>
 
