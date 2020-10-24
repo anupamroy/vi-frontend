@@ -47,8 +47,8 @@ export class EditAssociatedPostComponent implements OnInit {
         });
     }
     Swal.fire({
-      title: 'Editted',
-      text: 'Data Editted Successfully',
+      title: 'Edited',
+      text: 'Data Edited Successfully',
       icon: 'success',
       confirmButtonText: 'Ok'
     }).then(()=>{

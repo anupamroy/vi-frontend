@@ -81,23 +81,31 @@
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
                                     <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
-                                        <div class="col-lg-9 cl-sm-12 mb-3 form-group">
+                                        <div class="col-lg-12 cl-sm-12 mb-3 form-group">
                                             <label for="instituteType">Edit Associated Post</label>
-                                            <input data-toggle="tooltip" data-placement="bottom"
-                                                title="Edit Associate Post" type="text" name="associatedPost"
-                                                id="editAssociatedPost" class="form-control inputFocus"
-                                                placeholder="Associated Post" required minlength="1" maxlength="20"
-                                                [(ngModel)]="associated_post"
-                                                #associateControl="ngModel" />
-                                        </div>
-                                        <div class="col-lg-3 button-container mt-3 text-center">
-                                            <button [disabled]="enableButton()||!enableAlert()" (click)="onClick()" type="button"
-                                                id="cusEdit" style="background-color: #ebc034;"
-                                                class="btn btn-block btn-common-color btn-lg mt-3 text-white">
-                                                <span>
-                                                    Edit
-                                                    <i class="fas fa-caret-right btn-style1"></i></span>
-                                            </button>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <input data-toggle="tooltip" data-placement="bottom"
+                                                        title="Edit Associate Post" type="text" name="associatedPost"
+                                                        id="editAssociatedPost" class="form-control inputFocus"
+                                                        placeholder="Associated Post" required minlength="1" maxlength="20"
+                                                        [(ngModel)]="associated_post"
+                                                        #associateControl="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <div class="col-lg-3 button-container mt-3 text-center float-right">
+                                                        <button [disabled]="enableButton()||!enableAlert()" (click)="onClick()" type="button"
+                                                            id="cusEdit" style="background-color: #ebc034;"
+                                                            class="btn btn-block btn-common-color btn-lg mt-3 text-white">
+                                                            <span>
+                                                                Edit
+                                                                <i class="fas fa-caret-right btn-style1"></i></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
