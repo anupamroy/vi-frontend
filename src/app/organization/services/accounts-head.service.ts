@@ -22,8 +22,8 @@ export class AccountsHeadService {
     return this.http.put<any>(`${this.api}/${id}`, body)
   }
 
-  deleteAccountsHeadById(id: string):Observable<any> {
-    return this.http.delete<any>(`${this.api}/${id}`)
+  deleteAccountsHeadById(id: string, body: any):Observable<any> {
+    return this.http.put<any>(`${this.api}/${id}`,body)
   }
 
   addAccountsHead(body: any):Observable<any> {

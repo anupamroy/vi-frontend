@@ -21,8 +21,8 @@ export class OrganizationCategoryService {
     return this.http.put<any>(`${this.api}/${id}`, body);
   }
 
-  deleteOrganizationById(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.api}/${id}`);
+  deleteOrganizationById(id: string, body: any): Observable<any> {
+    return this.http.put<any>(`${this.api}/${id}`,body);
   }
 
   addOrganizationCategory(body: any): Observable<any> {

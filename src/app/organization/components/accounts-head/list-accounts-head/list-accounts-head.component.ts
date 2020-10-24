@@ -24,7 +24,10 @@ export class ListAccountsHeadComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-        this.accountsHeadService.deleteAccountsHeadById(id).subscribe(() => {
+        this.accountsHeadService.deleteAccountsHeadById(id,{
+          attribute : ['isDeleted'],
+          value: [true]
+        }).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
             return item.accounts_head_id !== id;
           })
@@ -61,7 +64,7 @@ export class ListAccountsHeadComponent implements OnInit {
           console.log(this.accountsHead)
           let temp = []
           this.accountsHead.forEach(record => {
-            if (record.accountsHead) {
+            if (record.isDeleted === false) {
               temp.push(record)
             }
           })

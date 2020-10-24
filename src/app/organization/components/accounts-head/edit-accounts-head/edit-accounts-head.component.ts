@@ -60,7 +60,7 @@ export class EditAccountsHeadComponent implements OnInit {
             console.log('ID'+data);
             if(data){
               Swal.fire({
-                title: 'Editted',
+                title: 'Edited',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 1500,
@@ -127,7 +127,7 @@ export class EditAccountsHeadComponent implements OnInit {
       console.log(this.parentAccount)
       let temp = []
       this.parentAccount.forEach(record => {
-        if (record.accountsHead) {
+        if (record.isDeleted === false) {
           temp.push(record)
         }
       })

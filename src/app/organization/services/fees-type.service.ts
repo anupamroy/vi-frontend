@@ -22,8 +22,8 @@ export class FeesService {
     return this.http.put<any>(`${this.api}/${id}`, body)
   }
 
-  deleteFeesTypeById(id: string):Observable<any> {
-    return this.http.delete<any>(`${this.api}/${id}`)
+  deleteFeesTypeById(id: string, body: any):Observable<any> {
+    return this.http.put<any>(`${this.api}/${id}`,body)
   }
 
   addFeesType(body: any):Observable<any> {

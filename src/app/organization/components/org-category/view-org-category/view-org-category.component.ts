@@ -25,7 +25,10 @@ export class ViewOrgCategoryComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-        this.organizationService.deleteOrganizationById(id).subscribe(() => {
+        this.organizationService.deleteOrganizationById(id,{
+          attribute : ['isDeleted'],
+          value : [true]
+        }).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
             return item.itemId !== id;
           })
@@ -132,7 +135,7 @@ export class ViewOrgCategoryComponent implements OnInit {
           console.log(this.orgCategory)
           let temp = []
           this.orgCategory.forEach(record => {
-            if (record.orgCategory) {
+            if (record.isDeleted === false) {
               temp.push(record)
             }
           })

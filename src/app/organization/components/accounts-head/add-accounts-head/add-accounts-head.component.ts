@@ -43,7 +43,8 @@ export class AddAccountsHeadComponent implements OnInit {
     const accountsHeadObj = {
       accountsHead : this.accountsHead,
       parentAccountHead : this.parentAccountHead,
-      isActivated: true
+      isActivated: true,
+      isDeleted: false
     }
 
     console.log(accountsHeadObj)
@@ -100,7 +101,7 @@ export class AddAccountsHeadComponent implements OnInit {
       console.log(this.parentAccount)
       let temp = []
       this.parentAccount.forEach(record => {
-        if (record.accountsHead) {
+        if (record.isDeleted === false) {
           temp.push(record)
         }
       })

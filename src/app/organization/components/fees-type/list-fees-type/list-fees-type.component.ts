@@ -24,7 +24,10 @@ export class ListFeesTypeComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-        this.feesService.deleteFeesTypeById(id).subscribe(() => {
+        this.feesService.deleteFeesTypeById(id,{
+          attribute: ['isDeleted'],
+          value: [true]
+        }).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
             return item.fees_head_id !== id;
           })
@@ -61,7 +64,7 @@ export class ListFeesTypeComponent implements OnInit {
           console.log(this.feesType)
           let temp = []
           this.feesType.forEach(record => {
-            if (record.feesType) {
+            if (record.isDeleted === false) {
               temp.push(record)
             }
           })

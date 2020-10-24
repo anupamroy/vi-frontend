@@ -51,7 +51,7 @@ export class EditOrgCategoryComponent implements OnInit {
             console.log('ID'+data);
             if(data){
               Swal.fire({
-                title: 'Editted',
+                title: 'Edited',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 1500,

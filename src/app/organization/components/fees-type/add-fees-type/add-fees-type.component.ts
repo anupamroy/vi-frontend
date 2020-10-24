@@ -31,7 +31,9 @@ export class AddFeesTypeComponent implements OnInit {
   
   onSubmit(){
     const feesTypeObj = {
-      feesType : this.feesType
+      feesType : this.feesType,
+      isActivated : true,
+      isDeleted: false
     }
 
     console.log(feesTypeObj)
