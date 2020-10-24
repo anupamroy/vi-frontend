@@ -22,8 +22,8 @@ export class AssociatedPostService {
     return this.http.put<any>(`${this.api}/${id}`, body);
   }
 
-  deleteAssociatedPostById(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.api}/${id}`);
+  deleteAssociatedPostById(id: string, body: any): Observable<any> {
+    return this.http.put<any>(`${this.api}/${id}`, body);
   }
 
   addAssociatedPost(body: any): Observable<any> {

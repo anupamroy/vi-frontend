@@ -36,7 +36,8 @@ export class AddAssociatedPostComponent implements OnInit {
     console.log(this.associatedPost);
     const associatedPostObj = {
       associated_post : this.associatedPost,
-      isActivated: true
+      isActivated: true,
+      isDeleted: false
     }
 
     console.log(associatedPostObj);

@@ -25,7 +25,10 @@ export class ListAssociatedPostComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-        this.associatedPostService.deleteAssociatedPostById(id).subscribe(() => {
+        this.associatedPostService.deleteAssociatedPostById(id, {
+          attribute: ['isDeleted'],
+          value: [true]
+        }).subscribe(() => {
           this.final_items = this.final_items.filter((item) => {
             return item.itemId !== id;
           })
@@ -140,7 +143,7 @@ export class ListAssociatedPostComponent implements OnInit {
           console.log(this.associated_Post)
           let temp = []
           this.associated_Post.forEach(record => {
-            if (record.associated_post) {
+            if (record.isDeleted === false) {
               temp.push(record)
             }
           })
