@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
 })
 export class EditOrgCategoryComponent implements OnInit {
 
-  OrgCategory: string
+  OrgCategory: string = ''
   id: string
 
   constructor(private activatedRoute : ActivatedRoute, private router : Router, private organizationService : OrganizationCategoryService ) { }
@@ -32,27 +32,59 @@ export class EditOrgCategoryComponent implements OnInit {
   onClick(){
    
       console.log(this.OrgCategory)
-      this.organizationService
-        .updateOrganizationById(this.id, {
-          attribute: ['orgCategory'],
-          value: [
-            this.OrgCategory
-          ],
-        })
-        .subscribe((data) => {
-          console.log(data);
-        });
+      Swal.fire({
+        title: 'Please Wait',
+        allowEscapeKey: false,
+        allowOutsideClick: true,
+        background: '#fff',
+        showConfirmButton: false,
+        onOpen: ()=>{
+          Swal.showLoading();
+          this.organizationService
+            .updateOrganizationById(this.id,{
+              attribute: ['orgCategory'],
+              value: [
+              this.OrgCategory
+              ],
+            })
+            .subscribe((data) => {
+            console.log('ID'+data);
+            if(data){
+              Swal.fire({
+                title: 'Editted',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500,
+              }).then(()=>{
+                this.router.navigate(['./org/list-org-category']);
+              })  
+            }
+          });
+          // Swal.close()
+         
+        }
+      });
+      // this.organizationService
+      //   .updateOrganizationById(this.id, {
+      //     attribute: ['orgCategory'],
+      //     value: [
+      //       this.OrgCategory
+      //     ],
+      //   })
+      //   .subscribe((data) => {
+      //     console.log(data);
+      //   });
         
-        Swal.fire({
-          title: 'Editted',
-          text: 'Data Editted Successfully',
-          icon: 'success',
-          confirmButtonText: 'Ok'
-        }).then(()=>{
-          setTimeout(() => {
-            this.router.navigate(['./org/list-org-category']);
-          }, 500);
-        })
+      //   Swal.fire({
+      //     title: 'Editted',
+      //     text: 'Data Editted Successfully',
+      //     icon: 'success',
+      //     confirmButtonText: 'Ok'
+      //   }).then(()=>{
+      //     setTimeout(() => {
+      //       this.router.navigate(['./org/list-org-category']);
+      //     }, 500);
+      //   })
   }
 
   onAdd(){
@@ -69,9 +101,15 @@ export class EditOrgCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.itemId;
-    const orgCategory =this.activatedRoute.snapshot.params.orgCategory
-    console.log(this.id, orgCategory)
-    this.OrgCategory = orgCategory
+    this.organizationService.getOrganizationCategoryById(this.id).subscribe((item)=>{
+      item = JSON.parse(item);
+      this.OrgCategory = item.orgCategory
+      console.log(item)
+    })
+
+    // const orgCategory =this.activatedRoute.snapshot.params.orgCategory
+    // console.log(this.id, orgCategory)
+    // this.OrgCategory = orgCategory
   }
 
 }

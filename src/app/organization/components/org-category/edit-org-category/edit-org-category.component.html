@@ -82,7 +82,7 @@
     <section class="stu-dashboard mt-5">
         <div class="container">
             <div class="row">
-                <div class="offset-lg-1 col-lg-10">
+                <div class="offset-lg-2 col-lg-8">
                     <h5>
                         <span class="float-right"
                             ><a
@@ -94,7 +94,7 @@
                         </span>
                     </h5>
                 </div>
-                <div class="col-lg-10 offset-lg-1 col-sm-12">
+                <div class="col-lg-8 offset-lg-2 col-sm-12">
                     <div class="border-double">
                         <form class="bg-light p-4" action="">
                             <div class="row">
@@ -121,18 +121,19 @@
                                             </a>
                                         </span>
                                     </h5>
+                                    <div [hidden]="enableAlert()" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
+                                        Special Characters and Numbers are not Allowed
+                                    </div>
+        
+                                    <div [hidden]="!enableButton()||!orgCategoryControl.dirty" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
+                                        Organization Category cannot be blank
+                                     </div>
                                 </div>
                                 <!--  <div class="col-lg-3 col-sm-12">
                             <button type="submit" class="btn-mat"><span>View Department</span></button>
                         </div> -->
                             </div>
-                            <div [hidden]="enableAlert()" class="alert alert-danger" role="alert">
-                                Special Characters and Numbers are not Allowed
-                            </div>
-
-                            <div [hidden]="!enableButton()||!orgCategoryControl.dirty" class="alert alert-danger" role="alert">
-                                Organization Category Required
-                             </div>
+                            
 
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
@@ -140,7 +141,7 @@
                                         class="bg-light-yellow ml-1 mr-1 p-3 row position-relative"
                                     >
                                         <div
-                                            class="col-lg-8 cl-sm-12 mb-3 form-group"
+                                            class="col-lg-12 cl-sm-12 mb-3 form-group"
                                         >
                                             <label for="feesGroup"
                                                 >Organization Category</label
@@ -155,14 +156,12 @@
                                                 class="form-control inputFocus"
                                                 placeholder="Organization Category"
                                                 required
-                                                minlength="1"
-                                                maxlength="20"
                                                 [(ngModel)] = 'OrgCategory'
                                                 #orgCategoryControl="ngModel"
                                             />
                                         </div>
                                         <div
-                                            class="col-lg-2 button-container mt-3"
+                                            class="col-lg-3 button-container mt-3 text-right"
                                         >
                                             <button [disabled]="enableButton()||!enableAlert()"
                                                 type="button"

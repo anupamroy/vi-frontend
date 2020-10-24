@@ -118,21 +118,60 @@ export class ViewOrgCategoryComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.organizationService.getOrganizationCategory().subscribe(responseData => {
-      this.orgCategory = JSON.parse(responseData).Items
-      console.log(this.orgCategory)
-      let temp = []
-      this.orgCategory.forEach(record => {
-        if (record.orgCategory) {
-          temp.push(record)
-        }
-      })
-      this.finalItems = temp
-    },
-      error => {
-        console.log("Could not Fetch Data")
+    // Swal.showLoading();
+    Swal.fire({
+      title: 'Please Wait',
+      allowEscapeKey: false,
+      allowOutsideClick: true,
+      background: '#fff',
+      showConfirmButton: false,
+      didOpen: ()=>{
+        Swal.showLoading();
+        this.organizationService.getOrganizationCategory().subscribe(responseData => {
+          this.orgCategory = JSON.parse(responseData).Items
+          console.log(this.orgCategory)
+          let temp = []
+          this.orgCategory.forEach(record => {
+            if (record.orgCategory) {
+              temp.push(record)
+            }
+          })
+          this.finalItems = temp
+          Swal.close()
+        },
+          error => {
+            console.log("Could not Fetch Data")
+            Swal.fire({
+              text: 'Error Fetching',
+              icon: 'warning'
+            })
+          }
+        )
+       
+        
+        // this.router.navigate(['./org/list-org-category']);
+        // Swal.close()
+
       }
-    )
+
+      // timer: 3000,
+      // timerProgressBar: true
+    });
+    // this.organizationService.getOrganizationCategory().subscribe(responseData => {
+    //   this.orgCategory = JSON.parse(responseData).Items
+    //   console.log(this.orgCategory)
+    //   let temp = []
+    //   this.orgCategory.forEach(record => {
+    //     if (record.orgCategory) {
+    //       temp.push(record)
+    //     }
+    //   })
+    //   this.finalItems = temp
+    // },
+    //   error => {
+    //     console.log("Could not Fetch Data")
+    //   }
+    // )
 
   }
 }

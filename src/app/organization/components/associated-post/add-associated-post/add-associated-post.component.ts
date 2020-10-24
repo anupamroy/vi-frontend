@@ -38,21 +38,50 @@ export class AddAssociatedPostComponent implements OnInit {
       associated_post : this.associatedPost,
       isActivated: true
     }
-    this.associatedPostService
-        .addAssociatedPost(associatedPostObj)
-        .subscribe((data) => {
-          console.log(data);
+
+    console.log(associatedPostObj);
+
+    Swal.fire({
+      title: 'Please Wait',
+      allowEscapeKey: false,
+      allowOutsideClick: true,
+      background: '#fff',
+      showConfirmButton: false,
+      onOpen: ()=>{
+        Swal.showLoading();
+        this.associatedPostService
+          .addAssociatedPost(associatedPostObj)
+          .subscribe((data) => {
+          console.log('ID'+data);
+          if(data){
+            Swal.fire({
+              title: 'Added',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1500,
+            }).then(()=>{
+              this.router.navigate(['./org/list-associated-post']);
+            })  
+          }
         });
-        Swal.fire({
-          title: 'Added',
-          text: 'Data Added Successfully',
-          icon: 'success',
-          confirmButtonText: 'Ok'
-        }).then(()=>{
-          setTimeout(() => {
-            this.router.navigate(['./org/list-associated-post']);
-          }, 500);
-        })
+      }
+    })
+
+    // this.associatedPostService
+    //     .addAssociatedPost(associatedPostObj)
+    //     .subscribe((data) => {
+    //       console.log(data);
+    //     });
+    //     Swal.fire({
+    //       title: 'Added',
+    //       text: 'Data Added Successfully',
+    //       icon: 'success',
+    //       confirmButtonText: 'Ok'
+    //     }).then(()=>{
+    //       setTimeout(() => {
+    //         this.router.navigate(['./org/list-associated-post']);
+    //       }, 500);
+    //     })
     
   }
 

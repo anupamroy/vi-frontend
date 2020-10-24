@@ -26,16 +26,21 @@ export class ListInstituteTypeComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.onDeleteConfirm(itemId)
-        Swal.fire(
-          'Deleted!',
-          'Your imaginary file has been deleted.',
-          'success'
-        )
-
+        Swal.fire({
+          title : "Deleting Institute Type",
+          willOpen: () => {
+            Swal.showLoading()        
+          },     
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('Adding Institute Type ')
+          }
+          })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',
-          'Your imaginary file is safe :)',
+          'Institute Type is safe :)',
           'error'
         )
       }
@@ -45,6 +50,13 @@ export class ListInstituteTypeComponent implements OnInit {
     this.InstituteTypeService.deleteInstituteType(id).subscribe(
       {next : resposeData =>{
       console.log(resposeData)
+      if(resposeData){
+        Swal.fire(
+          'Deleted!',
+          'Institute Type has been deleted.',
+          'success'
+        )
+      }
 
       this.finalItems = this.finalItems.filter((item) => {
         return item.itemId !== id;

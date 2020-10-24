@@ -42,14 +42,17 @@
             <div class="row">
                 <div class="col-lg-12 col-sm-12">
                     <h5 class="text-white pt-1 text-blue text-left text-capitalize">
-                        <i class="fas fa-arrows-alt"></i> View Organization Category<span class="float-right"><a
+                        <i class="fas fa-arrows-alt"></i> View Organization Category<span class="float-right">
+                            <a class="btn mb-3 text-white" routerLink="../add-org-category">
+                                <i class="fas fa-edit"></i> Add
+                            </a><a
                                 class="btn mb-3 text-white" routerLink="../">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
                             </a></span>
-                        <span class="float-right"><a class="btn mb-3 text-white" routerLink="../add-org-category">
+                        <!-- <span class="float-right"><a class="btn mb-3 text-white" routerLink="../add-org-category">
                                 <i class="fas fa-edit"></i> Add
                             </a>
-                        </span>
+                        </span> -->
                     </h5>
                     <hr class="hr-white" />
                 </div>
@@ -74,8 +77,7 @@
                                 <th scope="row">{{ i + 1 }}</th>
                                 <td>{{ item.orgCategory }}</td>
                                 <td>
-                                    <button routerLink="../edit-org-category/{{ item.itemId }}/{{
-                                    item.orgCategory}}" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
+                                    <button routerLink="../edit-org-category/{{ item.itemId }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button id="cusEdit"

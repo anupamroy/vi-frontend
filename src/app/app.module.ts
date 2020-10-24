@@ -18,7 +18,8 @@ Amplify.configure(awsconfig);
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+  
   ],
   imports: [
     BrowserModule,

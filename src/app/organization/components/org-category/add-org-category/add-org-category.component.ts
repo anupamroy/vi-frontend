@@ -12,6 +12,8 @@ export class AddOrgCategoryComponent implements OnInit {
 
   disableButton : boolean = true
   orgCategory : string = ''
+  requiredError : string = 'Organization Category cannot be blank'
+  validationError : string = 'Special Characters and Numbers are not Allowed'
 
   constructor(private router : Router, private organizationService : OrganizationCategoryService) { }
 
@@ -37,22 +39,50 @@ export class AddOrgCategoryComponent implements OnInit {
 
     console.log(orgCategoryObj)
 
-    this.organizationService
-        .addOrganizationCategory(orgCategoryObj)
-        .subscribe((data) => {
-          console.log(data);
-        });
-    
     Swal.fire({
-      title: 'Added',
-      text: 'Data Added Successfully',
-      icon: 'success',
-      confirmButtonText: 'Ok'
-    }).then(()=>{
-      setTimeout(() => {
-        this.router.navigate(['./org/list-org-category']);
-      }, 500);
-    })
+      title: 'Please Wait',
+      allowEscapeKey: false,
+      allowOutsideClick: true,
+      background: '#fff',
+      showConfirmButton: false,
+      onOpen: ()=>{
+        Swal.showLoading();
+        this.organizationService
+          .addOrganizationCategory(orgCategoryObj)
+          .subscribe((data) => {
+          console.log('ID'+data);
+          if(data){
+            Swal.fire({
+              title: 'Added',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1500,
+            }).then(()=>{
+              this.router.navigate(['./org/list-org-category']);
+            })  
+          }
+        });
+        // Swal.close()
+       
+      }
+    });
+
+    // this.organizationService
+    //     .addOrganizationCategory(orgCategoryObj)
+    //     .subscribe((data) => {
+    //       console.log(data);
+    //     });
+    
+    // Swal.fire({
+    //   title: 'Added',
+    //   text: 'Data Added Successfully',
+    //   icon: 'success',
+    //   confirmButtonText: 'Ok'
+    // }).then(()=>{
+    //   setTimeout(() => {
+    //     this.router.navigate(['./org/list-org-category']);
+    //   }, 500);
+    // })
   }
 
   ngOnInit(): void {

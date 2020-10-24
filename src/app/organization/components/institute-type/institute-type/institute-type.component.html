@@ -110,8 +110,14 @@
                                             </a>
                                         </span> 
                                     </h5>
-                                    <div class={{class}} style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;" *ngIf = 'showMessage'>{{message}}</div>
-
+   
+                                    <div [hidden]="enableAlert()" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
+                                        Special Characters and Numbers are not Allowed
+                                     </div>
+                                     
+                                     <div [hidden]="!enableButton() || !instituteTypeControl.dirty" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
+                                        Institute Type Required
+                                     </div>
                                 </div>
                               
                             </div>
@@ -138,7 +144,8 @@
                                                 placeholder="Institute Type"
                                                 style="width: 600px ;"
                                                 required
-                                                (input) = 'onAddInstituteType($event)'
+                                                [(ngModel)]="instituteType"
+                                                #instituteTypeControl = 'ngModel'
                                                  
                                             />
                                             <div
@@ -150,8 +157,8 @@
                                                 id="cusEdit"
                                                 class="btn btn-warning btn-common-color btn-lg mt-3 text-white"
                                                 (click) = 'onSubmit()'
-                                                [disabled]='disabledButton'
-                                                style="margin-left: 250px; width: 90px;"
+                                                [disabled]="enableButton()||!enableAlert()"
+                                                style="margin-left: 500px; width: 90px;"
                                                 >
                                                 <span>
                                                     Add
