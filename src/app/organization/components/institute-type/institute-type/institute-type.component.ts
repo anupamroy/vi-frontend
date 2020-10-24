@@ -41,7 +41,8 @@ export class InstituteTypeComponent implements OnInit {
     )
     const instituteTypeObj = {
       instituteType: this.instituteType,
-      isActivated: true
+      isActivated: true,
+      isDeleted: false
     }
     Swal.fire({
         title: "Adding Institute Type",

@@ -26,8 +26,8 @@ export class InstituteTypeService {
     return this.http.post<any>(`${this.api}`, body)
   }
 
-  deleteInstituteType(id : string):Observable<any>{
-    return this.http.delete<any>(`${this.api}/${id}`) 
+  deleteInstituteType(id : string, body: any):Observable<any>{
+    return this.http.put<any>(`${this.api}/${id}`, body) 
   }
 
 }
