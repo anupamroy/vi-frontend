@@ -26,6 +26,7 @@ import { ListAccountsHeadComponent } from './components/accounts-head/list-accou
 import { AddModuleComponent } from './components/module/add-module/add-module.component';
 import { EditModuleComponent } from './components/module/edit-module/edit-module.component';
 import { ListModuleComponent } from './components/module/list-module/list-module.component';
+import { ListOrganizationComponent } from './components/list-organization/list-organization.component';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import { ListModuleComponent } from './components/module/list-module/list-module
         ListAccountsHeadComponent,
         AddModuleComponent,
         EditModuleComponent,
-        ListModuleComponent
+        ListModuleComponent,
+        ListOrganizationComponent
     ],
     imports: [CommonModule, OrganizationRoutingModule, FormsModule],
 })

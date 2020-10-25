@@ -23,6 +23,7 @@ import { OrganizationComponent } from './organization.component';
 import { AddModuleComponent } from './components/module/add-module/add-module.component'
 import { EditModuleComponent } from './components/module/edit-module/edit-module.component'
 import { ListModuleComponent } from './components/module/list-module/list-module.component'
+import { ListOrganizationComponent } from './components/list-organization/list-organization.component';
 
 
 const routes: Routes = [
@@ -69,7 +70,8 @@ const routes: Routes = [
   { path: 'list-fees-type', component: ListFeesTypeComponent},
   { path: 'edit-fees-type/:itemId', component: EditFeesTypeComponent},
   { path: 'list-accounts-head', component: ListAccountsHeadComponent},
-  { path: 'edit-accounts-head/:itemId', component: EditAccountsHeadComponent}
+  { path: 'edit-accounts-head/:itemId', component: EditAccountsHeadComponent},
+  { path: 'list-organization', component: ListOrganizationComponent }
 ];
 
 @NgModule({
