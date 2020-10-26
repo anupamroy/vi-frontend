@@ -1,0 +1,260 @@
+<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script> -->
+
+<body class="bg-light-blue">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light-yellow navbar-nav p-0" id="mainNav">
+        <a class="navbar-brand js-scroll-trigger pl-5 pr-3 pt-0 pb-0 dx-block" href="#page-top">
+            <img src="/assets/images/mtjh.png" class="logo" alt="logo" />
+        </a>
+        <div class="container-fluid">
+            <a class="navbar-brand js-scroll-trigger mb-block pl-1" href="#page-top">
+                <img src="/assets/images/mtjh.png" class="logo" alt="logo" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse pl-lg-0" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <span class="nav-link institute-title" href="#">DUM DUM MOTIJHEEL COLLEGE
+                            <span class="sr-only">(current)</span></span>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"><img src="/assets/images/profile-pic.jpg"
+                                alt="profile pic" class="img-stu-profile" />
+                            Pritam Deb Nath
+                        </a>
+                        <small class="regNo">Department : Accounts</small>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- <section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 dashboard-logo mt-3 text-center cus-wave">
+                <img src="assest/images/logo.png" alt="Logo" class="img-nta-logo">
+                <span class="nta-logo-text">NTA e Solutions Private Limited</span>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+    <section class="stu-dashboard mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-1 col-lg-10">
+                    <h5>
+                        <span class="float-right"><a class="text-light btn mb-3" routerLink="../">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </span>
+                    </h5>
+                </div>
+                <div class="col-lg-10 offset-lg-1 col-sm-12">
+                    <div class="border-double">
+                        <form class="bg-light p-4" action="">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
+                                        <i class="fas fa-arrows-alt"></i> Add Package<span class="float-right"><a
+                                                class="btn mb-3" routerLink="../list-packages">
+                                                <i class="fas fa-eye"></i> View
+                                            </a>
+                                        </span>
+                                    </h5>
+                                </div>
+                                <!--  <div class="col-lg-3 col-sm-12">
+                            <button type="submit" class="btn-mat"><span>View Department</span></button>
+                        </div> -->
+                            </div>
+
+                            <div [hidden]="validatePackageName()" class="alert alert-warning text-center">
+                                Package Name Should Not be Blank and only contain letters, numbers and special characters like – Dash, Space and Single Inverted Comma
+                            </div>
+                            <div [hidden]="!requiredTrialDuration()" class="alert alert-warning text-center">
+                                Trial Duration is required as you have opted for Trial Package
+                            </div>
+                            <div [hidden]="requiredPackageDuration()" class="alert alert-warning text-center">
+                                Package Duration Required
+                            </div>
+                            <div [hidden]="requiredPackagePrice()" class="alert alert-warning text-center">
+                                Package Price Required
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
+                                        <!-- row 1 -->
+                                        <div class="col-lg-3 cl-sm-12 mb-3 form-group">
+                                            <label for="insType">Package Type </label>
+                                            <select class="form-control" id="insType" name="packageType" (change)="packageTypeOnChange($event)" [(ngModel)]="packageType" #packageTypeControl="ngModel">
+                                                <option *ngFor="let type of packageTypeArray">{{type}}</option>
+                                                <!-- <option>Type 2</option>
+                                                <option>Type 3</option> -->
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6 cl-sm-12 mb-3 form-group">
+                                            <label for="packageName">Package Name</label>
+                                            <input data-toggle="tooltip" data-placement="bottom"
+                                                title="Demo tooltip text" type="text" name="packageName"
+                                                id="packageName" class="form-control inputFocus" [(ngModel)]="packageName" #packageNameControl="ngModel"
+                                                placeholder="Package Name" required />
+                                        </div>
+                                        <div class="col-lg-3 cl-sm-12 mb-3 form-group">
+                                            <label for="insType">Payment Plan </label>
+                                            <select class="form-control" id="paymentPlan" name="paymentPlan" (change)="paymentPlanOnChange($event)" [(ngModel)]="paymentPlan" #paymentPlanControl="ngModel">
+                                                <option *ngFor="let plan of paymentPlanArray">{{plan}}</option>
+                                                <!-- <option>Plan 2</option>
+                                                <option>Plan 3</option> -->
+                                            </select>
+                                        </div>
+
+                                        <!-- row 2 -->
+                                        <div class="col-lg-6 cl-sm-12 mb-3 form-group">
+                                            <label for="packageDuration">Package Duration</label>
+                                            <input data-toggle="tooltip" data-placement="bottom"
+                                                title="Demo tooltip text" type="text" name="packageDuration"
+                                                id="packageDuration" class="form-control inputFocus" [(ngModel)]="packageDuration" #packageDurationControl="ngModel"
+                                                placeholder="Package Duration" required />
+                                        </div>
+                                        <div class="col-lg-6 cl-sm-12 mb-3 form-group">
+                                            <label for="packagePrice">Package Price</label>
+                                            <input data-toggle="tooltip" data-placement="bottom"
+                                                title="Demo tooltip text" type="text" name="packagePrice"
+                                                id="packagePrice" class="form-control inputFocus" [(ngModel)]="packagePrice" #packagePriceControl="ngModel"
+                                                placeholder="Package Price" required />
+                                        </div>
+
+                                        <!-- row 3 -->
+                                        <div class="col-lg-12 cl-sm-12 mb-3 form-group">
+                                            <label for="packageDescription">Package Description</label>
+                                            <textarea data-toggle="tooltip" data-placement="bottom"
+                                                title="Demo tooltip text" type="text" name="packageDescription" 
+                                                id="packageDescription" class="form-control inputFocus" [(ngModel)]="packageDescription"
+                                                placeholder="Enter your Message" required>
+                                            </textarea>
+                                        </div>
+
+                                        <!-- row 4 -->
+                                        <div class="col-lg-3 cl-sm-6 mb-3 ml-3 form-group form-check">
+                                            <input type="checkbox" class="form-check-input" name="isTrial" [(ngModel)]="isTrial" id="trialPackage" (change)="checkBoxOnChange($event)">
+                                            <label class="form-check-label" for="exampleCheck1">Trial Package</label>
+                                        </div>
+                                        <!-- <div class="col-lg-2 cl-sm-0"></div> -->
+                                        <div class="col-lg-6 cl-sm-12 mb-3 form-group">
+                                            <label for="packagePrice">Trial Duration</label>
+                                            <input data-toggle="tooltip" data-placement="bottom"
+                                                title="Demo tooltip text" type="text" name="trialDuration"
+                                                id="trialDuration" class="form-control inputFocus" [(ngModel)]="trialDuration"
+                                                placeholder="Trial Duration" required />
+                                        </div>
+
+                                        <!-- <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
+                                            <label for="parentFees"> Connected Modules</label><br />
+                                            <div class="form-group">
+                                                <input data-toggle="tooltip" data-placement="bottom"
+                                                    title="Demo tooltip text" type="text" name="feesHead" id="feesHead"
+                                                    class="form-control inputFocus" placeholder="Module Name"
+                                                    required />
+                                            </div>
+                                        </div> -->
+                                        <!-- <h1>Hi {{packageControl.touched}}</h1> -->
+                                        <div class="col-lg-2 offset-lg-5 button-container mt-3 text-center">
+                                            <button [disabled]="!(validatePackageName()&&!requiredTrialDuration()&&requiredPackageDuration()&&requiredPackagePrice())
+                                             || !packageNameControl.touched ||!packagePriceControl.touched||!packageDurationControl.touched||!packageTypeControl.dirty||!paymentPlanControl.dirty" type="button" id="cusEdit" (click)="onSubmit()"
+                                                class="btn btn-block btn-common-color btn-lg text-white" style="
+                          background: linear-gradient(
+                            180deg,
+                            #f4bd22 50%,
+                            #eeae20 50%
+                          );
+                          padding: 0.5rem;
+                        ">
+                                                <span>
+                                                    Add <i class="fas fa-caret-right btn-style1"></i></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- add more row end-->
+
+                            <!-- </div> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-2 bg-dark mt-3">
+        <div class="container">
+            <p class="m-0 text-center text-white">
+                &copy;
+                <script type="text/javascript">
+                    document.write(new Date().getFullYear());
+                </script>
+                | All Rights Reserved
+            </p>
+        </div>
+        <!-- /.container -->
+    </footer>
+    <footer class="footer-bottom">
+        <a href="#">
+            <img src="/assets/images/float-support.png" alt="support" class="float-support" />
+        </a>
+        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" />
+        </a>
+    </footer>
+    <!-- 
+    <script>
+        $(document).ready(function(){
+            $(".mul-select").select2({
+                placeholder : "select here",
+                tags : true,
+                tokenSeparators : ['/', ',' , ',' ,""]
+
+            });
+        })
+    </script>
+     -->
+
+    <!-- <script src="assest/js/jquery.min.js"></script>
+    <script src="assest/js/popper.min.js"></script>
+    <script src="assest/js/bootstrap.min.js"></script>
+    <script src="assest/js/sweet-alert.min.js"></script>
+    
+    <script src="assest/js/jquery.dataTables.min.js"></script>
+    <script src="assest/js/dataTables.bootstrap4.min.js"></script>
+    <script src="assest/js/moment.min.js"></script>
+    <script src="assest/js/jquery.daterangepicker.min.js"></script>
+    <script src="assest/js/chosen.jquery.js"></script>
+    <script src="assest/js/script.js"></script>
+    
+
+    
+<script type="text/javascript">
+    
+document.getElementById('cusEdit').onclick = function(){
+    swal("Good job!", "You clicked the button!", "success");
+};
+
+</script>
+<script type="text/javascript">
+  
+</script>
+</body>
+ -->
+</body>

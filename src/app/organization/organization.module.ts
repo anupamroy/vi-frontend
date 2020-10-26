@@ -27,6 +27,9 @@ import { AddModuleComponent } from './components/module/add-module/add-module.co
 import { EditModuleComponent } from './components/module/edit-module/edit-module.component';
 import { ListModuleComponent } from './components/module/list-module/list-module.component';
 import { ListOrganizationComponent } from './components/list-organization/list-organization.component';
+import { AddPackageComponent } from './components/packages-master/add-package/add-package.component';
+import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
+import { ListPackageComponent } from './components/packages-master/list-package/list-package.component';
 
 @NgModule({
     declarations: [
@@ -53,7 +56,10 @@ import { ListOrganizationComponent } from './components/list-organization/list-o
         AddModuleComponent,
         EditModuleComponent,
         ListModuleComponent,
-        ListOrganizationComponent
+        ListOrganizationComponent,
+        AddPackageComponent,
+        EditPackageComponent,
+        ListPackageComponent
     ],
     imports: [CommonModule, OrganizationRoutingModule, FormsModule],
 })
