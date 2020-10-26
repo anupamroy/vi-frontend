@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import {AssociatedPostService} from '../services/associated-post.service'
+import { AssociatePost } from '../../../../shared/models/associate-post';
 
 @Component({
   selector: 'app-add-associated-post',
@@ -34,11 +35,8 @@ export class AddAssociatedPostComponent implements OnInit {
 
   onClick() {
     console.log(this.associatedPost);
-    const associatedPostObj = {
-      associated_post : this.associatedPost,
-      isActivated: true,
-      isDeleted: false
-    }
+    const associatedPostObj = new AssociatePost();
+    associatedPostObj.associatedPost = this.associatedPost;
 
     console.log(associatedPostObj);
 

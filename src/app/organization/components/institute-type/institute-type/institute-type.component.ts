@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { InstituteTypeService } from '../Services/institute-type.service'
+import { InstituteType } from '../../../../shared/models/institute-type';
 import Swal from 'sweetalert2'
 
 
@@ -39,11 +40,9 @@ export class InstituteTypeComponent implements OnInit {
       'Institute Type has been added',
       'success'
     )
-    const instituteTypeObj = {
-      instituteType: this.instituteType,
-      isActivated: true,
-      isDeleted: false
-    }
+    const instituteTypeObj = new InstituteType();
+    instituteTypeObj.instituteType = this.instituteType
+    
     Swal.fire({
         title: "Adding Institute Type",
         willOpen: () => {

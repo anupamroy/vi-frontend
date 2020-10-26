@@ -7,7 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListOrganizationComponent implements OnInit {
 
-  list_organization = ['Silicon', 'CV Raman', 'KIIT', 'CET', 'IIIT', 'IIT', 'ITER'];
+  list_organization = [
+    {
+      id: 2376,
+      name: 'Silicon',
+      isDeleted: false,
+      isActivated: true
+    },
+    {
+      id: 2376,
+      name: 'KIIT',
+      isDeleted: false,
+      isActivated: true
+    },
+    {
+      id: 2376,
+      name: 'IIIT',
+      isDeleted: true,
+      isActivated: false
+    },
+  ];
 
   constructor() { }
 
