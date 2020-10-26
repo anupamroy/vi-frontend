@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeesService } from '../../../services/fees-type.service'
+import { FeesType } from '../../../../shared/models/fees-type';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -10,8 +11,8 @@ import Swal from 'sweetalert2'
 })
 export class EditFeesTypeComponent implements OnInit {
 
-  feesType: string = ''
-  id: string
+  feesType: string = '';
+  id: string;
 
   constructor(private activatedRoute : ActivatedRoute, private router : Router, private feesService : FeesService ) { }
 
@@ -29,9 +30,24 @@ export class EditFeesTypeComponent implements OnInit {
     return regex.test(this.feesType)
   }
 
+  processObjUpdated(object: FeesType){
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'itemId') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      itemId: object.itemId
+    }
+  }
+
   onClick(){
-   
-      console.log(this.feesType)
       Swal.fire({
         title: 'Please Wait',
         allowEscapeKey: false,
@@ -40,18 +56,14 @@ export class EditFeesTypeComponent implements OnInit {
         showConfirmButton: false,
         onOpen: ()=>{
           Swal.showLoading();
+          var obj = new FeesType();
+          obj.feesType = this.feesType;
           this.feesService
-            .updateFeesTypeById(this.id,{
-              attribute: ['feesType'],
-              value: [
-              this.feesType
-              ],
-            })
+            .updateFeesTypeById(this.id, this.processObjUpdated(obj))
             .subscribe((data) => {
-            console.log('ID'+data);
             if(data){
               Swal.fire({
-                title: 'Editted',
+                title: 'Edited',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 1500,
@@ -60,31 +72,8 @@ export class EditFeesTypeComponent implements OnInit {
               })  
             }
           });
-          // Swal.close()
-         
         }
       });
-      // this.feesService
-      //   .updateFeesTypeById(this.id, {
-      //     attribute: ['feesType'],
-      //     value: [
-      //       this.feesType
-      //     ],
-      //   })
-      //   .subscribe((data) => {
-      //     console.log(data);
-      //   });
-        
-      //   Swal.fire({
-      //     title: 'Editted',
-      //     text: 'Data Editted Successfully',
-      //     icon: 'success',
-      //     confirmButtonText: 'Ok'
-      //   }).then(()=>{
-      //     setTimeout(() => {
-      //       this.router.navigate(['./org/list-fees-type']);
-      //     }, 500);
-      //   })
   }
 
   onAdd(){
@@ -101,14 +90,6 @@ export class EditFeesTypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.itemId;
-    this.feesService.getFeesTypeById(this.id).subscribe((item)=>{
-      item = JSON.parse(item);
-      this.feesType = item.feesType
-      console.log(item)
-    })
-    // const feesType =this.activatedRoute.snapshot.params.feesType
-    // console.log(this.id, feesType)
-    // this.feesType = feesType
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FeesService } from '../../../services/fees-type.service'
+import { Router, ActivatedRoute } from '@angular/router';
+import { FeesService } from '../../../services/fees-type.service';
+import { FeesType } from '../../../../shared/models/fees-type';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -13,7 +14,7 @@ export class AddFeesTypeComponent implements OnInit {
   disableButton : boolean = true
   feesType : string = ''
 
-  constructor(private router : Router, private feesService : FeesService) { }
+  constructor(private router : Router, private feesService : FeesService, private activatedRoute: ActivatedRoute) { }
 
   enableButton() {
     if(this.feesType.trim() === '') {
@@ -30,11 +31,10 @@ export class AddFeesTypeComponent implements OnInit {
   }
   
   onSubmit(){
-    const feesTypeObj = {
-      feesType : this.feesType
-    }
-
-    console.log(feesTypeObj)
+    const obj = new FeesType();
+    obj.feesType = this.feesType;
+    obj.isActivated = true;
+    obj.isDeleted = false;
 
     Swal.fire({
       title: 'Please Wait',
@@ -45,9 +45,8 @@ export class AddFeesTypeComponent implements OnInit {
       onOpen: ()=>{
         Swal.showLoading();
         this.feesService
-          .addFeesType(feesTypeObj)
+          .addFeesType(obj)
           .subscribe((data) => {
-          console.log('ID'+data);
           if(data){
             Swal.fire({
               title: 'Added',
@@ -59,38 +58,8 @@ export class AddFeesTypeComponent implements OnInit {
             })  
           }
         });
-        // Swal.close()
-       
       }
     });
-
-    // this.feesService
-    //     .addFeesType(feesTypeObj)
-    //     .subscribe((data) => {
-    //       console.log('hello'+data);
-    //     });
-
-        // fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/fees', {
-        //   method: 'POST',
-        //   body: JSON.stringify(feesTypeObj),
-        // })
-        //   .then((data) => {
-        //     // this.router.navigate(['/fees-management/fees-type']);
-        //   })
-        //   .catch((err) => {
-        //     console.error(err);
-        //   });
-    
-    // Swal.fire({
-    //   title: 'Added',
-    //   text: 'Data Added Successfully',
-    //   icon: 'success',
-    //   confirmButtonText: 'Ok'
-    // }).then(()=>{
-    //   setTimeout(() => {
-    //     this.router.navigate(['./org/list-fees-type']);
-    //   }, 500);
-    // })
   }
 
   ngOnInit(): void {

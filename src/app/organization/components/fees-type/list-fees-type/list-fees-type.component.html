@@ -36,16 +36,19 @@
                                 <th scope="row">{{ i + 1 }}</th>
                                 <td>{{ item.feesType }}</td>
                                 <td>
-                                    <button routerLink="../edit-fees-type/{{ item.fees_head_id }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
+                                    <button routerLink="../edit-fees-type/{{ item.institue_type }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button id="cusEdit"
-                                        class="btn-dark-blue-light btn btn-sm" (click)="onDelete(item.fees_head_id)"
+                                        class="btn-dark-blue-light btn btn-sm" (click)="onDelete(item.institue_type)"
                                         data-toggle="modal" data-target="#exampleModal">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
-                                    <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
+                                    <button (click)="onDeactivate(item.institue_type)" *ngIf="item.isActivated" href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
                                         <i class="fas fa-ban"></i>
+                                    </button>
+                                    <button (click)="onActivate(item.institue_type)" *ngIf="!item.isActivated" href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
+                                        <i class="fas fa-check-circle"></i>
                                     </button>
                                 </td>
                             </tr>
