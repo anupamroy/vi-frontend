@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class AddPackageComponent implements OnInit {
   packageType : string = 'Choose'
   packageName : string
-  paymentPlan : string = 'Choose'
+  paymentPlan : string ='Choose'
   packageDuration : string
   packagePrice : string
   packageDescription : string = ''
@@ -26,10 +26,6 @@ export class AddPackageComponent implements OnInit {
 
   constructor(private packageService : PackagesService, private router : Router) { }
 
-  validatePackageName() : boolean {
-    const regex = /^[a-zA-Z0-9' -]+$/;
-    return regex.test(this.packageName)
-  }
 
   requiredTrialDuration(): boolean{
     // console.log(this.isTrial);
@@ -37,20 +33,10 @@ export class AddPackageComponent implements OnInit {
     if(this.isTrial){
       if(this.trialDuration.trim()==='')
         return true
+      else
+        return false
     } else 
         return false
-  }
-
-  requiredPackageDuration(){
-    this.validatePackageName();
-    const regex = /^(\w+\S*)$/
-    return regex.test(this.packageDuration)
-
-  }
-
-  requiredPackagePrice(){
-    const regex = /^(\w+\S*)$/
-    return regex.test(this.packagePrice)
   }
 
   paymentPlanOnChange(event:any){

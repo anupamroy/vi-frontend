@@ -1,6 +1,5 @@
 <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script> -->
-
 <body class="bg-light-blue">
     <section class="stu-dashboard mt-5">
         <div class="container">
@@ -15,7 +14,7 @@
                 </div>
                 <div class="col-lg-10 offset-lg-1 col-sm-12">
                     <div class="border-double">
-                        <form class="bg-light p-4" action="">
+                        <form class="bg-light p-4" action="" #packageForm = "ngForm">
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
                                     <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
@@ -31,18 +30,25 @@
                         </div> -->
                             </div>
 
-                            <div [hidden]="validatePackageName()" class="alert alert-warning text-center">
+                            <div [hidden]="(packageNameControl.valid || packageNameControl.untouched)" class="alert alert-warning text-center">
                                 Package Name Should Not be Blank and only contain letters, numbers and special characters like – Dash, Space and Single Inverted Comma
                             </div>
                             <div [hidden]="!requiredTrialDuration()" class="alert alert-warning text-center">
                                 Trial Duration is required as you have opted for Trial Package
                             </div>
-                            <div [hidden]="requiredPackageDuration()" class="alert alert-warning text-center">
+                            <div [hidden]="packageDurationControl.valid || packageDurationControl.untouched" class="alert alert-warning text-center">
                                 Package Duration Required
                             </div>
-                            <div [hidden]="requiredPackagePrice()" class="alert alert-warning text-center">
+                            <div [hidden]="packagePriceControl.valid || packagePriceControl.untouched" class="alert alert-warning text-center">
                                 Package Price Required
                             </div>
+                            <div [hidden]="(paymentPlanControl.valid && paymentPlanControl.dirty)||paymentPlanControl.untouched" class="alert alert-warning text-center">
+                                Payment Plan Required
+                            </div>
+                            <div [hidden]="(packageTypeControl.valid && packageTypeControl.dirty)||packageTypeControl.untouched" class="alert alert-warning text-center">
+                                Package Type Required
+                            </div>
+                            
 
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
@@ -50,8 +56,9 @@
                                         <!-- row 1 -->
                                         <div class="col-lg-3 cl-sm-12 mb-3 form-group">
                                             <label for="insType">Package Type </label>
-                                            <select class="form-control" id="insType" name="packageType" (change)="packageTypeOnChange($event)" [(ngModel)]="packageType" #packageTypeControl="ngModel">
-                                                <option *ngFor="let type of packageTypeArray">{{type}}</option>
+                                            <select class="form-control" id="insType" name="packageType" required (change)="packageTypeOnChange($event)" [(ngModel)]="packageType" #packageTypeControl="ngModel">
+                                                <option value="Choose" selected disabled>Package Type</option>
+                                                <option value="{{type}}" *ngFor="let type of packageTypeArray">{{type}}</option>
                                                 <!-- <option>Type 2</option>
                                                 <option>Type 3</option> -->
                                             </select>
@@ -59,14 +66,22 @@
                                         <div class="col-lg-6 cl-sm-12 mb-3 form-group">
                                             <label for="packageName">Package Name</label>
                                             <input data-toggle="tooltip" data-placement="bottom"
-                                                title="Demo tooltip text" type="text" name="packageName"
+                                                title="Demo tooltip text" type="text" name="packageName" pattern="[a-zA-Z0-9' -]+"
                                                 id="packageName" class="form-control inputFocus" [(ngModel)]="packageName" #packageNameControl="ngModel"
                                                 placeholder="Package Name" required />
                                         </div>
+                                        <!-- <h5>Name:{{packageNameControl.valid}}</h5>
+                                        <h5>Duration:{{packageDurationControl.valid}}</h5>
+                                        <h5>Price:{{packagePriceControl.valid}}</h5>
+                                        <h5>Price:{{paymentPlanControl.valid}}</h5>
+                                        <h5>Price:{{packageTypeControl.valid}}</h5>
+                                        <h5>FormValid:{{packageForm.form.valid}}</h5> -->
                                         <div class="col-lg-3 cl-sm-12 mb-3 form-group">
                                             <label for="insType">Payment Plan </label>
-                                            <select class="form-control" id="paymentPlan" name="paymentPlan" (change)="paymentPlanOnChange($event)" [(ngModel)]="paymentPlan" #paymentPlanControl="ngModel">
-                                                <option *ngFor="let plan of paymentPlanArray">{{plan}}</option>
+                                            <select class="form-control" id="paymentPlan" name="paymentPlan" required (change)="paymentPlanOnChange($event)"
+                                                 [(ngModel)]="paymentPlan" #paymentPlanControl="ngModel">
+                                                <option value="Choose" selected disabled>Payment Plan</option>
+                                                <option value="{{plan}}" *ngFor="let plan of paymentPlanArray">{{plan}}</option>
                                                 <!-- <option>Plan 2</option>
                                                 <option>Plan 3</option> -->
                                             </select>
@@ -94,7 +109,7 @@
                                             <textarea data-toggle="tooltip" data-placement="bottom"
                                                 title="Demo tooltip text" type="text" name="packageDescription" 
                                                 id="packageDescription" class="form-control inputFocus" [(ngModel)]="packageDescription"
-                                                placeholder="Enter your Message" required>
+                                                placeholder="Enter your Message">
                                             </textarea>
                                         </div>
 
@@ -109,7 +124,7 @@
                                             <input data-toggle="tooltip" data-placement="bottom"
                                                 title="Demo tooltip text" type="text" name="trialDuration"
                                                 id="trialDuration" class="form-control inputFocus" [(ngModel)]="trialDuration"
-                                                placeholder="Trial Duration" required />
+                                                placeholder="Trial Duration" />
                                         </div>
 
                                         <!-- <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
@@ -121,10 +136,10 @@
                                                     required />
                                             </div>
                                         </div> -->
-                                        <!-- <h1>Hi {{packageControl.touched}}</h1> -->
+
+                                        
                                         <div class="col-lg-2 offset-lg-5 button-container mt-3 text-center">
-                                            <button [disabled]="!(validatePackageName()&&!requiredTrialDuration()&&requiredPackageDuration()&&requiredPackagePrice())
-                                             || !packageNameControl.touched ||!packagePriceControl.touched||!packageDurationControl.touched||!packageTypeControl.dirty||!paymentPlanControl.dirty" type="button" id="cusEdit" (click)="onSubmit()"
+                                            <button [disabled]="(!packageForm.form.valid || requiredTrialDuration())" type="button" id="cusEdit" (click)="onSubmit()"
                                                 class="btn btn-block btn-common-color btn-lg text-white" style="
                           background: linear-gradient(
                             180deg,
