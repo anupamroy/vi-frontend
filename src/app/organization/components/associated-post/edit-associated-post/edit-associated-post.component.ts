@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import {AssociatedPostService} from '../services/associated-post.service'
+import { AssociatePost } from '../../../../shared/models/associate-post';
 
 @Component({
   selector: 'app-edit-associated-post',
@@ -33,16 +34,32 @@ export class EditAssociatedPostComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router,private associatedPostService:AssociatedPostService) {
   }
 
+  processObjUpdated(object: AssociatePost){
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'itemId') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      itemId: object.itemId
+    }
+  }
+
   onClick(){
     console.log(this.id)
     if (this.instituteType !== this.associated_post) {
+      var obj = new AssociatePost();
+
+      obj.associatedPost = this.associated_post;
+
       this.associatedPostService
-        .updateAssociatedPostById(this.id, {
-          attribute: ['associated_post'],
-          value: [
-            this.associated_post
-          ],
-        })
+        .updateAssociatedPostById(this.id, this.processObjUpdated(obj))
         .subscribe((data) => {
           console.log(data);
         });

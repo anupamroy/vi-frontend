@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssociatedPostService {
 
-  api = 'https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org'
+  api = environment.api;
   constructor(private http : HttpClient) { }
 
   getAssociatedPost():Observable<any> {

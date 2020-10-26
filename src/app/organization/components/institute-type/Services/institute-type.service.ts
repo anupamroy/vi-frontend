@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InstituteTypeService {
-  api = " https://rmxhxsszxg.execute-api.us-east-1.amazonaws.com/Prod/org"
+  api = environment.api;
 
 
   constructor(private http : HttpClient) { }
@@ -26,8 +27,8 @@ export class InstituteTypeService {
     return this.http.post<any>(`${this.api}`, body)
   }
 
-  deleteInstituteType(id : string):Observable<any>{
-    return this.http.delete<any>(`${this.api}/${id}`) 
+  deleteInstituteType(id : string, body: any):Observable<any>{
+    return this.http.put<any>(`${this.api}/${id}`, body) 
   }
 
 }

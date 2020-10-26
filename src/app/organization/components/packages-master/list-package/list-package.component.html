@@ -1,0 +1,138 @@
+<div class="bg-light-blue" style="height: 100%;">
+    <section class="pt-4 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <h5 class="text-white pt-1 text-blue text-left text-capitalize">
+                        <i class="fas fa-arrows-alt"></i> List Packages<span class="float-right">
+                            <a class="btn mb-3 text-white" routerLink="../add-package">
+                                <i class="fas fa-edit"></i> Add
+                            </a>
+                            <a class="btn mb-3 text-white" routerLink="../">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a></span>
+                            <!-- <span class="float-right"><a class="btn mb-3 text-white" routerLink="../add-accounts-head">
+                                <i class="fas fa-edit"></i> Add
+                            </a>
+                        </span> -->
+                    </h5>
+                    <hr class="hr-white" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stu-dashboard cus-pay-wave">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <table class="table table-bordered" style="background-color: aliceblue">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sl No</th>
+                                <th scope="col">Package Type</th>
+                                <th scope="col">Package Name</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of finalItems; let i = index">
+                                <th scope="row">{{ i + 1 }}</th>
+                                <td>{{item.packageType}}</td>
+                                <td>{{ item.packageName }}</td>
+                                <td>
+                                    <button routerLink="../edit-package/{{ item.itemId }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm ml-1">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button id="cusEdit"
+                                        class="btn-dark-blue-light btn btn-sm ml-1" (click)="onDelete(item.itemId)"
+                                        data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                    <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm ml-1" (click)='onView(item.itemId)'>
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm ml-1">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- <footer class="py-2 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">
+                &copy;
+                <script type="text/javascript">
+                    document.write(new Date().getFullYear());
+                </script>
+                | All Rights Reserved
+            </p>
+        </div>
+    </footer> -->
+    <footer class="footer-bottom">
+        <a href="#">
+            <img src="/assets/images/float-support.png" alt="support" class="float-support" />
+        </a>
+        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" />
+        </a>
+    </footer>
+
+    <!-- <script src="assest/js/jquery.min.js"></script>
+    <script src="assest/js/popper.min.js"></script>
+    <script src="assest/js/bootstrap.min.js"></script>
+    <script src="assest/js/sweet-alert.min.js"></script>
+    
+    <script src="assest/js/jquery.dataTables.min.js"></script>
+    <script src="assest/js/dataTables.bootstrap4.min.js"></script>
+    <script src="assest/js/moment.min.js"></script>
+    <script src="assest/js/jquery.daterangepicker.min.js"></script>
+    <script src="assest/js/chosen.jquery.js"></script>
+    <script src="assest/js/script.js"></script>
+    <script type="text/javascript">
+      jq = jQuery.noConflict();
+        jq(function(){
+          jq(".inputFocus").focus();
+        });
+    </script>
+    
+<script type="text/javascript">
+    
+document.getElementById('cusEdit').onclick = function(){
+    swal("Good job!", "You clicked the button!", "success");
+};
+
+</script>
+<script type="text/javascript">
+  // checkAll
+  jq = jQuery.noConflict();
+jq(document).ready(function () {
+    jq('#selectall').click(function () {
+        jq('.selectedId').prop('checked', this.checked);
+    });
+
+    jq('.selectedId').change(function () {
+        var check = (jq('.selectedId').filter(":checked").length == jq('.selectedId').length);
+        jq('#selectall').prop("checked", check);
+    });
+});
+
+jq(document).ready(function () {
+    jq('#selectall1').click(function () {
+        jq('.selectedId1').prop('checked', this.checked);
+    });
+
+    jq('.selectedId1').change(function () {
+        var check = (jq('.selectedId1').filter(":checked").length == jq('.selectedId1').length);
+        jq('#selectall1').prop("checked", check);
+    });
+});
+</script> -->
+</div>

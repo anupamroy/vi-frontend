@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router'
-import { InstituteTypeService} from '../Services/institute-type.service'
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2'
+import {InstituteTypeService} from '../services/institute-type.service'
+import { InstituteType } from '../../../../shared/models/institute-type';
 
 @Component({
   selector: 'app-edit-institute-type',
@@ -9,84 +10,88 @@ import Swal from 'sweetalert2'
   styleUrls: ['./edit-institute-type.component.scss']
 })
 export class EditInstituteTypeComponent implements OnInit {
- 
-  newInstituteType = ""
-  id = ""
-  
-  constructor(
-    private activatedRoute : ActivatedRoute, 
-    private router : Router ,
-    private InstituteTypeService : InstituteTypeService) { }
 
-    enableButton() {
-      if(this.newInstituteType && this.newInstituteType.trim() === '') {
-        return true
-      }
-      else {
-        return false
+  institute_type :string= '';
+  id:string;
+
+  instituteType = "MTech";
+
+  enableButton(){
+    if(this.institute_type && 
+      this.institute_type.trim() === '') {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
+  enableAlert(){
+    const regex = /^[a-zA-Z_ ]*$/
+    return regex.test(this.institute_type)
+  }
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,private instituteTypeService:InstituteTypeService) {
+  }
+
+  processObjUpdated(object: InstituteType){
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'itemId') {
+        attribute.push(key);
+        value.push(object[key]);
       }
     }
-  
-    enableAlert(){
-      const regex = /^[a-zA-Z_ ]*$/
-      return regex.test(this.newInstituteType)
+
+    return {
+      attribute,
+      value,
+      itemId: object.itemId
     }
-      
-    
-  goToView(){
-    this.router.navigate(['/org/list-institute-type'])
-  }
-  goToAdd(){
-    this.router.navigate(['/org/add-institute-type'])
-  }
-  goToDashboard(){
-    this.router.navigate(['/org'])
   }
 
   onClick(){
+    console.log(this.id)
+    if (this.instituteType !== this.institute_type) {
+      var obj = new InstituteType();
+
+      obj.instituteType = this.institute_type;
+
+      this.instituteTypeService
+        .updateInstituteTypeById(this.id, this.processObjUpdated(obj))
+        .subscribe((data) => {
+          console.log(data);
+        });
+    }
     Swal.fire({
-      title : "Updating Institute Type",
-      willOpen: () => {
-        Swal.showLoading()        
-      },     
-    }).then((result) => {
-     
-      if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('Adding Institute Type ')
-      }
-      })
-    
-    console.log(this.newInstituteType)
-    let body = JSON.stringify({
-          "attribute" : ["instituteType"],
-          "value" : [this.newInstituteType]
-        })
-
-    this.InstituteTypeService.updateInstituteTypeById(this.id, body).subscribe({
-      next : responseData =>{
-        console.log(responseData)
-        if(responseData){
-          Swal.fire(
-            'Congratulations!',
-            'Institute Type has been Updated',
-            'success'
-          ).then(result => {
-            this.router.navigate(['/org/list-institute-type'])
-          })
-        }
-      },
-      error : error => {
-        console.log(error)
-      }
+      title: 'Edited',
+      text: 'Data Edited Successfully',
+      icon: 'success',
+      confirmButtonText: 'Ok'
+    }).then(()=>{
+      setTimeout(() => {
+        this.router.navigate(['./org/list-institute-type']);
+      }, 500);
     })
+    // document.getElementById('alert').hidden = false
+  }
 
+  onView(){
+    this.router.navigate(["/org/list-institute-type"])
+  }
+  onDashboard(){
+    this.router.navigate(["./org"])
+  }
+
+  onAdd(){
+    this.router.navigate(["/org/add-institute-type"])
   }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.params.itemId;
-    const instituteType =this.activatedRoute.snapshot.params.instituteType
-    console.log(this.id, instituteType)
-    this.newInstituteType = instituteType
+    // console.log(this.activatedRoute.snapshot.params.id)
+    this.id = this.activatedRoute.snapshot.params.id;
+    this.institute_type = this.activatedRoute.snapshot.params.institute_type;
   }
 
 }

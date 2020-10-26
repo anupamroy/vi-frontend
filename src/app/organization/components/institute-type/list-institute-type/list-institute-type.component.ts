@@ -47,7 +47,10 @@ export class ListInstituteTypeComponent implements OnInit {
     })
   }
   onDeleteConfirm(id: string){
-    this.InstituteTypeService.deleteInstituteType(id).subscribe(
+    this.InstituteTypeService.deleteInstituteType(id, {
+      attribute: ['isDeleted'],
+      value: [true]
+    }).subscribe(
       {next : resposeData =>{
       console.log(resposeData)
       if(resposeData){
@@ -148,8 +151,7 @@ export class ListInstituteTypeComponent implements OnInit {
       console.log(this.institute_Type)
       let temp= []
           this.institute_Type.forEach(record => {
-            console.log(record)
-            if(record.instituteType){
+            if(record.isDeleted === false){
               temp.push(record)
             }
           })

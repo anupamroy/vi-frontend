@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import {AssociatedPostService} from '../services/associated-post.service'
+import { AssociatePost } from '../../../../shared/models/associate-post';
 
 @Component({
   selector: 'app-add-associated-post',
@@ -34,13 +35,11 @@ export class AddAssociatedPostComponent implements OnInit {
 
   onClick() {
     console.log(this.associatedPost);
-    const associatedPostObj = {
-      associated_post : this.associatedPost,
-      isActivated: true,
-      isDeleted: false
-    }
+    const obj = new AssociatePost();
 
-    console.log(associatedPostObj);
+    obj.associatedPost = this.associatedPost;
+    obj.isActivated = true;
+    obj.isDeleted = false;
 
     Swal.fire({
       title: 'Please Wait',
@@ -51,9 +50,8 @@ export class AddAssociatedPostComponent implements OnInit {
       onOpen: ()=>{
         Swal.showLoading();
         this.associatedPostService
-          .addAssociatedPost(associatedPostObj)
+          .addAssociatedPost(obj)
           .subscribe((data) => {
-          console.log('ID'+data);
           if(data){
             Swal.fire({
               title: 'Added',
@@ -67,23 +65,6 @@ export class AddAssociatedPostComponent implements OnInit {
         });
       }
     })
-
-    // this.associatedPostService
-    //     .addAssociatedPost(associatedPostObj)
-    //     .subscribe((data) => {
-    //       console.log(data);
-    //     });
-    //     Swal.fire({
-    //       title: 'Added',
-    //       text: 'Data Added Successfully',
-    //       icon: 'success',
-    //       confirmButtonText: 'Ok'
-    //     }).then(()=>{
-    //       setTimeout(() => {
-    //         this.router.navigate(['./org/list-associated-post']);
-    //       }, 500);
-    //     })
-    
   }
 
   onDashboard(){

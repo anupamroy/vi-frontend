@@ -1,0 +1,72 @@
+<div style="height:100%" class="bg-light-blue">
+    <section class="pt-4 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <h5 class="text-white pt-1 text-blue text-left text-capitalize"><i class="fas fa-arrows-alt"></i>
+                        List Organization <span class="float-right">
+                            <a class="btn mb-3 text-white"> <i class="fas fa-edit"></i> Add </a>
+                            <a class="btn mb-3 text-white"> <i class="fas fa-tachometer-alt"></i> Dashboard </a>
+                            </span>
+                    </h5>
+                    <hr class="hr-white">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="stu-dashboard cus-pay-wave">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <table class="table table-bordered" style="background-color: aliceblue;">
+                        <thead>
+                          <tr>
+                            <th scope="col">Sl No</th>
+                            <th scope="col">Associate Post</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor="let item of list_organization; let i = index">                                    
+                                    <th scope="row">{{ i+1 }}</th>
+                                    <td >{{ item.name }}</td>
+                                    <td>
+                                        <button 
+                                            id="cusEdit" 
+                                            class="btn-dark-blue-light btn btn-sm"><i class="fas fa-eye"></i>
+                                        </button>
+                                        <button 
+                                            id="cusEdit" 
+                                            class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i>
+                                        </button>
+                                        <button 
+                                            id="cusEdit" 
+                                            class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i>
+                                        </button>    
+                                        <button 
+                                            id="cusEdit" 
+                                            class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i>
+                                        </button>
+                                    </td>
+                                  </tr>                       
+                            
+                        
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer-bottom">
+        <a href="#">
+            <img src="/assets/images/float-support.png" alt="support" class="float-support" />
+        </a>
+        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" />
+        </a>
+    </footer>
+</div>
