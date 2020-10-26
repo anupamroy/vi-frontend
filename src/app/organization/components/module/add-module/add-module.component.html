@@ -69,6 +69,13 @@
                             <h5 class="pb-3 pt-1 text-blue text-left text-capitalize"><i class="fas fa-arrows-alt"></i> Add Modules<span class="float-right"><a class="btn mb-3" routerLink = "../list-module"> <i class="fas fa-eye"></i> View </a>
                               </span>
                              </h5>
+                             <div [hidden]="enableAlert()" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
+                                Special Characters and Numbers are not Allowed
+                            </div>
+    
+                            <div [hidden]="!enableButton()" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
+                                All Fields Are Required
+                             </div>
                         </div>
                        <!--  <div class="col-lg-3 col-sm-12">
                             <button type="submit" class="btn-mat"><span>View Department</span></button>
@@ -83,7 +90,7 @@
 
             <div class="col-lg-3 cl-sm-12 mb-3 form-group">
                 <label for="insType">Parent Module </label>
-                <select class="form-control" id="insType" name="insType">
+                <select class="form-control" id="insType" name="insType" [(ngModel)] = 'parentModule'>
                     <option>Select Option</option>
                     <option>E Exam</option>
                     <option>E Fees</option>
@@ -92,14 +99,14 @@
             </div>
             <div class="col-lg-5 cl-sm-12 mb-3 form-group">
                 <label for="feesHead">Module Name</label>
-                <input data-toggle="tooltip" data-placement="bottom" title="Demo tooltip text" type="text" name="feesHead" id="feesHead" class="form-control inputFocus" placeholder="Module Name" required >
+                <input data-toggle="tooltip" data-placement="bottom" [(ngModel)] = "moduleName" #moduleNameControl='ngModel'title="Demo tooltip text" type="text" name="feesHead" id="feesHead" class="form-control inputFocus" placeholder="Module Name" required >
             </div>
 
             <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
               <label for="parentFees"> Connected Modules</label><br>
               <div class="form-group">
                
-                <input data-toggle="tooltip" data-placement="bottom" title="Demo tooltip text" type="text" name="feesHead" id="feesHead" class="form-control inputFocus" placeholder="Module Name" required >
+                <input data-toggle="tooltip" [(ngModel)] = "connectedModules"  #connectedModuleControl='ngModel' data-placement="bottom" title="Demo tooltip text" type="text" name="feesHead" id="feesHead" class="form-control inputFocus" placeholder="Module Name" required >
 
               </div>
     
@@ -108,6 +115,8 @@
                 <div class="col-lg-2 offset-lg-5 button-container mt-3 text-center">
                     <button type="button" id="cusEdit" 
                     class="btn btn-block btn-common-color btn-lg text-white"
+                    (click) = "onSubmit()"
+                    [disabled]="enableButton()||!enableAlert()"
                     style="
                           background: linear-gradient(
                             180deg,

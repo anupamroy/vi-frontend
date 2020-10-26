@@ -34,11 +34,7 @@ export class InstituteTypeComponent implements OnInit {
   }
 
   onSubmit() {
-    Swal.fire(
-      'Congratulations!',
-      'Institute Type has been added',
-      'success'
-    )
+    
     const instituteTypeObj = {
       instituteType: this.instituteType,
       isActivated: true
@@ -72,6 +68,11 @@ export class InstituteTypeComponent implements OnInit {
 
           },
           error: error => {
+            Swal.fire(
+              'Error!',
+              'Could not add Institute Type',
+              'error'
+            )
             console.log(error)
           }
         })

@@ -34,7 +34,7 @@ export class ListInstituteTypeComponent implements OnInit {
         }).then((result) => {
           /* Read more about handling dismissals below */
           if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('Adding Institute Type ')
+            console.log('Deleting Institute Type ')
           }
           })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -64,6 +64,11 @@ export class ListInstituteTypeComponent implements OnInit {
     },
       error : error => {
         console.log(error)
+        Swal.fire(
+          'Error!',
+          'Could not delete Institute Type',
+          'error'
+        )
       }
   })
   }
@@ -143,11 +148,13 @@ export class ListInstituteTypeComponent implements OnInit {
       console.log(this.institute_Type)
       let temp= []
           this.institute_Type.forEach(record => {
+            console.log(record)
             if(record.instituteType){
               temp.push(record)
             }
           })
           this.finalItems = temp
+          console.log(this.finalItems)
         },
         error =>{
           console.log("Could not Fetch Data")

@@ -65,14 +65,19 @@
                       <thead>
                         <tr>
                           <th scope="col">Sl No</th>
-                          <th scope="col">Institute Types</th>
-                          <th scope="col"></th>
+                          <th scope="col">Parent Module</th>
+                          <th scope="col">Module Name</th>
+                          <th scope="col">Connected Modules</th>
+
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor = "let item of modules ; let  i = index" >
                           <th scope="row">{{i + 1}}</th>
-                          <td>{{item}}</td>
+                          <th scope="row">{{item}}</th>
+                          <th scope="row">Module Name</th>
+                          <th scope="row">Connected Modules</th>
+
                           <td>
                               <button routerLink="../edit-module/{{item}}" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i></button>
                               <button href="#" id="cusEdit"  class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>

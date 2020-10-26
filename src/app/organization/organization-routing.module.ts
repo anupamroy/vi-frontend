@@ -54,7 +54,7 @@ const routes: Routes = [
 
   { path: 'list-institute-type', component: ListInstituteTypeComponent },
   { path: 'list-module', component: ListModuleComponent },
-  { path: 'edit-module/:module', component: EditModuleComponent },
+  { path: 'edit-module/:parentModule', component: EditModuleComponent },
 
 
   {

@@ -119,7 +119,7 @@
                                         Special Characters and Numbers are not Allowed
                                     </div>
         
-                                    <div [hidden]="!enableButton()||!orgCategoryControl.dirty" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
+                                    <div [hidden]="!enableButton()||!instituteTypeControl.dirty" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
                                         Institute Type Required
                                      </div>
                                 </div>
@@ -149,7 +149,7 @@
                                                 style="width: 600px ;"
                                                 required
                                                 [(ngModel)] = 'newInstituteType' 
-                                                #orgCategoryControl='ngModel'                                               
+                                                #instituteTypeControl='ngModel'                                               
                                             />
                                             <div
                                             class="col-lg-3 button-container mt-3 text-center"

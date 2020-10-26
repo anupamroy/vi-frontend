@@ -6,7 +6,7 @@ import { Observable } from 'rxjs'
   providedIn: 'root'
 })
 export class InstituteTypeService {
-  api = "https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org"
+  api = " https://rmxhxsszxg.execute-api.us-east-1.amazonaws.com/Prod/org"
 
 
   constructor(private http : HttpClient) { }
