@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountsHeadService } from '../../../services/accounts-head.service'
 import { Validations } from '../../../../shared/Services/Validations'
+import { AccountsHead } from '../../../../shared/models/accounts-head'
 import Swal from 'sweetalert2'
 
 @Component({
@@ -40,13 +41,18 @@ export class AddAccountsHeadComponent implements OnInit {
   
   onSubmit(){
     // let e = (document.getElementById("parentAccountHead") as HTMLSelectElement).value
-    const accountsHeadObj = {
-      accountsHead : this.accountsHead,
-      parentAccountHead : this.parentAccountHead,
-      isActivated: true
-    }
+    let obj = new AccountsHead();
+    obj.accountsHead = this.accountsHead
+    obj.parentAccountsHead = this.parentAccountHead
+    obj.isDeleted = false
+    obj.isActivated = true
+    // const accountsHeadObj = {
+    //   accountsHead : this.accountsHead,
+    //   parentAccountHead : this.parentAccountHead,
+    //   isActivated: true
+    // }
 
-    console.log(accountsHeadObj)
+    console.log(obj)
 
     Swal.fire({
       title: 'Please Wait',
@@ -54,10 +60,10 @@ export class AddAccountsHeadComponent implements OnInit {
       allowOutsideClick: true,
       background: '#fff',
       showConfirmButton: false,
-      onOpen: ()=>{
+      didOpen: ()=>{
         Swal.showLoading();
         this.accountsHeadService
-          .addAccountsHead(accountsHeadObj)
+          .addAccountsHead(obj)
           .subscribe((data) => {
           console.log('ID'+data);
           if(data){
@@ -100,7 +106,7 @@ export class AddAccountsHeadComponent implements OnInit {
       console.log(this.parentAccount)
       let temp = []
       this.parentAccount.forEach(record => {
-        if (record.accountsHead) {
+        if (record.itemId === 'ACCOUNTS_HEAD' && record.isDeleted === false) {
           temp.push(record)
         }
       })

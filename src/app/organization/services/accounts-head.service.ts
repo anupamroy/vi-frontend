@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountsHeadService {
-  api = 'https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/accounts';
-
+ 
+  api = environment.api;
   constructor(private http: HttpClient) {}
 
   getAccountsHead():Observable<any> {
@@ -15,15 +16,15 @@ export class AccountsHeadService {
   }
 
   getAccountsHeadById(id: string):Observable<any> {
-    return this.http.get<any>(`${this.api}/${id}`)
+    return this.http.get<any>(`${this.api}/${id}?masterType=ACCOUNTS_HEAD`)
   }
 
   updateAccountsHeadById(id: string, body: any):Observable<any> {
     return this.http.put<any>(`${this.api}/${id}`, body)
   }
 
-  deleteAccountsHeadById(id: string):Observable<any> {
-    return this.http.delete<any>(`${this.api}/${id}`)
+  deleteAccountsHeadById(id: string, body: any):Observable<any> {
+    return this.http.put<any>(`${this.api}/${id}`,body)
   }
 
   addAccountsHead(body: any):Observable<any> {

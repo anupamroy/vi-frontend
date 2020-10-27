@@ -38,20 +38,29 @@
                         <tbody>
                             <tr *ngFor="let item of finalItems; let i = index">
                                 <th scope="row">{{ i + 1 }}</th>
-                                <td>{{item.parentAccountHead}}</td>
+                                <td>{{item.parentAccountsHead}}</td>
                                 <td>{{ item.accountsHead }}</td>
                                 <td>
-                                    <button routerLink="../edit-accounts-head/{{ item.accounts_head_id }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
+                                    <button routerLink="../edit-accounts-head/{{ item.institue_type }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button id="cusEdit"
-                                        class="btn-dark-blue-light btn btn-sm" (click)="onDelete(item.accounts_head_id)"
+                                        class="btn-dark-blue-light btn btn-sm" (click)="onDelete(item.institue_type)"
                                         data-toggle="modal" data-target="#exampleModal">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
-                                    <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
-                                        <i class="fas fa-ban"></i>
-                                    </button>
+                                    <button
+                                        *ngIf="item.isActivated==true"
+                                        (click)="onDeactivate(item.institue_type)" 
+                                        href="#" 
+                                        id="cusEdit" 
+                                        class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
+                                        <button
+                                        *ngIf="item.isActivated==false"
+                                        (click)="onActivate(item.institue_type)" 
+                                        href="#" 
+                                        id="cusEdit" 
+                                        class="btn-dark-blue-light btn btn-sm"><i class="fas fa-check-circle"></i></button>
                                 </td>
                             </tr>
                         </tbody>

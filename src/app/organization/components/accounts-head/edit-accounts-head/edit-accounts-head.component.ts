@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountsHeadService } from '../../../services/accounts-head.service'
+import { AccountsHead } from '../../../../shared/models/accounts-head'
 import Swal from 'sweetalert2'
 
 @Component({
@@ -17,6 +18,23 @@ export class EditAccountsHeadComponent implements OnInit {
   finalItems: any
 
   constructor(private activatedRoute : ActivatedRoute, private router : Router, private accountsHeadService : AccountsHeadService ) { }
+
+  processObjUpdated(object: AccountsHead){
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'itemId') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      itemId: object.itemId
+    }
+  }
 
   enableButton() {
     if(this.accountsHead.trim() === '') {
@@ -48,19 +66,16 @@ export class EditAccountsHeadComponent implements OnInit {
         showConfirmButton: false,
         onOpen: ()=>{
           Swal.showLoading();
+          let obj = new AccountsHead()
+          obj.accountsHead = this.accountsHead
+          obj.parentAccountsHead = this.parentAccountHead
           this.accountsHeadService
-            .updateAccountsHeadById(this.id,{
-              attribute: ['accountsHead','parentAccountHead'],
-              value: [
-              this.accountsHead,
-              this.parentAccountHead
-              ],
-            })
+            .updateAccountsHeadById(this.id,this.processObjUpdated(obj))
             .subscribe((data) => {
             console.log('ID'+data);
             if(data){
               Swal.fire({
-                title: 'Editted',
+                title: 'Edited',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 1500,
@@ -110,10 +125,15 @@ export class EditAccountsHeadComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.itemId;
+    console.log('My ID',this.id);
+    
     this.accountsHeadService.getAccountsHeadById(this.id).subscribe((item)=>{
       item = JSON.parse(item);
-      this.accountsHead = item.accountsHead
-      this.parentAccountHead = item.parentAccountHead
+      console.log("HELLO: ",item);
+      console.log("accountsHead:",item.Items[0].accountsHead);
+      
+      this.accountsHead = item.Items[0].accountsHead
+      this.parentAccountHead = item.Items[0].parentAccountsHead
       console.log(item)
     })
     // console.log(this.getResult);
@@ -127,7 +147,7 @@ export class EditAccountsHeadComponent implements OnInit {
       console.log(this.parentAccount)
       let temp = []
       this.parentAccount.forEach(record => {
-        if (record.accountsHead) {
+        if (record.itemId === 'ACCOUNTS_HEAD' && record.isDeleted === false) {
           temp.push(record)
         }
       })
