@@ -13,7 +13,7 @@ export class FeesService {
   constructor(private http: HttpClient) {}
 
   getFeesHeadById(id: string): Observable<any> {
-    return this.http.get(`${this.api}/${id}`);
+    return this.http.get(`${this.api}/${id}?masterType=FEES_HEAD`);
   }
 
   updateFeesHeadById(id: string, body: any): Observable<any> {

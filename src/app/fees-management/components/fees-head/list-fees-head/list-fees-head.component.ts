@@ -52,9 +52,10 @@ export class ListFeesHeadComponent implements OnInit {
       cancelButtonText: 'No',
       showCloseButton: true,
     }).then((result) => {
-      if (result.value) {
+      if (result.isConfirmed) {
         var obj = new FeesHead();
         obj.isDeleted = true;
+        console.log(obj)
 
         this.feesService.deleteFeesHeadById(id, this.processObjUpdated(obj)).subscribe(
           (res) => {
@@ -71,110 +72,79 @@ export class ListFeesHeadComponent implements OnInit {
     });
   }
 
-    // activateFeesHead(id: string): void {
-      // Swal.fire({
-      //   title: 'Are you sure you want to activate?',
-      //   icon: 'warning',
-      //   showCancelButton: true,
-      //   confirmButtonText: 'Yes',
-      //   cancelButtonText: 'No',
-      //   confirmButtonColor: "#DD6B55"
-      // }).then((result) => {
-      //   if(result.isConfirmed) {
-      //     // Activate Logic
-      //     console.log('Activate')
+  activateFeesHead(id: string): void {
+    Swal.fire({
+      title: 'Are you sure you want to activate?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonColor: "#DD6B55"
+    }).then((result) => {
+      if(result.isConfirmed) {
+        // Activate Logic
+        console.log('Activate')
 
-      //     const selectedFeesHead: FeesHead = Object.assign(
-      //       this.feesHeadList.find((item) => item.feesHeadId === id)
-      //     );
-      //     // console.log(selectedFeesHead);
-      //     if (selectedFeesHead) {
-      //       this.feesService
-      //         .updateFeesHeadById(selectedFeesHead.feesHeadId, {
-      //           attribute: [
-      //             'instituteType',
-      //             'feesHeadName',
-      //             'parentFees',
-      //             'isActivated',
-      //           ],
-      //           value: [
-      //             selectedFeesHead.instituteType,
-      //             selectedFeesHead.feesHeadName,
-      //             selectedFeesHead.parentFees,
-      //             (selectedFeesHead.isActivated = true),
-      //           ],
-      //         })
-      //         .subscribe(
-      //           (data) => {
-      //             console.log(data);
-      //             if (data) {
-      //               this.feesHeadList.find(
-      //                 (item) => item.feesHeadId === id
-      //               ).isActivated = true;
-      //             }
-      //           },
-      //           (error) => console.error(error)
-      //         );
-      //     }
+        const obj = new FeesHead();
+        obj.isActivated = true;
 
-      //     Swal.fire('Activated!', 'Your Fees Head has been activated', 'success');
-      //   } else if(result.isDismissed) {
-      //     Swal.fire('Cancelled!', 'Your Fees Head is not activated', 'error');
-      //   }
-      // })
+        // console.log(selectedFeesHead);
+          this.feesService
+            .updateFeesHeadById(id, this.processObjUpdated(obj))
+            .subscribe(
+              (data) => {
+                console.log(data);
+                if (data) {
+                  this.feesHeadList.find(
+                    (item) => item.feesHeadId === id
+                  ).isActivated = true;
+                }
+              },
+              (error) => console.error(error)
+            );
 
-    // deactivateFeesHead(id: string): void {
-      //   Swal.fire({
-      //     title: 'Are you sure you want to deactivate?',
-      //     icon: 'warning',
-      //     showCancelButton: true,
-      //     confirmButtonText: 'Yes',
-      //     cancelButtonText: 'No',
-      //     confirmButtonColor: "#DD6B55"
-      //   }).then((result) => {
-      //     if(result.isConfirmed) {
-      //       // Deactivate Logic
-      //       console.log('Deactivate')
+        Swal.fire('Activated!', 'Your Fees Head has been activated', 'success');
+      } else if(result.isDismissed) {
+        Swal.fire('Cancelled!', 'Your Fees Head is not activated', 'error');
+      }
+    })
+  }
 
-      //       const selectedFeesHead: FeesHead = Object.assign(
-      //         this.feesHeadList.find((item) => item.feesHeadId === id)
-      //       );
-      //       // console.log(selectedFeesHead);
-      //       if (selectedFeesHead) {
-      //         this.feesService
-      //           .updateFeesHeadById(selectedFeesHead.feesHeadId, {
-      //             attribute: [
-      //               'instituteType',
-      //               'feesHeadName',
-      //               'parentFees',
-      //               'isActivated',
-      //             ],
-      //             value: [
-      //               selectedFeesHead.instituteType,
-      //               selectedFeesHead.feesHeadName,
-      //               selectedFeesHead.parentFees,
-      //               (selectedFeesHead.isActivated = false),
-      //             ],
-      //           })
-      //           .subscribe(
-      //             (data) => {
-      //               console.log(data);
-      //               if (data) {
-      //                 this.feesHeadList.find(
-      //                   (item) => item.feesHeadId === id
-      //                 ).isActivated = false;
-      //               }
-      //             },
-      //             (error) => console.error(error)
-      //           );
-      //       }
+  deactivateFeesHead(id: string): void {
+      Swal.fire({
+        title: 'Are you sure you want to deactivate?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        confirmButtonColor: "#DD6B55"
+      }).then((result) => {
+        if(result.isConfirmed) {
+          // Deactivate Logic
+          console.log('Deactivate')
 
-      //       Swal.fire('Deactivated!', 'Your Fees Head has been deactivated', 'success');
-      //     } else if(result.isDismissed) {
-      //       Swal.fire('Cancelled!', 'Your Fees Head is not deactivated', 'error');
-      //     }
-      //   })
-      // }
+          var obj = new FeesHead();
+          obj.isActivated = false
 
+          // console.log(selectedFeesHead);
+          this.feesService
+            .updateFeesHeadById(id, this.processObjUpdated(obj))
+            .subscribe(
+              (data) => {
+                console.log(data);
+                if (data) {
+                  this.feesHeadList.find(
+                    (item) => item.feesHeadId === id
+                  ).isActivated = false;
+                }
+              },
+              (error) => console.error(error)
+            );
 
+          Swal.fire('Deactivated!', 'Your Fees Head has been deactivated', 'success');
+        } else if(result.isDismissed) {
+          Swal.fire('Cancelled!', 'Your Fees Head is not deactivated', 'error');
+        }
+      })
+  }
 }

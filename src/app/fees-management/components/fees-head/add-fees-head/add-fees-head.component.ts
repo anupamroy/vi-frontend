@@ -50,7 +50,7 @@ export class AddFeesHeadComponent implements OnInit {
         const data = JSON.parse(res).Items;
         const temp = [];
         data.map((item) => {
-          if (item.itemId === 'INSTITUTE_TYPE') {
+          if (item.itemId === 'INSTITUTE_TYPE' && item.isDeleted === false) {
             temp.push(item);
           }
         });
@@ -67,7 +67,7 @@ export class AddFeesHeadComponent implements OnInit {
         let temp = [];
         
         data.map((item) => {
-          if (item.itemId === 'FEES_HEAD'){
+          if (item.itemId === 'FEES_HEAD' && item.isDeleted === false){
             temp.push(item)
           }
         });
@@ -82,8 +82,8 @@ export class AddFeesHeadComponent implements OnInit {
   onSubmit() {
     const feesHeadObject = new FeesHead();
     feesHeadObject.feesHeadName = this.addFeesHeadForm.controls.feesHeadName.value;
-    feesHeadObject.parentFeesName = this.addFeesHeadForm.controls.parentFees.value || 'XYZ';
-    feesHeadObject.instituteType = this.addFeesHeadForm.controls.instituteType.value || 'PG XYZ';
+    feesHeadObject.parentFeesName = this.addFeesHeadForm.controls.parentFees.value;
+    feesHeadObject.instituteType = this.addFeesHeadForm.controls.instituteType.value;
     feesHeadObject.isActivated = true;
     feesHeadObject.isDeleted = false;
 

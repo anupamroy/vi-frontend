@@ -50,21 +50,26 @@ export class EditFeesHeadComponent implements OnInit {
 
     this.feesService.getFeesHeadById(this.selectedId).subscribe(
       (item) => {
-        item = JSON.parse(item);
-        var selectedFeesHead = new FeesHead();
-        selectedFeesHead.feesHeadName = item.feesHeadName;
-        selectedFeesHead.instituteType = item.instituteType;
-        selectedFeesHead.parentFeesName = item.parentFeesName;
-        selectedFeesHead.isActivated = item.isActivated;
-        selectedFeesHead.isDeleted = item.isDeleted;
-        selectedFeesHead.itemId = item.itemId;
+        item = JSON.parse(item).Items[0];
+        console.log(item);
+
+        var obj = new FeesHead();
+
+        obj.feesHeadName = item.feesHeadName;
+        obj.instituteType = item.instituteType;
+        obj.parentFeesName = item.parentFeesName;
+        obj.isActivated = item.isActivated;
+        obj.isDeleted = item.isDeleted;
+        obj.itemId = item.itemId;
+
+        this.selectedFeesHead = obj;
+        console.log(this.selectedFeesHead);
 
         this.editFeesHeadForm.patchValue({
           feesHeadName: this.selectedFeesHead.feesHeadName,
           parentFees: this.selectedFeesHead.parentFeesName,
           instituteType: this.selectedFeesHead.instituteType,
         });
-        console.log(this.selectedFeesHead);
       },
       // (error) => console.error(error)
     );
@@ -74,7 +79,7 @@ export class EditFeesHeadComponent implements OnInit {
         const data = JSON.parse(res).Items;
         const temp = [];
         data.map((item) => {
-          if (item.itemId === 'INSTITUTE_TYPE') {
+          if (item.itemId === 'INSTITUTE_TYPE' && item.isDeleted === false) {
             temp.push(item);
           }
         });
@@ -91,7 +96,7 @@ export class EditFeesHeadComponent implements OnInit {
         let temp = [];
 
         data.map((item) => {
-          if (item.itemId === 'FEES_HEAD') {
+          if (item.itemId === 'FEES_HEAD' && item.isDeleted === false) {
             temp.push(item)
           }
         });
@@ -121,28 +126,6 @@ export class EditFeesHeadComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   onSubmit() {
-    // this.feesService
-    //     .updateFeesHeadById(this.selectedId, {
-    //       attribute: ['instituteType', 'feesHeadName', 'parentFees'],
-    //       value: [
-    //         this.editFeesHeadForm.controls.instituteType.value,
-    //         this.editFeesHeadForm.controls.feesHeadName.value,
-    //         this.editFeesHeadForm.controls.parentFees.value,
-    //       ],
-    //     })
-    //     .subscribe(
-    //       (data) => {
-    //         Swal.fire(
-    //           'Congratulations!',
-    //           'Fees Head has been editted successfully',
-    //           'success'
-    //         ).then(() => {
-    //           this.router.navigate(['/fees-management/fees-head']);
-    //         });
-    //       },
-    //       (error) => console.error()
-    //     );
-
     var obj = new FeesHead();
     obj.feesHeadName = this.editFeesHeadForm.controls.feesHeadName.value;
     obj.parentFeesName = this.editFeesHeadForm.controls.parentFees.value;
