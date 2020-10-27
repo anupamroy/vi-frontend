@@ -26,9 +26,21 @@ export class ListFeesHeadComponent implements OnInit {
         })
 
         this.final_items = temp;
+        console.log(this.final_items);
       },
       (error) => console.error(error)
     );
+  }
+
+  processObjUpdated(object: FeesHead){
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'itemId') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
   }
 
   onDelete(id: string): void {
@@ -41,11 +53,13 @@ export class ListFeesHeadComponent implements OnInit {
       showCloseButton: true,
     }).then((result) => {
       if (result.value) {
-        // tslint:disable-next-line: deprecation
-        this.feesService.deleteFeesHeadById(id).subscribe(
+        var obj = new FeesHead();
+        obj.isDeleted = true;
+
+        this.feesService.deleteFeesHeadById(id, this.processObjUpdated(obj)).subscribe(
           (res) => {
-            this.feesHeadList = this.feesHeadList.filter((item) => {
-              return item.feesHeadId !== id;
+            this.final_items = this.final_items.filter((item) => {
+              return item.institue_type !== id;
             });
           },
           (error) => console.error(error)
@@ -57,110 +71,110 @@ export class ListFeesHeadComponent implements OnInit {
     });
   }
 
-  activateFeesHead(id: string): void {
-    // Swal.fire({
-    //   title: 'Are you sure you want to activate?',
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonText: 'Yes',
-    //   cancelButtonText: 'No',
-    //   confirmButtonColor: "#DD6B55"
-    // }).then((result) => {
-    //   if(result.isConfirmed) {
-    //     // Activate Logic
-    //     console.log('Activate')
+    // activateFeesHead(id: string): void {
+      // Swal.fire({
+      //   title: 'Are you sure you want to activate?',
+      //   icon: 'warning',
+      //   showCancelButton: true,
+      //   confirmButtonText: 'Yes',
+      //   cancelButtonText: 'No',
+      //   confirmButtonColor: "#DD6B55"
+      // }).then((result) => {
+      //   if(result.isConfirmed) {
+      //     // Activate Logic
+      //     console.log('Activate')
 
-    //     const selectedFeesHead: FeesHead = Object.assign(
-    //       this.feesHeadList.find((item) => item.feesHeadId === id)
-    //     );
-    //     // console.log(selectedFeesHead);
-    //     if (selectedFeesHead) {
-    //       this.feesService
-    //         .updateFeesHeadById(selectedFeesHead.feesHeadId, {
-    //           attribute: [
-    //             'instituteType',
-    //             'feesHeadName',
-    //             'parentFees',
-    //             'isActivated',
-    //           ],
-    //           value: [
-    //             selectedFeesHead.instituteType,
-    //             selectedFeesHead.feesHeadName,
-    //             selectedFeesHead.parentFees,
-    //             (selectedFeesHead.isActivated = true),
-    //           ],
-    //         })
-    //         .subscribe(
-    //           (data) => {
-    //             console.log(data);
-    //             if (data) {
-    //               this.feesHeadList.find(
-    //                 (item) => item.feesHeadId === id
-    //               ).isActivated = true;
-    //             }
-    //           },
-    //           (error) => console.error(error)
-    //         );
-    //     }
+      //     const selectedFeesHead: FeesHead = Object.assign(
+      //       this.feesHeadList.find((item) => item.feesHeadId === id)
+      //     );
+      //     // console.log(selectedFeesHead);
+      //     if (selectedFeesHead) {
+      //       this.feesService
+      //         .updateFeesHeadById(selectedFeesHead.feesHeadId, {
+      //           attribute: [
+      //             'instituteType',
+      //             'feesHeadName',
+      //             'parentFees',
+      //             'isActivated',
+      //           ],
+      //           value: [
+      //             selectedFeesHead.instituteType,
+      //             selectedFeesHead.feesHeadName,
+      //             selectedFeesHead.parentFees,
+      //             (selectedFeesHead.isActivated = true),
+      //           ],
+      //         })
+      //         .subscribe(
+      //           (data) => {
+      //             console.log(data);
+      //             if (data) {
+      //               this.feesHeadList.find(
+      //                 (item) => item.feesHeadId === id
+      //               ).isActivated = true;
+      //             }
+      //           },
+      //           (error) => console.error(error)
+      //         );
+      //     }
 
-    //     Swal.fire('Activated!', 'Your Fees Head has been activated', 'success');
-    //   } else if(result.isDismissed) {
-    //     Swal.fire('Cancelled!', 'Your Fees Head is not activated', 'error');
-    //   }
-    // })
-  }
+      //     Swal.fire('Activated!', 'Your Fees Head has been activated', 'success');
+      //   } else if(result.isDismissed) {
+      //     Swal.fire('Cancelled!', 'Your Fees Head is not activated', 'error');
+      //   }
+      // })
 
-  deactivateFeesHead(id: string): void {
-    //   Swal.fire({
-    //     title: 'Are you sure you want to deactivate?',
-    //     icon: 'warning',
-    //     showCancelButton: true,
-    //     confirmButtonText: 'Yes',
-    //     cancelButtonText: 'No',
-    //     confirmButtonColor: "#DD6B55"
-    //   }).then((result) => {
-    //     if(result.isConfirmed) {
-    //       // Deactivate Logic
-    //       console.log('Deactivate')
+    // deactivateFeesHead(id: string): void {
+      //   Swal.fire({
+      //     title: 'Are you sure you want to deactivate?',
+      //     icon: 'warning',
+      //     showCancelButton: true,
+      //     confirmButtonText: 'Yes',
+      //     cancelButtonText: 'No',
+      //     confirmButtonColor: "#DD6B55"
+      //   }).then((result) => {
+      //     if(result.isConfirmed) {
+      //       // Deactivate Logic
+      //       console.log('Deactivate')
 
-    //       const selectedFeesHead: FeesHead = Object.assign(
-    //         this.feesHeadList.find((item) => item.feesHeadId === id)
-    //       );
-    //       // console.log(selectedFeesHead);
-    //       if (selectedFeesHead) {
-    //         this.feesService
-    //           .updateFeesHeadById(selectedFeesHead.feesHeadId, {
-    //             attribute: [
-    //               'instituteType',
-    //               'feesHeadName',
-    //               'parentFees',
-    //               'isActivated',
-    //             ],
-    //             value: [
-    //               selectedFeesHead.instituteType,
-    //               selectedFeesHead.feesHeadName,
-    //               selectedFeesHead.parentFees,
-    //               (selectedFeesHead.isActivated = false),
-    //             ],
-    //           })
-    //           .subscribe(
-    //             (data) => {
-    //               console.log(data);
-    //               if (data) {
-    //                 this.feesHeadList.find(
-    //                   (item) => item.feesHeadId === id
-    //                 ).isActivated = false;
-    //               }
-    //             },
-    //             (error) => console.error(error)
-    //           );
-    //       }
+      //       const selectedFeesHead: FeesHead = Object.assign(
+      //         this.feesHeadList.find((item) => item.feesHeadId === id)
+      //       );
+      //       // console.log(selectedFeesHead);
+      //       if (selectedFeesHead) {
+      //         this.feesService
+      //           .updateFeesHeadById(selectedFeesHead.feesHeadId, {
+      //             attribute: [
+      //               'instituteType',
+      //               'feesHeadName',
+      //               'parentFees',
+      //               'isActivated',
+      //             ],
+      //             value: [
+      //               selectedFeesHead.instituteType,
+      //               selectedFeesHead.feesHeadName,
+      //               selectedFeesHead.parentFees,
+      //               (selectedFeesHead.isActivated = false),
+      //             ],
+      //           })
+      //           .subscribe(
+      //             (data) => {
+      //               console.log(data);
+      //               if (data) {
+      //                 this.feesHeadList.find(
+      //                   (item) => item.feesHeadId === id
+      //                 ).isActivated = false;
+      //               }
+      //             },
+      //             (error) => console.error(error)
+      //           );
+      //       }
 
-    //       Swal.fire('Deactivated!', 'Your Fees Head has been deactivated', 'success');
-    //     } else if(result.isDismissed) {
-    //       Swal.fire('Cancelled!', 'Your Fees Head is not deactivated', 'error');
-    //     }
-    //   })
-    // }
-  }
+      //       Swal.fire('Deactivated!', 'Your Fees Head has been deactivated', 'success');
+      //     } else if(result.isDismissed) {
+      //       Swal.fire('Cancelled!', 'Your Fees Head is not deactivated', 'error');
+      //     }
+      //   })
+      // }
+
+
 }

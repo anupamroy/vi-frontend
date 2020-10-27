@@ -20,8 +20,8 @@ export class FeesService {
     return this.http.put<any>(`${this.api}/${id}`, body);
   }
 
-  deleteFeesHeadById(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.api}/${id}`);
+  deleteFeesHeadById(id: string, body: any): Observable<any> {
+    return this.http.put<any>(`${this.api}/${id}`, body);
   }
 
   addFeesHead(body: any): Observable<any> {
