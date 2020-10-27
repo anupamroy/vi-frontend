@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Params, Router } from '@angular/router'
 import { ModuleService } from '../Services/module.service'
 import Swal from 'sweetalert2'
+import { Module } from 'src/app/shared/models/module';
 
 
 @Component({
@@ -13,8 +14,9 @@ export class EditModuleComponent implements OnInit {
 
   newParentModule = ''
   newModuleName = ''
-  newConnectedModule = ''
+  newConnectedModules = ''
   id = ''
+  module;
 
   constructor(
     private activatedRoute : ActivatedRoute, 
@@ -36,9 +38,14 @@ export class EditModuleComponent implements OnInit {
   }
 
   enableButton() {
-    if(this.newParentModule.trim() === ''
-      ||this.newModuleName.trim() === ''
-      || this.newConnectedModule.trim() === '') {
+    if(this.newModuleName.trim()==='' || this.newConnectedModules.trim() === ""){
+      return true
+    }
+    if( (!this.newParentModule)
+        ||  !(this.newModuleName )
+      ||   (!this.newConnectedModules ) )
+    
+      {
       return true
     }
     else {
@@ -50,76 +57,100 @@ export class EditModuleComponent implements OnInit {
     const regex = /^[a-zA-Z_ ]*$/
     const parent = regex.test(this.newParentModule)
     const name = regex.test(this.newModuleName)
-    const connected = regex.test(this.newConnectedModule)
+    const connected = regex.test(this.newConnectedModules)
     if(parent == true && name==true && connected == true){
       return true
     } else {
       return false
     }
   }
+  processObjUpdated(object: Module){
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'itemId') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      itemId: object.itemId
+    }
+  }
 
   onClick(){
     Swal.fire({
-      title : "Updating Module",
+      title: "Please Wait",
       willOpen: () => {
-        Swal.showLoading()        
-      },     
-    }).then((result) => {
-     
-      if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('updating Module ')
-      }
-      })
-      const module = {
-        parentModule : this.newParentModule,
-        moduleName : this.newModuleName,
-        connectedModule : this.newConnectedModule
-      }
-    
-    console.log(module)
-    let body = JSON.stringify({
-          "attribute" : ["module"],
-          "value" : [module]
-        })
-
-    this.ModuleService.updateModule(this.id, body).subscribe({
-      next : responseData =>{
-        console.log(responseData)
-        if(responseData){
-          Swal.fire(
-            'Congratulations!',
-            'Module has been Updated',
-            'success'
-          ).then(result => {
-            this.router.navigate(['/org/list-module'])
-          })
-        }
+        Swal.showLoading()
       },
-      error : error => {
-        Swal.fire(
-          'Error!',
-          'Could not add Module',
-          'error'
-        )
-        console.log(error)
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
       }
     })
+    console.log(this.id)
+    
+      var obj = new Module();
 
+      obj.parentModule = this.newParentModule
+      obj.moduleName = this.newModuleName
+      obj.connectedModules = this.newConnectedModules
+     
+
+      this.ModuleService
+        .updateModule(this.id, this.processObjUpdated(obj))
+        .subscribe((data) => {
+          console.log(data);
+          if (data) {
+            Swal.fire(
+              'Congratulations!',
+              'Module  has been Updated',
+              'success'
+            ).then(result => {
+              this.router.navigate(['/org/list-module'])
+
+            })
+          }
+
+         error => {
+          Swal.fire(
+            'Error!',
+            'Could not add Module',
+            'error'
+          )
+          console.log(error)
+        }
+      })
+        
   }
+
+
+  
 
 
  
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.params.itemId;
-    const parent =this.activatedRoute.snapshot.params.parentModule
-    const name =this.activatedRoute.snapshot.params.moduleName
-    const connected =this.activatedRoute.snapshot.params.connectedModule
+    console.log(  this.activatedRoute.queryParams)
+   
+    this.activatedRoute.queryParams.subscribe(
+  
+      (queryParams: Params) => {
+        this.module = JSON.parse(queryParams.params)
+        console.log(this.module)   
 
-    console.log(this.id, parent, name, connected)
-    this.newParentModule = parent
-    this.newModuleName = name
-    this.newConnectedModule = connected
+        
+      }
+      
+  );
+  this.id = this.module.institue_type
+  this.newParentModule = this.module.parentModule
+  this.newModuleName = this.module.moduleName
+  this.newConnectedModules =this. module.connectedModules
+
 
   }
 

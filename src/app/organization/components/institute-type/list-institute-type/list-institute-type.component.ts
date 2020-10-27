@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InstituteTypeService} from '../Services/institute-type.service'
+import { InstituteType } from '../../../../shared/models/institute-type'
+import { Router } from '@angular/router';
+
 import Swal from 'sweetalert2'
 
 
@@ -13,70 +16,77 @@ export class ListInstituteTypeComponent implements OnInit {
   institute_Type : any;
   temp=[]
   finalItems : any
-  constructor(private InstituteTypeService : InstituteTypeService) { }
+  constructor(private router: Router, private InstituteTypeService : InstituteTypeService) { }
 
-  showDeleteAlert(id: string){
-    let itemId =id
+  processObjUpdated(object: InstituteType){
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'itemId') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      itemId: object.itemId
+    }
+  }
+
+  onDelete(id: string) {
     Swal.fire({
       title: 'Are you sure you want to delete?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes',
-      cancelButtonText: 'No'
+      cancelButtonText: 'No',
+      confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-        this.onDeleteConfirm(itemId)
+          
         Swal.fire({
-          title : "Deleting Institute Type",
+          title: "Please Wait",
           willOpen: () => {
-            Swal.showLoading()        
-          },     
-        }).then((result) => {
-          /* Read more about handling dismissals below */
-          if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('Deleting Institute Type ')
-          }
+            Swal.showLoading()
+          },
+        })
+        var newObj = new InstituteType();
+        newObj.isDeleted = true;
+        console.log("After Deleting  -- "+ newObj)
+
+        this.InstituteTypeService.deleteInstituteType(id, this.processObjUpdated(newObj)).subscribe(() => {
+          this.finalItems = this.finalItems.filter((item) => {
+            return item.institue_type !== id;
           })
+          Swal.fire(
+            'Deleted!',
+            'Your Data has been deleted.',
+            'success'
+          )
+        });
+       
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',
-          'Institute Type is safe :)',
+          'Your Data is safe :)',
           'error'
         )
       }
     })
-  }
-  onDeleteConfirm(id: string){
-    this.InstituteTypeService.deleteInstituteType(id, {
-      attribute: ['isDeleted'],
-      value: [true]
-    }).subscribe(
-      {next : resposeData =>{
-      console.log(resposeData)
-      if(resposeData){
-        Swal.fire(
-          'Deleted!',
-          'Institute Type has been deleted.',
-          'success'
-        )
-      }
 
-      this.finalItems = this.finalItems.filter((item) => {
-        return item.itemId !== id;
-      })
-    },
-      error : error => {
-        console.log(error)
-        Swal.fire(
-          'Error!',
-          'Could not delete Institute Type',
-          'error'
-        )
-      }
-  })
   }
 
-  onDeactivate(id: string){
+  onDashboard() {
+    this.router.navigate(["./org"])
+  }
+
+  onAdd() {
+    this.router.navigate(["/org/add-associated-post"])
+  }
+
+  onDeactivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to deactivate?',
       icon: 'warning',
@@ -85,32 +95,33 @@ export class ListInstituteTypeComponent implements OnInit {
       cancelButtonText: 'No',
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
-      if(result.isConfirmed) {
+      if (result.isConfirmed) {
         // Deactivate Logic
         console.log('Deactivate')
-        this.InstituteTypeService.updateInstituteTypeById(id, {
-          attribute: ['isActivated'],
-          value: [false]
-        }).subscribe((data) => {
+
+        var newObj = new InstituteType();
+        newObj.isActivated = false;
+        console.log('NEW: ', newObj);
+        this.InstituteTypeService.updateInstituteTypeById(id, this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
           this.finalItems = this.finalItems.map((item) => {
-            if (item.itemId === id){
-              item.isActivated = false;
+            if (item.institue_type === id) {
+              item.isActivated = false
             }
 
             return item;
           })
         })
 
-        Swal.fire('Deactivated!', 'Your Institute Type has been deactivated', 'success');
-      } else if(result.isDismissed) {
-        Swal.fire('Cancelled!', 'Your Institiute Type is not deactivated', 'error');
+        Swal.fire('Deactivated!', 'Your Data has been deactivated', 'success');
+      } else if (result.isDismissed) {
+        Swal.fire('Cancelled!', 'Your Data is not deactivated', 'error');
       }
     })
   }
 
-  onActivate(id: string){
+  onActivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to activate?',
       icon: 'warning',
@@ -119,18 +130,18 @@ export class ListInstituteTypeComponent implements OnInit {
       cancelButtonText: 'No',
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
-      if(result.isConfirmed) {
+      if (result.isConfirmed) {
         // Activate Logic
         console.log('Activate');
 
-        this.InstituteTypeService.updateInstituteTypeById(id, {
-          attribute: ['isActivated'],
-          value: [true]
-        }).subscribe((data) => {
+        var newObj = new InstituteType();
+        newObj.isActivated = true;
+
+        this.InstituteTypeService.updateInstituteTypeById(id, this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
           this.finalItems = this.finalItems.map((item) => {
-            if (item.itemId === id){
+            if (item.institue_type === id) {
               item.isActivated = true;
             }
 
@@ -138,20 +149,27 @@ export class ListInstituteTypeComponent implements OnInit {
           })
         })
 
-        Swal.fire('Activated!', 'Your Institute Type has been activated', 'success');
-      } else if(result.isDismissed) {
-        Swal.fire('Cancelled!', 'Your Institute Type is not activated', 'error');
+        Swal.fire('Activated!', 'Your Data has been activated', 'success');
+      } else if (result.isDismissed) {
+        Swal.fire('Cancelled!', 'Your Data is not activated', 'error');
       }
     })
   }
 
   ngOnInit(): void {
+    Swal.fire({
+      title: "Please Wait",
+      willOpen: () => {
+        Swal.showLoading()
+      },
+    })
     this.InstituteTypeService.getInstituteType().subscribe(responseData => {
       this.institute_Type = JSON.parse(responseData).Items
       console.log(this.institute_Type)
+      Swal.close()
       let temp= []
           this.institute_Type.forEach(record => {
-            if(record.isDeleted === false){
+            if(record.isDeleted === false && record.itemId === 'INSTITUTE_TYPE'){
               temp.push(record)
             }
           })
@@ -170,38 +188,4 @@ export class ListInstituteTypeComponent implements OnInit {
 
     
 
-  //   fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all')
-  //   .then( res=> res.json())
-  //   .then( res => {
-  //     this.institute_Type = JSON.parse(res).Items;
-  //     console.log(this.institute_Type)
-
-  //     let temp= []
-  //     this.institute_Type.forEach(record => {
-  //       if(record.instituteType){
-  //         temp.push(record)
-  //       }
-  //     })
-  //     this.finalItems = temp
-  //   })
-  //   .catch(err => console.log(err))
-  // }
-
   
-
-  //   fetch(`https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/${id}`, {
-  //     method: 'DELETE'
-  //   }).then((res) => {
-  //     console.log(res)
-
-  //     this.finalItems = this.finalItems.filter((item) => {
-  //       return item.itemId !== id;
-  //     })
-  //   }).catch((err) => {
-  //     console.log(err)
-  //   })
-  // }
-  
-    
-
-

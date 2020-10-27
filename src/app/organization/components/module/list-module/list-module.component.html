@@ -4,7 +4,7 @@
           <div class="row">
               <div class="col-lg-12 col-sm-12">
                   <h5 class="text-white pt-1 text-blue text-left text-capitalize"><i class="fas fa-arrows-alt"></i>
-                      View Institute Types <span class="float-right"><a class="btn mb-3 text-white"
+                      View Modules  <span class="float-right"><a class="btn mb-3 text-white"
                           routerLink="../">                     
                           <i 
                           class="fas fa-tachometer-alt"
@@ -33,16 +33,29 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor = "let item of modules ; let  i = index" >
-                          <th scope="row">{{i + 1}}</th>
-                          <th scope="row">{{item}}</th>
-                          <th scope="row">Module Name</th>
-                          <th scope="row">Connected Modules</th>
+                        <tr *ngFor = "let item of finalItems ; let  i = index" >
+                          <td>{{i + 1}}</td>
+                          <td>{{item.parentModule}}</td>
+                          <td>{{item.moduleName}}</td>
+                          <td>{{item.connectedModules}}</td>
 
                           <td>
-                              <button routerLink="../edit-module/{{item}}" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i></button>
-                              <button href="#" id="cusEdit"  class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
-                              <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
+                              <button routerLink="../edit-module/{{item.institue_type}}"  [queryParams]="{ params: item | json}"
+
+                              id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i></button>
+                              <button href="#" id="cusEdit" (click) = "onDelete(item.institue_type)" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
+                              <button
+                                *ngIf="item.isActivated==true"
+                                (click)="onDeactivate(item.institue_type)" 
+                                href="#" 
+                                id="cusEdit" 
+                                class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
+                                <button
+                                *ngIf="item.isActivated==false"
+                                (click)="onActivate(item.institue_type)" 
+                                href="#" 
+                                id="cusEdit" 
+                                class="btn-dark-blue-light btn btn-sm"><i class="fas fa-check-circle"></i></button>
                           </td>
                         </tr>
 

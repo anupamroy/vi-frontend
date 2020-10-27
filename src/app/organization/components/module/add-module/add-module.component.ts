@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ModuleService} from '../Services/module.service'
 import Swal from 'sweetalert2'
 import { ActivatedRoute, Router } from '@angular/router'
+import {Module} from '../../../../shared/models/module'
 
 
 
@@ -12,22 +13,41 @@ import { ActivatedRoute, Router } from '@angular/router'
 })
 export class AddModuleComponent implements OnInit {
 
-  constructor(     private router: Router,
+  constructor(  private router: Router,
     private ModuleService : ModuleService) { }
 
-  parentModule = ""
-  moduleName = ""
-  connectedModules = ""
+  parentModule =''
+  moduleName =''
+  connectedModules =''
+  showButton : boolean = false
+  showAlert : boolean = false
 
   enableButton() {
-    if(this.parentModule.trim() === ''
-      || this.moduleName.trim() === ''
-      || this.connectedModules.trim() === '') {
-      return true
+    if(this.moduleName.trim()==='' || this.connectedModules.trim() === ''  ){
+      this.showAlert = true
+      this.showButton = false
     }
     else {
-      return false
+    this.showAlert = false
+    this.showButton = true
     }
+    
+    if( !this.parentModule
+      || !this.moduleName || !this.connectedModules ){
+        this.showAlert = true
+        this.showButton = false
+      
+    }
+    else{
+      
+      this.showButton = true
+      this.showAlert = false
+    }
+    
+  
+    console.log(this.showButton , this.showAlert)
+    
+    
   }
 
   enableAlert(){
@@ -36,34 +56,34 @@ export class AddModuleComponent implements OnInit {
     const name = regex.test(this.moduleName)
     const connected = regex.test(this.connectedModules)
     if(parent == true && name==true && connected == true){
-      return true
-    } else {
       return false
+    } else {
+      return true
     }
   }
 
   
 
   onSubmit() {
-    
-    const module = {
-      parentModule : this.parentModule,
-      moduleName : this.moduleName,
-      connectedModules :this.connectedModules
-    }
+
+    const moduleObj = new Module()
+    moduleObj.parentModule=this.parentModule
+    moduleObj.moduleName = this.moduleName
+    moduleObj.connectedModules = this.connectedModules
+    moduleObj.isDeleted = false
+    moduleObj.isActivated = true
     console.log(module)
     Swal.fire({
-        title: "Adding Module",
+        title: "Please Wait",
         willOpen: () => {
           Swal.showLoading()
         },
       }).then((result) => {
-        /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
         }
       })
 
-    this.ModuleService.postModule(module)
+    this.ModuleService.postModule(moduleObj)
         .subscribe({
           next: responseData => {
             console.log(responseData)
@@ -92,6 +112,7 @@ export class AddModuleComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
     
   }
 

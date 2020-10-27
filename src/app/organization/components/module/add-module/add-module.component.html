@@ -1,6 +1,5 @@
 
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
 
 
 <body class="bg-light-blue">
@@ -21,11 +20,11 @@
                             <h5 class="pb-3 pt-1 text-blue text-left text-capitalize"><i class="fas fa-arrows-alt"></i> Add Modules<span class="float-right"><a class="btn mb-3" routerLink = "../list-module"> <i class="fas fa-eye"></i> View </a>
                               </span>
                              </h5>
-                             <div [hidden]="enableAlert()" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
+                             <div [hidden]="!enableAlert()" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
                                 Special Characters and Numbers are not Allowed
                             </div>
     
-                            <div [hidden]="!enableButton()" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
+                            <div [hidden] = '!showAlert' class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
                                 All Fields Are Required
                              </div>
                         </div>
@@ -42,23 +41,24 @@
 
             <div class="col-lg-3 cl-sm-12 mb-3 form-group">
                 <label for="insType">Parent Module </label>
-                <select class="form-control" id="insType" name="insType" [(ngModel)] = 'parentModule'>
-                    <option>Select Option</option>
+                <select class="form-control" id="insType" name="insType" [(ngModel)] = 'parentModule' (change) = 'enableButton()'>
+                    <option value ='' disabled selected>Select Option</option>
                     <option>E Exam</option>
                     <option>E Fees</option>
                     <option>E Library</option>
+                    <option>E Org</option>
                 </select>
             </div>
             <div class="col-lg-5 cl-sm-12 mb-3 form-group">
                 <label for="feesHead">Module Name</label>
-                <input data-toggle="tooltip" data-placement="bottom" [(ngModel)] = "moduleName" #moduleNameControl='ngModel'title="Demo tooltip text" type="text" name="feesHead" id="feesHead" class="form-control inputFocus" placeholder="Module Name" required >
+                <input data-toggle="tooltip" data-placement="bottom" (input) = 'enableButton()' [(ngModel)] = "moduleName" #moduleNameControl='ngModel'title="Demo tooltip text" type="text" name="moduleName" id="moduleName" class="form-control inputFocus" placeholder="Module Name" required >
             </div>
 
             <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
               <label for="parentFees"> Connected Modules</label><br>
               <div class="form-group">
                
-                <input data-toggle="tooltip" [(ngModel)] = "connectedModules"  #connectedModuleControl='ngModel' data-placement="bottom" title="Demo tooltip text" type="text" name="feesHead" id="feesHead" class="form-control inputFocus" placeholder="Module Name" required >
+                <input data-toggle="tooltip" (input) = 'enableButton()' [(ngModel)] = "connectedModules"  #connectedModuleControl='ngModel' data-placement="bottom" title="Demo tooltip text" type="text" name="connectedModules" id="connectedModules" class="form-control inputFocus" placeholder=" Connected Modules" required >
 
               </div>
     
@@ -68,7 +68,7 @@
                     <button type="button" id="cusEdit" 
                     class="btn btn-block btn-common-color btn-lg text-white"
                     (click) = "onSubmit()"
-                    [disabled]="enableButton()||!enableAlert()"
+                    [disabled]="!showButton||enableAlert()"
                     style="
                           background: linear-gradient(
                             180deg,

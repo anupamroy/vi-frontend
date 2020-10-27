@@ -59,11 +59,11 @@ const routes: Routes = [
 
   { path: 'list-institute-type', component: ListInstituteTypeComponent },
   { path: 'list-module', component: ListModuleComponent },
-  { path: 'edit-module/:parentModule', component: EditModuleComponent },
+  { path: 'edit-module/:module', component: EditModuleComponent },
 
 
   {
-    path: 'edit-institute-type/:itemId/:instituteType',
+    path: 'edit-institute-type/:id/:instituteType',
     component: EditInstituteTypeComponent,
   },
   { path: 'add-associated-post', component: AddAssociatedPostComponent },

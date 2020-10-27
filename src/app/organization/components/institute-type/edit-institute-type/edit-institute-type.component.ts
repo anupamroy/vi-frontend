@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2'
-import {InstituteTypeService} from '../services/institute-type.service'
+import {InstituteTypeService} from '../Services/institute-type.service'
 import { InstituteType } from '../../../../shared/models/institute-type';
 
 @Component({
@@ -91,7 +91,7 @@ export class EditInstituteTypeComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.activatedRoute.snapshot.params.id)
     this.id = this.activatedRoute.snapshot.params.id;
-    this.institute_type = this.activatedRoute.snapshot.params.institute_type;
+    this.institute_type = this.activatedRoute.snapshot.params.instituteType;
   }
 
 }

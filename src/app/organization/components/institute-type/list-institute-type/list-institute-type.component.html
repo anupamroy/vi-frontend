@@ -35,17 +35,17 @@
                             <th scope="row">{{i+1}}</th>
                             <td>{{item.instituteType}}</td>
                             <td>
-                                <button routerLink="../edit-institute-type/{{item.itemId}}/{{item.instituteType}}" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i></button>
-                                <button href="#" id="cusEdit" (click) = 'showDeleteAlert(item.itemId)' class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                <button routerLink="../edit-institute-type/{{item.institue_type}}/{{item.instituteType}}" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i></button>
+                                <button href="#" id="cusEdit" (click) = 'onDelete(item.institue_type)' class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
                                 <button
                                 *ngIf="item.isActivated==true"
-                                (click)="onDeactivate(item.itemId)" 
+                                (click)="onDeactivate(item.institue_type)" 
                                 href="#" 
                                 id="cusEdit" 
                                 class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
                                 <button
                                 *ngIf="item.isActivated==false"
-                                (click)="onActivate(item.itemId)" 
+                                (click)="onActivate(item.institue_type)" 
                                 href="#" 
                                 id="cusEdit" 
                                 class="btn-dark-blue-light btn btn-sm"><i class="fas fa-check-circle"></i></button>

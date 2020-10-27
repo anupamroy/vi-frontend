@@ -57,22 +57,28 @@
 
             <div class="col-lg-3 cl-sm-12 mb-3 form-group">
                 <label for="insType">Parent Module</label>
-                <select class="form-control" id="module" name="module"  >
-                    <option>Select Option</option>
-                    <option >{{newParentModule}}</option>
+                <select class="form-control" id="module" name="module"  [(ngModel)] = 'newParentModule' >
+                    <option selected>{{newParentModule}}</option>
+                    <option>E Library</option>
+                    <option>E Fees</option>
+                    <option>E Org</option>
+                    <option> E Exam</option>
+
                 </select>
             </div>
             <div class="col-lg-5 cl-sm-12 mb-3 form-group">
                 <label for="feesHead">Module Name</label>
-                <input data-toggle="tooltip" data-placement="bottom" #newModuleNameControl='ngModel' [(ngModel)] = 'newModuleName'                                               
-                title="Demo tooltip text" type="text" name="moduleName" id="moduleName" class="form-control inputFocus" placeholder="Fees Head" required minlength="1" maxlength="50">
+                <input data-toggle="tooltip" data-placement="bottom" pattern="[A-Za-z]"
+                #newModuleNameControl='ngModel' [(ngModel)] = 'newModuleName'                                               
+                title="Demo tooltip text" type="text" name="moduleName" id="moduleName" class="form-control inputFocus" placeholder="Module Name" required minlength="1" >
             </div>
 
             <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
                 <label for="feesHead">Connected Modules</label>
 
-                <input data-toggle="tooltip"  #newConnectedModuleControl='ngModel' [(ngModel)] = 'newConnectedModule'                                              
-                data-placement="bottom" title="Demo tooltip text" type="text" name="feesHead" id="feesHead" class="form-control inputFocus" placeholder="Connected Modules" required >
+                <input data-toggle="tooltip" pattern="[A-Za-z]"
+                #newConnectedModuleControl='ngModel' [(ngModel)] = 'newConnectedModules'                                              
+                data-placement="bottom" title="Demo tooltip text" type="text" name="connectedModules" id="connectedModules" class="form-control inputFocus" placeholder="Connected Modules" required >
             </div>
                 <div class="col-lg-2 offset-lg-5 button-container mt-3 text-center">
                     <button type="button" id="cusEdit" 
@@ -84,7 +90,7 @@
                           );
                           padding: 0.5rem;
                         "
-                    class="btn btn-block btn-common-color btn-lg text-white"  [disabled]="enableButton()||!enableAlert()"><span> Edit <i class="fas fa-caret-right btn-style1"></i></span></button>
+                    class="btn btn-block btn-common-color btn-lg text-white" (click) = "onClick()" [disabled]="enableButton()||!enableAlert()"><span> Edit <i class="fas fa-caret-right btn-style1"></i></span></button>
                 </div>
         </div>
 

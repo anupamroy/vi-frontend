@@ -36,17 +36,13 @@ export class InstituteTypeComponent implements OnInit {
 
   onSubmit() {
     
-    
-    Swal.fire(
-      'Congratulations!',
-      'Institute Type has been added',
-      'success'
-    )
     const instituteTypeObj = new InstituteType();
+    instituteTypeObj.isDeleted = false
+    instituteTypeObj.isActivated = true
     instituteTypeObj.instituteType = this.instituteType
     
     Swal.fire({
-        title: "Adding Institute Type",
+        title: "Please Wait",
         willOpen: () => {
           Swal.showLoading()
         },
