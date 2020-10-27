@@ -89,7 +89,8 @@ export class EditFeesTypeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.params.itemId;
+    // console.log(this.activatedRoute.snapshot.params.itemId);
+    this.id = this.activatedRoute.snapshot.params.id;
   }
 
 }

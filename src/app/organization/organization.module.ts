@@ -30,6 +30,7 @@ import { ListOrganizationComponent } from './components/list-organization/list-o
 import { AddPackageComponent } from './components/packages-master/add-package/add-package.component';
 import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
 import { ListPackageComponent } from './components/packages-master/list-package/list-package.component';
+import { ListDetailOrganizationComponent } from './components/list-detail-organization/list-detail-organization.component';
 
 @NgModule({
     declarations: [
@@ -59,7 +60,8 @@ import { ListPackageComponent } from './components/packages-master/list-package/
         ListOrganizationComponent,
         AddPackageComponent,
         EditPackageComponent,
-        ListPackageComponent
+        ListPackageComponent,
+        ListDetailOrganizationComponent
     ],
     imports: [CommonModule, OrganizationRoutingModule, FormsModule],
 })

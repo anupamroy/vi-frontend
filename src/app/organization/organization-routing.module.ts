@@ -27,6 +27,7 @@ import { ListOrganizationComponent } from './components/list-organization/list-o
 import { AddPackageComponent } from './components/packages-master/add-package/add-package.component';
 import { ListPackageComponent } from './components/packages-master/list-package/list-package.component';
 import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
+import { ListDetailOrganizationComponent } from './components/list-detail-organization/list-detail-organization.component';
 
 
 const routes: Routes = [
@@ -72,10 +73,11 @@ const routes: Routes = [
   { path: 'list-org-category', component: ViewOrgCategoryComponent },
   { path: 'edit-org-category/:itemId', component: EditOrgCategoryComponent },
   { path: 'list-fees-type', component: ListFeesTypeComponent},
-  { path: 'edit-fees-type/:itemId', component: EditFeesTypeComponent},
+  { path: 'edit-fees-type/:id', component: EditFeesTypeComponent},
   { path: 'list-accounts-head', component: ListAccountsHeadComponent},
   { path: 'edit-accounts-head/:itemId', component: EditAccountsHeadComponent},
   { path: 'list-organization', component: ListOrganizationComponent },
+  { path: 'list-detail-organization/:id', component: ListDetailOrganizationComponent },
   { path: 'list-packages' , component: ListPackageComponent },
   { path: 'edit-package/:itemId' , component: EditPackageComponent }
 ];
