@@ -103,7 +103,7 @@
                         <option selected value="">Institute Type</option>
                         <option
                           *ngFor="let item of instituteTypeList"
-                          [value]="item.instituteType.toString()"
+                          [value]="item.instituteType && item.instituteType.toString()"
                         >
                           {{ item.instituteType }}
                         </option>

@@ -33,8 +33,6 @@ export class FeesService {
   }
 
   getInstituteTypes(): Observable<any> {
-    return this.http.get<any>(
-      'https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all'
-    );
+    return this.http.get<any>(`${this.api}/all`);
   }
 }

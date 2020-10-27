@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import FeesHeadModel from '../../../models/fees-head.model';
+import { FeesHead } from '../../../models/fees-head.model';
 
 import {
   FormBuilder,
@@ -21,7 +21,7 @@ import { FeesService } from 'src/app/fees-management/services/fees.service';
 export class AddFeesHeadComponent implements OnInit {
   addFeesHeadForm: FormGroup;
   instituteTypeList = [];
-  parentFeesList: Array<FeesHeadModel> = [];
+  parentFeesList = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,27 +50,29 @@ export class AddFeesHeadComponent implements OnInit {
         const data = JSON.parse(res).Items;
         const temp = [];
         data.map((item) => {
-          if (item.instituteType) {
+          if (item.itemId === 'INSTITUTE_TYPE') {
             temp.push(item);
           }
         });
         this.instituteTypeList = temp;
+        console.log(this.instituteTypeList);
       },
-      (error) => console.error(error)
+      // (error) => console.error(error)
     );
 
     // Get data to populate parent fees Dropdown
     this.feesService.getFeesHeads().subscribe(
-      (data) => {
-        this.parentFeesList = JSON.parse(data).Items.map((item) => {
-          return new FeesHeadModel({
-            feesHeadId: item.fees_head_id,
-            feesHeadName: item.feesHeadName,
-            instituteType: item.instituteType,
-            isActivated: item.isActivated,
-            parentFees: item.parentFees,
-          });
+      (res) => {
+        const data = JSON.parse(res).Items;
+        let temp = [];
+        
+        data.map((item) => {
+          if (item.itemId === 'FEES_HEAD'){
+            temp.push(item)
+          }
         });
+
+        this.parentFeesList = temp;
       },
       (error) => console.error(error)
     );
@@ -78,11 +80,13 @@ export class AddFeesHeadComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   onSubmit() {
-    const feesHeadObject = new FeesHeadModel({
-      feesHeadName: this.feesHeadName.value.trim(),
-      instituteType: this.instituteType.value,
-      parentFees: this.parentFees.value,
-    });
+    const feesHeadObject = new FeesHead();
+    feesHeadObject.feesHeadName = this.addFeesHeadForm.controls.feesHeadName.value;
+    feesHeadObject.parentFeesName = this.addFeesHeadForm.controls.parentFees.value || 'XYZ';
+    feesHeadObject.instituteType = this.addFeesHeadForm.controls.instituteType.value || 'PG XYZ';
+    feesHeadObject.isActivated = true;
+    feesHeadObject.isDeleted = false;
+
     this.feesService.addFeesHead(feesHeadObject).subscribe(
       (data) => {
         Swal.fire(

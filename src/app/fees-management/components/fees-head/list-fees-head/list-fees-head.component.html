@@ -43,6 +43,7 @@
                 </select>
                 <tr>
                   <th>Sl&nbsp;No</th>
+                  <th>Institute&nbsp;Type</th>
                   <th>Fees&nbsp;Head</th>
                   <th>Parent&nbsp;Fees&nbsp;Head</th>
                   <th></th>
@@ -52,15 +53,16 @@
                 <tr
                   role="row"
                   class="odd"
-                  *ngFor="let fees of feesHeadList; let i = index"
+                  *ngFor="let fees of final_items; let i = index"
                 >
                   <td class="">{{ i + 1 }}</td>
+                  <td>{{ fees.instituteType }}</td>
                   <td>{{ fees.feesHeadName }}</td>
-                  <td class="sorting_1">{{ fees.parentFees }}</td>
+                  <td class="sorting_1">{{ fees.parentFeesName }}</td>
                   <td>
                     <a
                       routerLink="/fees-management/fees-head/edit/{{
-                        fees.feesHeadId
+                        fees.institue_type
                       }}"
                       id="cusEdit"
                       class="btn-dark-blue-light btn btn-sm mx-2"
@@ -68,18 +70,18 @@
                     ></a>
                     <a
                       id="cusEdit1"
-                      (click)="onDelete(fees.feesHeadId)"
+                      (click)="onDelete(fees.institue_type)"
                       class="btn-dark-blue-light btn btn-sm mx-2"
                       ><i class="far fa-trash-alt"></i
                     ></a>
                     <a
-                      (click)="deactivateFeesHead(fees.feesHeadId)"
+                      (click)="deactivateFeesHead(fees.institue_type)"
                       *ngIf="fees.isActivated === true"
                       class="btn-dark-blue-light btn btn-sm mx-2"
                       ><i class="fas fa-ban"></i
                     ></a>
                     <a
-                      (click)="activateFeesHead(fees.feesHeadId)"
+                      (click)="activateFeesHead(fees.institue_type)"
                       *ngIf="fees.isActivated === false"
                       class="btn-dark-blue-light btn btn-sm mx-2"
                       ><i class="far fa-check-circle"></i
