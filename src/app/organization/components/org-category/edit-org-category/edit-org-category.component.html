@@ -1,14 +1,59 @@
-<div class="bg-light-blue" style="height: 100%;">
-    <section class="stu-dashboard mt-5">
+<div class="bg-light-blue" style="height:100%">
+    <!-- Navigation -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light-yellow navbar-nav p-0" id="mainNav">
+        <a class="navbar-brand js-scroll-trigger pl-5 pr-3 pt-0 pb-0 dx-block" href="#page-top">
+            <img src="/assets/images/mtjh.png" class="logo" alt="logo" />
+        </a>
+        <div class="container-fluid">
+            <a class="navbar-brand js-scroll-trigger mb-block pl-1" href="#page-top">
+                <img src="/assets/images/mtjh.png" class="logo" alt="logo" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse pl-lg-0" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <span class="nav-link institute-title" href="#">DUM DUM MOTIJHEEL COLLEGE
+                            <span class="sr-only">(current)</span></span>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"><img src="/assets/images/profile-pic.jpg"
+                                alt="profile pic" class="img-stu-profile" />
+                            Pritam Deb Nath
+                        </a>
+                        <small class="regNo">Department : Accounts</small>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> -->
+
+    <!-- <section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 dashboard-logo mt-3 text-center cus-wave">
+                <img src="assest/images/logo.png" alt="Logo" class="img-nta-logo">
+                <span class="nta-logo-text">NTA e Solutions Private Limited</span>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+    <section class="stu-dashboard">
         <div class="container">
             <div class="row">
                 <div class="offset-lg-2 col-lg-8">
                     <h5>
-                        <span class="float-right"
-                            ><a
-                                class="text-light btn mb-3"
-                                (click)="onDashboard()"
-                            >
+                        <span class="float-right"><a class="text-light btn mb-3" (click)="onDashboard()">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
                             </a>
                         </span>
@@ -19,16 +64,10 @@
                         <form class="bg-light p-4" action="">
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
-                                    <h5
-                                        class="pb-3 pt-1 text-blue text-left text-capitalize"
-                                    >
-                                        <i class="fas fa-arrows-alt"></i> Edit
-                                        Organization Category
-                                        <span class="float-right"
-                                            ><a
-                                                class="btn mb-3"
-                                                (click)="onView()"
-                                            >
+                                    <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
+                                        <i class="fas fa-arrows-alt"></i>
+                                        Edit Organization Category
+                                        <span class="float-right"><a class="btn mb-3" (click)="onView()">
                                                 <i class="fas fa-eye"></i> View
                                             </a>
                                         </span>
@@ -41,32 +80,29 @@
                                             </a>
                                         </span>
                                     </h5>
-                                    <div [hidden]="enableAlert()" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
-                                        Special Characters and Numbers are not Allowed
-                                    </div>
-        
-                                    <div [hidden]="!enableButton()||!orgCategoryControl.dirty" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
-                                        Organization Category cannot be blank
-                                     </div>
                                 </div>
-                                <!--  <div class="col-lg-3 col-sm-12">
-                            <button type="submit" class="btn-mat"><span>View Department</span></button>
-                        </div> -->
                             </div>
-                            
 
+                            <div [hidden]="!enableButton()||!orgCategoryControl.dirty" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
+                                Organization Category cannot be blank
+                             </div>
+                            <div [hidden]="enableAlert()" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
+                                Special Characters and Numbers are not Allowed
+                            </div>
+
+                             <div [hidden]="true" class="m-1 p-2 alert alert-success" id="alert" role="alert">
+                                Data Saved Successfully!!
+                             </div>
+
+                             
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
-                                    <div
-                                        class="bg-light-yellow ml-1 mr-1 p-3 row position-relative"
-                                    >
-                                        <div
-                                            class="col-lg-12 cl-sm-12 mb-3 form-group"
-                                        >
-                                            <label for="feesGroup"
-                                                >Organization Category</label
-                                            >
-                                            <input
+                                    <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
+                                        <div class="col-lg-12 col-sm-12 mb-3 form-group">
+                                            <label for="instituteType">Organization Category</label>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <input
                                                 data-toggle="tooltip"
                                                 data-placement="bottom"
                                                 title="Demo tooltip text"
@@ -79,31 +115,30 @@
                                                 [(ngModel)] = 'OrgCategory'
                                                 #orgCategoryControl="ngModel"
                                             />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <div class="button-container mt-3 text-center float-right">
+                                                        <button [disabled]="enableButton()||!enableAlert()"
+                                                            type="button"
+                                                            id="cusEdit"
+                                                            class="btn btn-warning btn-common-color btn-lg mt-3 text-white"
+                                                            (click) = "onClick()">
+                                                            <span>
+                                                                Edit
+                                                                <i class="fas fa-caret-right btn-style1"></i></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div
-                                            class="col-lg-3 button-container mt-3 text-right"
-                                        >
-                                            <button [disabled]="enableButton()||!enableAlert()"
-                                                type="button"
-                                                id="cusEdit"
-                                                
-                                                (click) = "onClick()"
-                                                class="btn btn-warning btn-common-color btn-lg text-white mt-3"
-                                            >
-                                                <span>
-                                                    Edit
-                                                    <i
-                                                        class="fas fa-caret-right"
-                                                    ></i
-                                                ></span>
-                                            </button>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
-                            <!-- add more row end-->
 
-                            <!-- </div> -->
+                            <!-- add more row end-->
                         </form>
                     </div>
                 </div>
@@ -124,72 +159,60 @@
     </footer> -->
     <footer class="footer-bottom">
         <a href="#">
-            <img
-                src="assets/images/float-support.png"
-                alt="support"
-                class="float-support"
-            />
+            <img src="/assets/images/float-support.png" alt="support" class="float-support" />
         </a>
-        <a href="#"
-            ><img
-                src="/assets/images/float-chat.png"
-                alt="chat"
-                class="float-chat"
-            />
+        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" />
         </a>
     </footer>
 
-    <!-- <script src="../../../../assets/js/jquery.min.js"></script>
-    <script src="../../../../assets/js/popper.min.js"></script>
-    <script src="../../../../assets/js/bootstrap.min.js"></script>
-    <script src="../../../../assets/js/sweet-alert.min.js"></script>
-
-    <script src="../../../../assets/js/jquery.dataTables.min.js"></script>
-    <script src="../../../../assets/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../../../../assets/js/moment.min.js"></script>
-    <script src="../../../../assets/js/jquery.daterangepicker.min.js"></script>
-    <script src="../../../../assets/js/chosen.jquery.js"></script>
-    <script src="../../../../assets/js/script.js"></script>
+    <!-- <script src="assest/js/jquery.min.js"></script>
+    <script src="assest/js/popper.min.js"></script>
+    <script src="assest/js/bootstrap.min.js"></script>
+    <script src="assest/js/sweet-alert.min.js"></script>
+    
+    <script src="assest/js/jquery.dataTables.min.js"></script>
+    <script src="assest/js/dataTables.bootstrap4.min.js"></script>
+    <script src="assest/js/moment.min.js"></script>
+    <script src="assest/js/jquery.daterangepicker.min.js"></script>
+    <script src="assest/js/chosen.jquery.js"></script>
+    <script src="assest/js/script.js"></script>
     <script type="text/javascript">
-        jq = jQuery.noConflict();
-        jq(function () {
-            jq('.inputFocus').focus();
+      jq = jQuery.noConflict();
+        jq(function(){
+          jq(".inputFocus").focus();
         });
     </script>
+    
+<script type="text/javascript">
+    
+document.getElementById('cusEdit').onclick = function(){
+    swal("Good job!", "You clicked the button!", "success");
+};
 
-    <script type="text/javascript">
-        document.getElementById('cusEdit').onclick = function () {
-            swal('Good job!', 'You clicked the button!', 'success');
-        };
-    </script>
-    <script type="text/javascript">
-        // checkAll
-        jq = jQuery.noConflict();
-        jq(document).ready(function () {
-            jq('#selectall').click(function () {
-                jq('.selectedId').prop('checked', this.checked);
-            });
+</script>
+<script type="text/javascript">
+  // checkAll
+  jq = jQuery.noConflict();
+jq(document).ready(function () {
+    jq('#selectall').click(function () {
+        jq('.selectedId').prop('checked', this.checked);
+    });
 
-            jq('.selectedId').change(function () {
-                var check =
-                    jq('.selectedId').filter(':checked').length ==
-                    jq('.selectedId').length;
-                jq('#selectall').prop('checked', check);
-            });
-        });
+    jq('.selectedId').change(function () {
+        var check = (jq('.selectedId').filter(":checked").length == jq('.selectedId').length);
+        jq('#selectall').prop("checked", check);
+    });
+});
 
-        jq(document).ready(function () {
-            jq('#selectall1').click(function () {
-                jq('.selectedId1').prop('checked', this.checked);
-            });
+jq(document).ready(function () {
+    jq('#selectall1').click(function () {
+        jq('.selectedId1').prop('checked', this.checked);
+    });
 
-            jq('.selectedId1').change(function () {
-                var check =
-                    jq('.selectedId1').filter(':checked').length ==
-                    jq('.selectedId1').length;
-                jq('#selectall1').prop('checked', check);
-            });
-        });
-    </script> -->
+    jq('.selectedId1').change(function () {
+        var check = (jq('.selectedId1').filter(":checked").length == jq('.selectedId1').length);
+        jq('#selectall1').prop("checked", check);
+    });
+});
+</script> -->
 </div>
-

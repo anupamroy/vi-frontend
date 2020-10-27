@@ -1,0 +1,27 @@
+.step-text {
+  cursor: pointer;
+}
+.step-icon {
+  cursor: pointer;
+}
+
+.back {
+  background-image: linear-gradient(
+    0deg,
+    rgb(109 176 21) 0%,
+    rgb(107 175 23) 50%,
+    rgb(108 175 23) 100%
+  ) !important;
+}
+
+li {
+  list-style: none !important;
+}
+
+.err {
+  font-size: 12px;
+}
+
+.pos {
+  margin: 0 20px 0 20px;
+}

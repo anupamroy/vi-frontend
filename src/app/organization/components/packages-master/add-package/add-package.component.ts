@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModelForPackage } from '../model';
 import { PackagesService } from '../../../services/packages.service'
 import { Router } from '@angular/router';
+import {Packages} from '../../../../shared/models/packages';
 
 @Component({
   selector: 'app-add-package',
@@ -55,23 +56,42 @@ export class AddPackageComponent implements OnInit {
     // console.log('Value of checkbox'+event.target.value)
   }
 
+  requiredPackageValidator(): boolean{
+    if(this.packageName.trim()==='')
+      return false;
+    else
+      return true;
+  }
+  requiredDurationValidator(): boolean{
+    if(this.packageDuration.trim()==='')
+      return false;
+    else
+      return true;
+  }
+  requiredPriceValidator(): boolean{
+    if(this.packagePrice.trim()==='')
+      return false;
+    else
+      return true;
+  }
   onSubmit(){
     // console.log(document.getElementById('trialPackage').contains);
     
-    this.package = {
-      packageType : this.packageType,
-      packageName : this.packageName,
-      paymentPlan : this.paymentPlan,
-      packageDuration : this.packageDuration,
-      packagePrice : this.packagePrice,
-      packageDescription : this.packageDescription,
-      isTrial : this.isTrial,
-      trialDuration : this.trialDuration,
-      isActivated : true,
-      isDeleted : false
-    }
-    console.log(this.package);
-    this.packageService.addPackage(this.package).subscribe((data)=> {
+    let obj = new Packages();
+    
+    obj.packageType = this.packageType;
+    obj.packageName = this.packageName;
+    obj.paymentPlan = this.paymentPlan;
+    obj.packageDuration = this.packageDuration;
+    obj.packagePrice = this.packagePrice;
+    obj.packageDescription = this.packageDescription;
+    obj.isTrial = this.isTrial;
+    obj.trialDuration = this.trialDuration;
+    obj.isActivated = true;
+    obj.isDeleted = false;
+    
+    console.log(obj);
+    this.packageService.addPackage(obj).subscribe((data)=> {
       console.log(data);
       if(data) {
         this.router.navigate(['./org/list-packages'])

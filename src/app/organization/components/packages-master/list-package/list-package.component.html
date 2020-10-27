@@ -41,20 +41,29 @@
                                 <td>{{item.packageType}}</td>
                                 <td>{{ item.packageName }}</td>
                                 <td>
-                                    <button routerLink="../edit-package/{{ item.itemId }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm ml-1">
+                                    <button routerLink="../edit-package/{{ item.institue_type }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm ml-1">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button id="cusEdit"
-                                        class="btn-dark-blue-light btn btn-sm ml-1" (click)="onDelete(item.itemId)"
+                                        class="btn-dark-blue-light btn btn-sm ml-1" (click)="onDelete(item.institue_type)"
                                         data-toggle="modal" data-target="#exampleModal">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
-                                    <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm ml-1" (click)='onView(item.itemId)'>
+                                    <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm ml-1" (click)='onView(item.institue_type)'>
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                    <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm ml-1">
-                                        <i class="fas fa-ban"></i>
-                                    </button>
+                                    <button
+                                    *ngIf="item.isActivated==true"
+                                    (click)="onDeactivate(item.institue_type)" 
+                                    href="#" 
+                                    id="cusEdit" 
+                                    class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
+                                    <button
+                                    *ngIf="item.isActivated==false"
+                                    (click)="onActivate(item.institue_type)" 
+                                    href="#" 
+                                    id="cusEdit" 
+                                    class="btn-dark-blue-light btn btn-sm"><i class="fas fa-check-circle"></i></button>
                                 </td>
                             </tr>
                         </tbody>

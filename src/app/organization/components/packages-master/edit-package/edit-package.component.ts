@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModelForPackage } from '../model'
 import { PackagesService } from '../../../services/packages.service'
 import { ActivatedRoute, Router } from '@angular/router';
+import { Packages } from '../../../../shared/models/packages'
 
 @Component({
   selector: 'app-edit-package',
@@ -28,6 +29,23 @@ export class EditPackageComponent implements OnInit {
 
   constructor(private packageService : PackagesService, private router: Router, private activatedRoute : ActivatedRoute) { }
 
+  processObjUpdated(object: Packages){
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'itemId') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      itemId: object.itemId
+    }
+  }
+
   onView(){
     this.router.navigate(['./org/list-packages'])
   }
@@ -46,6 +64,42 @@ export class EditPackageComponent implements OnInit {
   packageTypeOnChange(event:any){
     this.packageType = event.target.value
   }
+  checkBoxOnChange(event:any) {
+    console.log('checkBox: '+this.isTrial);
+    
+    // console.log(document.getElementById('trialPackage'));
+    // console.log('Value of checkbox'+event.target.value)
+  }
+  requiredTrialDuration(): boolean{
+    // console.log(this.isTrial);
+    
+    if(this.isTrial){
+      if(this.trialDuration.trim()==='')
+        return true
+      else
+        return false
+    } else 
+        return false
+  }
+
+  requiredPackageValidator(): boolean{
+    if(this.packageName.trim()==='')
+      return false;
+    else
+      return true;
+  }
+  requiredDurationValidator(): boolean{
+    if(this.packageDuration.trim()==='')
+      return false;
+    else
+      return true;
+  }
+  requiredPriceValidator(): boolean{
+    if(this.packagePrice.trim()==='')
+      return false;
+    else
+      return true;
+  }
 
   onSubmit(){
     // this.package = {
@@ -59,19 +113,21 @@ export class EditPackageComponent implements OnInit {
     //   trialDuration : this.trialDuration
     // }
     // console.log(this.package);
-    this.packageService.updatePackageById(this.id,{
-      attribute: ['packageType','packageName','paymentPlan','packageDuration','packagePrice','packageDescription','isTrial','trialDuration'],
-      value: [
-      this.packageType,
-      this.packageName,
-      this.paymentPlan,
-      this.packageDuration,
-      this.packagePrice,
-      this.packageDescription,
-      this.isTrial,
-      this.trialDuration
-      ],
-    }).subscribe((data)=> {
+    var obj = new Packages();
+
+    obj.packageType = this.packageType;
+    obj.packageName = this.packageName;
+    obj.paymentPlan = this.paymentPlan;
+    obj.packageDuration = this.packageDuration;
+    obj.packagePrice = this.packagePrice;
+    obj.packageDescription = this.packageDescription;
+    obj.isTrial = this.isTrial;
+    obj.trialDuration = this.trialDuration;
+    obj.isActivated = true;
+    obj.isDeleted = false;
+
+    this.packageService.updatePackageById(this.id,this.processObjUpdated(obj)
+    ).subscribe((data)=> {
       console.log(data);
       if(data) {
         this.router.navigate(['./org/list-packages'])
@@ -85,27 +141,31 @@ export class EditPackageComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params.itemId;
     this.packageService.getPackageById(this.id).subscribe((item)=>{
       item = JSON.parse(item);
-      this.packageType = item.packageType
-      this.packageName = item.packageName
-      this.paymentPlan = item.paymentPlan
-      this.packageDuration = item.packageDuration
-      this.packagePrice = item.packagePrice
-      this.packageDescription = item.packageDescription
-      this.isTrial = item.isTrial
-      this.trialDuration = item.trialDuration
+      this.packageType = item.Items[0].packageType
+      this.packageName = item.Items[0].packageName
+      this.paymentPlan = item.Items[0].paymentPlan
+      this.packageDuration = item.Items[0].packageDuration
+      this.packagePrice = item.Items[0].packagePrice
+      this.packageDescription = item.Items[0].packageDescription
+      this.isTrial = item.Items[0].isTrial
+      this.trialDuration = item.Items[0].trialDuration
+
+      this.packageTypeArray = this.packageService.getPackageType().filter((items)=>{
+        return items!==this.packageType;
+      })
+
       
+    this.paymentPlanArray = this.packageService.getPaymentPlan().filter((items)=>{
+      return items!==this.paymentPlan;
+    })
       // this.accountsHead = item.accountsHead
       // this.parentAccountHead = item.parentAccountHead
       console.log(item)
     })
     // Filtering duplicates
-    this.packageTypeArray = this.packageService.getPackageType().filter((item)=>{
-      
-    })
-    this.paymentPlanArray = this.packageService.getPaymentPlan().filter((item)=>{
-      console.log('Hi'+item);
-      
-    })
+    
+    // this.packageTypeArray = this.packageService.getPackageType()
+
   }
 
 }

@@ -1,14 +1,10 @@
-<div class="bg-light-blue" style = "height: 600px;">
+<div style="height:100%" class="bg-light-blue">
     <section class="stu-dashboard mt-5">
         <div class="container">
             <div class="row">
                 <div class="offset-lg-2 col-lg-8">
                     <h5>
-                        <span class="float-right"
-                            ><a
-                                class="text-light btn mb-3"
-                                routerLink="../"
-                            >
+                        <span class="float-right"><a class="text-light btn mb-3" routerLink="../">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
                             </a>
                         </span>
@@ -19,48 +15,37 @@
                         <form class="bg-light p-4" action="">
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
-                                    <h5
-                                        class="pb-3 pt-1 text-blue text-left text-capitalize"
-                                    >
+                                    <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
                                         <i class="fas fa-arrows-alt"></i>
-                                        add institute type
-                                        <span class="float-right"
-                                            ><a
-                                                class="btn mb-3"
-                                                routerLink="../list-institute-type"
-
-                                            >
-                                                <i 
-                                                class="fas fa-eye"
-                                                routerLink="../list-institute-type"
-                                                ></i> View
+                                        Add Institute Type
+                                        <span class="float-right"><a class="btn mb-3" routerLink="../list-institute-type">
+                                                <i class="fas fa-eye"></i> View
                                             </a>
-                                        </span> 
+                                        </span>
                                     </h5>
-   
-                                    <div [hidden]="enableAlert()" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
-                                        Special Characters and Numbers are not Allowed
-                                     </div>
-                                     
-                                     <div [hidden]="!enableButton() || !instituteTypeControl.dirty" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
-                                        Institute Type Required
-                                     </div>
                                 </div>
-                              
                             </div>
 
+                            <div [hidden]="!enableButton() || !instituteTypeControl.dirty" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
+                                Institute Type Required
+                             </div>
+                             <div [hidden]="enableAlert()" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
+                                Special Characters and Numbers are not Allowed
+                             </div>
+
+                             <div [hidden]="true" class="m-1 p-2 alert alert-success" id="alert" role="alert">
+                                Data Saved Successfully!!
+                             </div>
+
+                             
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
-                                    <div
-                                        class="bg-light-yellow ml-1 mr-1 p-3 row position-relative"
-                                    >
-                                        <div
-                                            class="col-lg-9 cl-sm-12 mb-3 form-group"
-                                        >
-                                            <label for="instituteType"
-                                                >Institute Type</label
-                                            >
-                                            <input
+                                    <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
+                                        <div class="col-lg-12 col-sm-12 mb-3 form-group">
+                                            <label for="instituteType">Institute Type</label>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <input
                                                 data-toggle="tooltip"
                                                 data-placement="bottom"
                                                 title="Demo tooltip text"
@@ -69,17 +54,17 @@
                                                 id="instituteType"
                                                 class="form-control inputFocus"
                                                 placeholder="Institute Type"
-                                                style="width: 600px ;"
                                                 required
                                                 [(ngModel)]="instituteType"
                                                 #instituteTypeControl = 'ngModel'
                                                  
                                             />
-                                            <div
-                                            class="col-lg-3 button-container mt-3 text-center"
-
-                                        >
-                                            <button
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <div class="button-container mt-3 text-center float-right">
+                                                        <button
                                                 type="button"
                                                 id="cusEdit"
                                                 class="btn btn-warning btn-common-color btn-lg mt-3 text-white"
@@ -94,9 +79,11 @@
                                                     ></i
                                                 ></span>
                                             </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        </div>
-                                       
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -109,82 +96,11 @@
         </div>
     </section>
 
-    <footer class="py-2 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">
-                &copy;
-                <script type="text/javascript">
-                    document.write(new Date().getFullYear());
-                </script>
-                | All Rights Reserved
-            </p>
-        </div>
-    </footer>
     <footer class="footer-bottom">
         <a href="#">
-            <img
-                src="/assets/images/float-support.png"
-                alt="support"
-                class="float-support"
-            />
+            <img src="/assets/images/float-support.png" alt="support" class="float-support" />
         </a>
-        <a href="#"
-            ><img
-                src="/assets/images/float-chat.png"
-                alt="chat"
-                class="float-chat"
-            />
+        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" />
         </a>
     </footer>
-
-    <!-- <script src="assest/js/jquery.min.js"></script>
-    <script src="assest/js/popper.min.js"></script>
-    <script src="assest/js/bootstrap.min.js"></script>
-    <script src="assest/js/sweet-alert.min.js"></script>
-    
-    <script src="assest/js/jquery.dataTables.min.js"></script>
-    <script src="assest/js/dataTables.bootstrap4.min.js"></script>
-    <script src="assest/js/moment.min.js"></script>
-    <script src="assest/js/jquery.daterangepicker.min.js"></script>
-    <script src="assest/js/chosen.jquery.js"></script>
-    <script src="assest/js/script.js"></script>
-    <script type="text/javascript">
-      jq = jQuery.noConflict();
-        jq(function(){
-          jq(".inputFocus").focus();
-        });
-    </script>
-    
-<script type="text/javascript">
-    
-document.getElementById('cusEdit').onclick = function(){
-    swal("Good job!", "You clicked the button!", "success");
-};
-
-</script>
-<script type="text/javascript">
-  // checkAll
-  jq = jQuery.noConflict();
-jq(document).ready(function () {
-    jq('#selectall').click(function () {
-        jq('.selectedId').prop('checked', this.checked);
-    });
-
-    jq('.selectedId').change(function () {
-        var check = (jq('.selectedId').filter(":checked").length == jq('.selectedId').length);
-        jq('#selectall').prop("checked", check);
-    });
-});
-
-jq(document).ready(function () {
-    jq('#selectall1').click(function () {
-        jq('.selectedId1').prop('checked', this.checked);
-    });
-
-    jq('.selectedId1').change(function () {
-        var check = (jq('.selectedId1').filter(":checked").length == jq('.selectedId1').length);
-        jq('#selectall1').prop("checked", check);
-    });
-});
-</script> -->
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { OrganizationCategoryService } from '../Services/organization-category.service'
 import Swal from 'sweetalert2'
+import { OrganizationCategory } from '../../../../shared/models/org-catagory';
 
 @Component({
   selector: 'app-edit-org-category',
@@ -15,6 +16,22 @@ export class EditOrgCategoryComponent implements OnInit {
 
   constructor(private activatedRoute : ActivatedRoute, private router : Router, private organizationService : OrganizationCategoryService ) { }
 
+  processObjUpdated(object: OrganizationCategory){
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'itemId') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      itemId: object.itemId
+    }
+  }
   enableButton() {
     if(this.OrgCategory && this.OrgCategory.trim() === '') {
       return true
@@ -40,13 +57,12 @@ export class EditOrgCategoryComponent implements OnInit {
         showConfirmButton: false,
         onOpen: ()=>{
           Swal.showLoading();
+          
+          var obj = new OrganizationCategory();
+          obj.organizationCategory = this.OrgCategory;
+
           this.organizationService
-            .updateOrganizationById(this.id,{
-              attribute: ['orgCategory'],
-              value: [
-              this.OrgCategory
-              ],
-            })
+            .updateOrganizationById(this.id, this.processObjUpdated(obj))
             .subscribe((data) => {
             console.log('ID'+data);
             if(data){
@@ -103,7 +119,7 @@ export class EditOrgCategoryComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params.itemId;
     this.organizationService.getOrganizationCategoryById(this.id).subscribe((item)=>{
       item = JSON.parse(item);
-      this.OrgCategory = item.orgCategory
+      this.OrgCategory = item.Items[0].organizationCategory
       console.log(item)
     })
 

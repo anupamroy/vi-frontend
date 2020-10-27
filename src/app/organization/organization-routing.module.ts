@@ -20,15 +20,16 @@ import { EditOrgCategoryComponent } from './components/org-category/edit-org-cat
 import { ViewOrgCategoryComponent } from './components/org-category/view-org-category/view-org-category.component';
 import { ViewMastersComponent } from './components/view-masters/view-masters.component';
 import { OrganizationComponent } from './organization.component';
-import { AddModuleComponent } from './components/module/add-module/add-module.component'
-import { EditModuleComponent } from './components/module/edit-module/edit-module.component'
-import { ListModuleComponent } from './components/module/list-module/list-module.component'
+import { AddModuleComponent } from './components/module/add-module/add-module.component';
+import { EditModuleComponent } from './components/module/edit-module/edit-module.component';
+import { ListModuleComponent } from './components/module/list-module/list-module.component';
 import { ListOrganizationComponent } from './components/list-organization/list-organization.component';
 import { AddPackageComponent } from './components/packages-master/add-package/add-package.component';
 import { ListPackageComponent } from './components/packages-master/list-package/list-package.component';
 import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
 import { ListDetailOrganizationComponent } from './components/list-detail-organization/list-detail-organization.component';
 
+import { AddOrganizationComponent } from './components/add-organization/add-organization.component';
 
 const routes: Routes = [
   {
@@ -51,10 +52,11 @@ const routes: Routes = [
       { path: 'add-module', component: AddModuleComponent },
 
       { path: '', component: AdminDashboardComponent },
-      { path: 'add-org-category', component: AddOrgCategoryComponent},
-      { path: 'add-fees-type', component: AddFeesTypeComponent},
+      { path: 'add-org-category', component: AddOrgCategoryComponent },
+      { path: 'add-fees-type', component: AddFeesTypeComponent },
       { path: 'add-accounts-head', component: AddAccountsHeadComponent },
-      { path: 'add-package', component: AddPackageComponent }
+      { path: 'add-package', component: AddPackageComponent },
+      { path: 'add-org', component: AddOrganizationComponent },
     ],
   },
 
@@ -62,13 +64,15 @@ const routes: Routes = [
   { path: 'list-module', component: ListModuleComponent },
   { path: 'edit-module/:module', component: EditModuleComponent },
 
-
   {
     path: 'edit-institute-type/:itemId/:instituteType',
     component: EditInstituteTypeComponent,
   },
   { path: 'add-associated-post', component: AddAssociatedPostComponent },
-  { path: 'edit-associated-post/:id/:associated_post', component: EditAssociatedPostComponent },
+  {
+    path: 'edit-associated-post/:id/:associated_post',
+    component: EditAssociatedPostComponent,
+  },
   { path: 'list-associated-post', component: ListAssociatedPostComponent },
   { path: 'list-org-category', component: ViewOrgCategoryComponent },
   { path: 'edit-org-category/:itemId', component: EditOrgCategoryComponent },
@@ -79,7 +83,14 @@ const routes: Routes = [
   { path: 'list-organization', component: ListOrganizationComponent },
   { path: 'list-detail-organization/:id', component: ListDetailOrganizationComponent },
   { path: 'list-packages' , component: ListPackageComponent },
-  { path: 'edit-package/:itemId' , component: EditPackageComponent }
+  { path: 'edit-package/:itemId' , component: EditPackageComponent },
+  { path: 'list-fees-type', component: ListFeesTypeComponent },
+  { path: 'edit-fees-type/:itemId', component: EditFeesTypeComponent },
+  { path: 'list-accounts-head', component: ListAccountsHeadComponent },
+  { path: 'edit-accounts-head/:itemId', component: EditAccountsHeadComponent },
+  { path: 'list-organization', component: ListOrganizationComponent },
+  { path: 'list-packages', component: ListPackageComponent },
+  { path: 'edit-package/:itemId', component: EditPackageComponent },
 ];
 
 @NgModule({

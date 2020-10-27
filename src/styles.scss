@@ -1,12 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../src/assets/css/style.css";
-@import "../src/assets/css/responsive.css";
+@import '../src/assets/css/style.css';
+@import '../src/assets/css/responsive.css';
 // @import "../src/assets/css/sweet-alert.css";
-@import "../src//assets/css/chosen.css";
-@import "../src/assets/css/daterangepicker.min.css";
-@import "../src/assets/css/dataTables.bootstrap4.min.css";
-@import "../src/assets/css/child.dataTables.min.css";
-.wrapper{
-    height: 100vh;
-    width: 100%;
+@import '../src//assets/css/chosen.css';
+@import '../src/assets/css/daterangepicker.min.css';
+@import '../src/assets/css/dataTables.bootstrap4.min.css';
+@import '../src/assets/css/child.dataTables.min.css';
+.wrapper {
+  height: 100vh;
+  width: 100%;
+}
+@import '../src/assets/css/wizard.css';
+.bg-light-blue{
+  height: auto;
+  margin-bottom: 30px;
 }

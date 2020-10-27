@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrganizationCategoryService } from '../Services/organization-category.service'
 import Swal from 'sweetalert2';
 import { read } from 'fs';
-
+import { OrganizationCategory } from '../../../../shared/models/org-catagory';
 @Component({
   selector: 'app-view-org-category',
   templateUrl: './view-org-category.component.html',
@@ -13,6 +13,23 @@ export class ViewOrgCategoryComponent implements OnInit {
   orgCategory: any;
   finalItems: any
   constructor(private organizationService: OrganizationCategoryService) { }
+
+  processObjUpdated(object: OrganizationCategory){
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'itemId') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      itemId: object.itemId
+    }
+  }
 
   onDelete(id: string) {
 
@@ -25,9 +42,11 @@ export class ViewOrgCategoryComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-        this.organizationService.deleteOrganizationById(id).subscribe(() => {
+        var newObj = new OrganizationCategory();
+        newObj.isDeleted = true;
+        this.organizationService.deleteOrganizationById(id, this.processObjUpdated(newObj)).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
-            return item.itemId !== id;
+            return item.institue_type !== id;
           })
         });
         Swal.fire(
@@ -60,13 +79,13 @@ export class ViewOrgCategoryComponent implements OnInit {
         // Deactivate Logic
         console.log('Deactivate');
 
-        this.organizationService.updateOrganizationById(id, {
-          attribute: ['isActivated'],
-          value: [false]
-        }).subscribe((data) => {
+        var newObj = new OrganizationCategory();
+        newObj.isActivated = true;
+        
+        this.organizationService.updateOrganizationById(id, this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data)
           this.finalItems = this.finalItems.map((item) => {
-            if (item.itemId === id){
+            if (item.institue_type === id){
               item.isActivated = false;
             }
 
@@ -94,14 +113,14 @@ export class ViewOrgCategoryComponent implements OnInit {
         // Activate Logic
         console.log('Activate');
 
-        this.organizationService.updateOrganizationById(id, {
-          attribute: ['isActivated'],
-          value: [true]
-        }).subscribe((data) => {
+        var newObj = new OrganizationCategory();
+        newObj.isActivated = true;
+
+        this.organizationService.updateOrganizationById(id, this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
           this.finalItems = this.finalItems.map((item) => {
-            if (item.itemId === id){
+            if (item.institue_type === id){
               item.isActivated = true;
             }
 
@@ -132,7 +151,7 @@ export class ViewOrgCategoryComponent implements OnInit {
           console.log(this.orgCategory)
           let temp = []
           this.orgCategory.forEach(record => {
-            if (record.orgCategory) {
+            if (record.itemId==="ORGANIZATION_CATEGORY" && record.isDeleted===false) {
               temp.push(record)
             }
           })

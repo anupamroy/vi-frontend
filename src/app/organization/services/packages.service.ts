@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PackagesService {
 
-  api = 'https://rmxhxsszxg.execute-api.us-east-1.amazonaws.com/Prod/org';
+  api = environment.api;
   constructor(private http: HttpClient) { }
 
   packageTypeArray: string[] = ['Type 1','Type 2','Type 3']
@@ -25,15 +26,15 @@ export class PackagesService {
   }
 
   getPackageById(id: string):Observable<any> {
-    return this.http.get<any>(`${this.api}/${id}`)
+    return this.http.get<any>(`${this.api}/${id}?masterType=PACKAGE_MASTER`)
   }
 
   updatePackageById(id: string, body: any):Observable<any> {
     return this.http.put<any>(`${this.api}/${id}`, body)
   }
 
-  deletePackagebyId(id: string):Observable<any> {
-    return this.http.delete<any>(`${this.api}/${id}`)
+  deletePackagebyId(id: string,body:any):Observable<any> {
+    return this.http.put<any>(`${this.api}/${id}`, body)
   }
 
   addPackage(body: any):Observable<any> {

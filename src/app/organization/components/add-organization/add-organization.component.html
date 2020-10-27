@@ -1,0 +1,2362 @@
+<div class="bg-light-blue">
+  <div class="page-content">
+    <div class="wizard-v4-content col-lg-8">
+      <div class="wizard-form">
+        <div class="wizard-header"></div>
+        <form class="form-register wizard" action="#" method="post">
+          <div id="form-total">
+            <!-- Start -->
+            <div class="steps clearfix">
+              <ul role="tablist">
+                <li role="tab" aria-disabled="false" disabled>
+                  <a
+                    id="form-total-t-0"
+                    (click)="step(0)"
+                    aria-controls="form-total-p-0"
+                    ><span class="current-info audible"> </span>
+                    <div class="title">
+                      <span
+                        class="step-icon"
+                        [ngClass]="
+                          currentStep === 0 || validatedStep >= 0 ? 'back' : ''
+                        "
+                        ><i>1</i></span
+                      >
+                      <span class="step-text">Step 1</span>
+                    </div></a
+                  >
+                </li>
+                <li role="tab" aria-disabled="false">
+                  <a
+                    id="form-total-t-1"
+                    (click)="step(1)"
+                    aria-controls="form-total-p-1"
+                    ><div class="title">
+                      <span
+                        class="step-icon"
+                        [ngClass]="
+                          currentStep === 1 || validatedStep >= 1 ? 'back' : ''
+                        "
+                        ><i class="">2</i></span
+                      >
+                      <span class="step-text">Step 2</span>
+                    </div></a
+                  >
+                </li>
+                <li role="tab" aria-disabled="false">
+                  <a
+                    id="form-total-t-2"
+                    (click)="step(2)"
+                    aria-controls="form-total-p-2"
+                    ><div class="title">
+                      <span
+                        class="step-icon"
+                        [ngClass]="
+                          currentStep === 2 || validatedStep >= 2 ? 'back' : ''
+                        "
+                        ><i class="">3</i></span
+                      >
+                      <span class="step-text">Step 3</span>
+                    </div></a
+                  >
+                </li>
+                <li role="tab" aria-disabled="false">
+                  <a
+                    id="form-total-t-3"
+                    (click)="step(3)"
+                    aria-controls="form-total-p-3"
+                    ><div class="title">
+                      <span
+                        class="step-icon"
+                        [ngClass]="
+                          currentStep === 3 || validatedStep >= 3 ? 'back' : ''
+                        "
+                        ><i class="">4</i></span
+                      >
+                      <span class="step-text">Step 4</span>
+                    </div></a
+                  >
+                </li>
+                <li role="tab" aria-disabled="false">
+                  <a
+                    id="form-total-t-4"
+                    (click)="step(4)"
+                    aria-controls="form-total-p-4"
+                    ><div class="title">
+                      <span
+                        class="step-icon"
+                        [ngClass]="
+                          currentStep === 4 || validatedStep >= 4 ? 'back' : ''
+                        "
+                        ><i class="">5</i></span
+                      >
+                      <span class="step-text">Step 5</span>
+                    </div></a
+                  >
+                </li>
+                <li role="tab" aria-disabled="false">
+                  <a
+                    id="form-total-t-5"
+                    (click)="step(5)"
+                    aria-controls="form-total-p-5"
+                    ><div class="title">
+                      <span
+                        class="step-icon"
+                        [ngClass]="
+                          currentStep === 5 || validatedStep >= 5 ? 'back' : ''
+                        "
+                        ><i class="">6</i></span
+                      >
+                      <span class="step-text">Step 6</span>
+                    </div></a
+                  >
+                </li>
+                <li role="tab" aria-disabled="false" class="last">
+                  <a
+                    id="form-total-t-6"
+                    (click)="step(6)"
+                    aria-controls="form-total-p-6"
+                    ><div class="title">
+                      <span
+                        class="step-icon"
+                        [ngClass]="
+                          currentStep === 6 || validatedStep >= 6 ? 'back' : ''
+                        "
+                        ><i class="">7</i></span
+                      >
+                      <span class="step-text">Step 7</span>
+                    </div></a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="pos">
+              <div class="text-muted err m-1">Field with * are mandatory</div>
+              <div class="text-muted err m-1">
+                Field with ** are mandatory for Organization Type - Institute
+              </div>
+            </div>
+            <div class="content clearfix">
+              <form [formGroup]="addOrganizationForm">
+                <!-- SECTION 1 -->
+                <section [hidden]="currentStep !== 0">
+                  <div class="inner text-center">
+                    <h3 class="mb-lg-5 mb-3">Organization Type</h3>
+                    <div class="form-row">
+                      <form class="container">
+                        <div id="radios">
+                          <label for="Seller" class="material-icons">
+                            <input
+                              type="radio"
+                              name="orgType"
+                              id="Seller"
+                              value="Seller"
+                              checked
+                              [formControl]="
+                                addOrganizationForm.controls.orgType
+                              "
+                              (change)="onChangeOrg()"
+                            />
+                            <span
+                              ><img
+                                src="/assets/images/seller.png"
+                                class="img-radio-icon"
+                                alt="seller"
+                            /></span>
+                            <p class="mt-4">Seller</p>
+                          </label>
+                          <label for="Institute" class="material-icons">
+                            <input
+                              type="radio"
+                              name="orgType"
+                              id="Institute"
+                              value="Institute"
+                              [formControl]="
+                                addOrganizationForm.controls.orgType
+                              "
+                              (change)="onChangeOrg()"
+                            />
+                            <span
+                              ><img
+                                src="/assets/images/institute.png"
+                                class="img-radio-icon"
+                                alt="Institute"
+                            /></span>
+                            <p class="mt-4">Institute</p>
+                          </label>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </section>
+                <!-- SECTION 1 END -->
+                <!-- SECTION 2 START -->
+                <section [hidden]="currentStep !== 1">
+                  <form class="inner" formGroupName="basicDetails">
+                    <h3>Basic Details</h3>
+                    <div class="form-row">
+                      <div class="form-holder-2 col-lg-4 dropdown">
+                        <button
+                          class="btn-block label-multi-select text-left dropdown-toggle"
+                          type="button"
+                          id="dropdownMenuButton"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          [disabled]="
+                            addOrganizationForm.controls.orgType.value ===
+                            'Seller'
+                          "
+                        >
+                          Institute Type**
+                        </button>
+                        <div
+                          class="dropdown-menu"
+                          aria-labelledby="dropdownMenuButton"
+                        >
+                          <ul
+                            class="dropdown-menu"
+                            class="list-style-none pl-3"
+                            aria-labelledby="dropdownMenuButton"
+                            formArrayName="instituteType"
+                          >
+                            <li>
+                              <a
+                                ><input
+                                  type="checkbox"
+                                  id="selectall"
+                                  [checked]="selectAllInstitute"
+                                  (change)="
+                                    selectAllInstituteTypeToggle($event)
+                                  "
+                                />
+                                Select All</a
+                              >
+                              <ul>
+                                <li
+                                  *ngFor="
+                                    let item of instituteTypeList;
+                                    let ind = index
+                                  "
+                                >
+                                  <a
+                                    ><input
+                                      type="checkbox"
+                                      [value]="item.type"
+                                      class="selectedId"
+                                      name="selectedId"
+                                      (change)="
+                                        onInstituteTypeSelectChange(ind, $event)
+                                      "
+                                      [checked]="item.value"
+                                    />{{ item.type }}</a
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                        <div
+                          class="mt-1 mb-2 text-danger err"
+                          *ngIf="
+                            addOrganizationForm.controls.basicDetails.errors &&
+                            addOrganizationForm.controls.basicDetails.errors
+                              .noInstituteSelected === true
+                          "
+                        >
+                          Select at least one Institute Type
+                        </div>
+                      </div>
+                      <div class="form-holder form-holder-2 col-lg-8">
+                        <label class="form-row-inner">
+                          <input
+                            type="text"
+                            name="organizationName"
+                            id="org-name"
+                            class="form-control"
+                            formControlName="organizationName"
+                            (blur)="setOrgCode()"
+                          />
+                          <span class="label">Organization Name*</span>
+                          <span class="border"></span>
+                        </label>
+                        <div
+                          class="mb-2 text-danger err"
+                          *ngIf="
+                            addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].organizationName.touched &&
+                            addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].organizationName.errors &&
+                            (addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].organizationName.errors.required ||
+                              addOrganizationForm.controls.basicDetails[
+                                'controls'
+                              ].organizationName.errors.emptyvalidator)
+                          "
+                        >
+                          This field is required
+                        </div>
+                        <div
+                          class="mb-2 text-danger err"
+                          *ngIf="
+                            addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].organizationName.errors &&
+                            addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].organizationName.errors.pattern
+                          "
+                        >
+                          Only Alpha-numeric, (' - .) & space are allowed
+                        </div>
+                      </div>
+
+                      <div class="form-holder col-lg-8 col-sm-12">
+                        <label class="form-row-inner">
+                          <input
+                            type="text"
+                            name="organizationCode"
+                            id="org-scode"
+                            class="form-control"
+                            formControlName="organizationCode"
+                          />
+                          <span class="label">Organization Short Code*</span>
+                          <span class="border"></span>
+                        </label>
+                        <div
+                          class="mb-2 text-danger err"
+                          *ngIf="
+                            addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].organizationCode.touched &&
+                            addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].organizationCode.errors &&
+                            (addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].organizationCode.errors.required ||
+                              addOrganizationForm.controls.basicDetails[
+                                'controls'
+                              ].organizationCode.errors.emptyvalidator)
+                          "
+                        >
+                          This field is required
+                        </div>
+                        <div
+                          class="mb-2 text-danger err"
+                          *ngIf="
+                            addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].organizationCode.errors &&
+                            addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].organizationCode.errors.pattern
+                          "
+                        >
+                          Only 6 Alpha-numeric characters are allowed
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-holder col-lg-6 col-sm-12">
+                        <img
+                          id="imgPlaceholder"
+                          src="/assets/images/img-placeholder.png"
+                          alt="image upload"
+                        />
+                        <input
+                          type="file"
+                          class="form-upload"
+                          (change)="singleUpload()"
+                          formControlName="fileChoosen"
+                        />
+                        <div
+                          class="mb-2 text-danger err"
+                          *ngIf="
+                            addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].fileChoosen.touched &&
+                            addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].fileChoosen.errors &&
+                            addOrganizationForm.controls.basicDetails[
+                              'controls'
+                            ].fileChoosen.errors.required
+                          "
+                        >
+                          This field is required
+                        </div>
+                        <div class="mt-2 text-danger err">
+                          Only .png and .svg within 100 pixels are allowed
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </section>
+                <!-- SECTION 2 END -->
+                <!-- SECTION 3 START -->
+                <section [hidden]="currentStep !== 2">
+                  <form class="inner" formGroupName="contactDetails">
+                    <h3>Contact Details</h3>
+                    <!-- Add Address start -->
+                    <div
+                      formArrayName="address"
+                      *ngFor="
+                        let control of addressArray['controls'];
+                        let i = index
+                      "
+                    >
+                      <div class="form-row" [formGroup]="control">
+                        <div class="form-holder col-lg-4 col-sm-12">
+                          <select
+                            name="position"
+                            id="position"
+                            [formControl]="control.controls.addressFor"
+                          >
+                            <option ngValue="Address" selected>
+                              Address For
+                            </option>
+                            <option
+                              [ngValue]="item"
+                              *ngFor="let item of addressForList"
+                            >
+                              {{ item }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="form-holder col-lg-7 col-sm-12">
+                          <label class="form-row-inner">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="address"
+                              name="address"
+                              [formControl]="control.controls.address"
+                            />
+                            <span class="label">Address*</span>
+                            <span class="border"></span>
+                          </label>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.address.touched &&
+                              control.controls.address.errors &&
+                              (control.controls.address.errors.required ||
+                                control.controls.address.errors.emptyvalidator)
+                            "
+                          >
+                            This field is required
+                          </div>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.address.touched &&
+                              control.controls.address.errors &&
+                              control.controls.address.errors.pattern
+                            "
+                          >
+                            Only Alpha-numeric, (' - . / ,) & Space are allowed
+                          </div>
+                        </div>
+                        <div
+                          class="form-holder col-lg-1 col-sm-12"
+                          *ngIf="i === 0"
+                        >
+                          <a
+                            (click)="addaddressGroup()"
+                            class="btn btn-dark-blue-light"
+                            ><i class="fas fa-plus-circle"></i
+                          ></a>
+                        </div>
+                        <div
+                          class="form-holder col-lg-1 col-sm-12"
+                          *ngIf="i > 0"
+                        >
+                          <a
+                            (click)="deleteAddressGroup(i)"
+                            class="btn btn-info-light"
+                            ><i class="fas fa-minus-circle"></i
+                          ></a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Add Address end -->
+                    <div class="col-12">
+                      <hr class="hrr" />
+                    </div>
+                    <!-- Add Phone -->
+                    <div
+                      formArrayName="phone"
+                      *ngFor="
+                        let control of phoneArray['controls'];
+                        let i = index
+                      "
+                    >
+                      <div class="form-row" [formGroup]="control">
+                        <div class="form-holder col-lg-4 col-sm-12">
+                          <select
+                            name="phoneText"
+                            id="p-text"
+                            [formControl]="control.controls.phoneText"
+                          >
+                            <option value="Phone" selected>Phone Text</option>
+                            <option
+                              [ngValue]="item"
+                              *ngFor="let item of phoneTextList"
+                            >
+                              {{ item }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="form-holder col-lg-4 col-sm-12">
+                          <label class="form-row-inner">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="p-no"
+                              name="phoneNumber"
+                              placeholder="+91 999 999 9999"
+                              [formControl]="control.controls.phoneNumber"
+                            />
+                            <span class="label">Phone Number*</span>
+                            <span class="border"></span>
+                          </label>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.phoneNumber.touched &&
+                              control.controls.phoneNumber.errors &&
+                              control.controls.phoneNumber.errors.pattern
+                            "
+                          >
+                            Only Numbers, ( - + ) & Space are allowed
+                          </div>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.phoneNumber.touched &&
+                              control.controls.phoneNumber.errors &&
+                              (control.controls.phoneNumber.errors.required ||
+                                control.controls.phoneNumber.errors
+                                  .emptyvalidator)
+                            "
+                          >
+                            This field is required
+                          </div>
+                        </div>
+
+                        <div class="form-holder col-lg-3 col-sm-12">
+                          <select
+                            name="phoneType"
+                            id="p-type"
+                            [formControl]="control.controls.phoneType"
+                          >
+                            <option
+                              [ngValue]="item"
+                              [selected]="item === 'Primary'"
+                              *ngFor="let item of phoneTypeList"
+                            >
+                              {{ item === 'Primary' ? 'Type: Primary' : item }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="form-holder col-lg-2 col-sm-12">
+                          <label class="form-row-inner">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="Timings"
+                              name="timings"
+                              [formControl]="control.controls.timing"
+                            />
+                            <span class="label top-0">Timings</span>
+                            <span class="border"></span>
+                          </label>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                          <button
+                            class="btn-block label-multi-select text-left dropdown-toggle mt-3"
+                            type="button"
+                            data-toggle="dropdown"
+                          >
+                            Days <span class="caret"></span>
+                          </button>
+
+                          <ul class="dropdown-menu pl-3">
+                            <li>
+                              <a
+                                ><input
+                                  type="checkbox"
+                                  id="selectall1"
+                                  [checked]="selectAllDays[i]"
+                                  (change)="selectAllDaysToggle(i, $event)"
+                                />
+                                Select All</a
+                              >
+                              <ul class="list-style-none pl-3">
+                                <li
+                                  *ngFor="
+                                    let item of daysList[i];
+                                    let ind = index
+                                  "
+                                >
+                                  <a
+                                    ><input
+                                      type="checkbox"
+                                      class="selectedId1"
+                                      name="selectedId1"
+                                      [value]="item.type"
+                                      [checked]="item.value"
+                                      (change)="
+                                        onDaySelectChange(i, ind, $event)
+                                      "
+                                    />
+                                    {{ item.type }}</a
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="form-holder col-lg-3 col-sm-12">
+                          <select
+                            name="Shift"
+                            id="Shift"
+                            [formControl]="control.controls.shift"
+                          >
+                            <option value="All" selected>Shift</option>
+                            <option
+                              [id]="i"
+                              [ngValue]="shift"
+                              *ngFor="let shift of shiftList; let i = index"
+                            >
+                              {{ shift }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="form-holder col-lg-3 col-sm-12">
+                          <select
+                            name="associatedWith"
+                            id="associatedWith"
+                            [formControl]="control.controls.associatedWith"
+                          >
+                            <option value="Official Phone" selected>
+                              Associated With
+                            </option>
+                            <option
+                              [ngValue]="item"
+                              *ngFor="let item of associatedWithList"
+                            >
+                              {{ item }}
+                            </option>
+                          </select>
+                        </div>
+                        <div
+                          class="form-holder col-lg-1 col-sm-12"
+                          *ngIf="i === 0"
+                        >
+                          <a
+                            (click)="addPhoneGroup()"
+                            class="btn btn-dark-blue-light"
+                            ><i class="fas fa-plus-circle"></i
+                          ></a>
+                        </div>
+                        <div
+                          class="form-holder col-lg-1 col-sm-12"
+                          *ngIf="i > 0"
+                        >
+                          <a
+                            (click)="deletePhoneGroup(i)"
+                            class="btn btn-info-light"
+                            ><i class="fas fa-minus-circle"></i
+                          ></a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Add Phone Number End -->
+                    <div class="col-12">
+                      <hr class="hrr" />
+                    </div>
+                    <!-- Add Email Start -->
+                    <div
+                      formArrayName="email"
+                      *ngFor="
+                        let control of emailArray['controls'];
+                        let i = index
+                      "
+                    >
+                      <div class="form-row" [formGroup]="control">
+                        <div class="form-holder col-lg-4 col-sm-12">
+                          <label class="form-row-inner">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="e-text"
+                              name="emailText"
+                              [formControl]="control.controls.emailText"
+                            />
+                            <span class="label top-0">Email Text</span>
+                            <span class="border"></span>
+                          </label>
+                        </div>
+                        <div class="form-holder col-lg-7 col-sm-12">
+                          <label class="form-row-inner">
+                            <input
+                              type="email"
+                              class="form-control"
+                              id="email"
+                              name="emailAddress"
+                              placeholder="abc@xyz.com"
+                              [formControl]="control.controls.emailAddress"
+                            />
+                            <span class="label top-0">Email Address*</span>
+                            <span class="border"></span>
+                          </label>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.emailAddress.touched &&
+                              control.controls.emailAddress.errors &&
+                              (control.controls.emailAddress.errors.required ||
+                                control.controls.phoneNumber.errors
+                                  .emptyvalidator)
+                            "
+                          >
+                            This field is required
+                          </div>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.emailAddress.errors &&
+                              control.controls.emailAddress.errors.pattern
+                            "
+                          >
+                            Email is invalid
+                          </div>
+                        </div>
+                        <div class="form-holder col-lg-4 col-sm-12">
+                          <select
+                            name="emailType"
+                            id="emailType"
+                            [formControl]="control.controls.emailType"
+                          >
+                            <!-- <option ngValue="" disabled selected>
+                              Email Type
+                            </option> -->
+                            <option
+                              [ngValue]="item"
+                              [selected]="item === 'Primary'"
+                              *ngFor="let item of emailTypeList"
+                            >
+                              {{ item === 'Primary' ? 'Type: Primary' : item }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="form-holder col-lg-3 col-sm-12">
+                          <select
+                            name="Shift"
+                            id="Shift"
+                            [formControl]="control.controls.shift"
+                          >
+                            <option ngValue="All" selected>Shift</option>
+                            <option
+                              [ngValue]="item"
+                              *ngFor="let item of shiftList"
+                            >
+                              {{ item }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="form-holder col-lg-4 col-sm-12">
+                          <select
+                            name="Shift"
+                            id="Shift"
+                            [formControl]="control.controls.associatedWith"
+                          >
+                            <option ngValue="Official Email" selected>
+                              Associated with
+                            </option>
+                            <option
+                              [ngValue]="item"
+                              *ngFor="let item of associatedWithList"
+                            >
+                              {{ item }}
+                            </option>
+                          </select>
+                        </div>
+                        <div
+                          class="form-holder col-lg-1 col-sm-12"
+                          *ngIf="i === 0"
+                        >
+                          <a
+                            (click)="addEmailGroup()"
+                            class="btn btn-dark-blue-light"
+                            ><i class="fas fa-plus-circle"></i
+                          ></a>
+                        </div>
+                        <div
+                          class="form-holder col-lg-1 col-sm-12"
+                          *ngIf="i > 0"
+                        >
+                          <a
+                            (click)="deleteEmailGroup(i)"
+                            class="btn btn-info-light"
+                            ><i class="fas fa-minus-circle"></i
+                          ></a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Add email section end-->
+                    <div class="col-12">
+                      <hr class="hrr" />
+                    </div>
+                    <!-- Add Social Media Start -->
+                    <div
+                      formArrayName="socialMedia"
+                      *ngFor="
+                        let control of socialMediaArray['controls'];
+                        let i = index
+                      "
+                    >
+                      <div class="form-row" [formGroup]="control">
+                        <div class="col-12"><h4>Social Media</h4></div>
+                        <div class="form-holder col-lg-3 col-sm-12">
+                          <select
+                            name="s-media-type"
+                            id="s-media-type"
+                            [formControl]="control.controls.socialMediaType"
+                            (change)="onSocialMediaChange(control, $event)"
+                          >
+                            <option ngValue="" selected>
+                              SocialMedia : None
+                            </option>
+                            <option
+                              [ngValue]="item"
+                              *ngFor="let item of socialMediaList"
+                            >
+                              {{ item }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="form-holder col-lg-8 col-sm-12">
+                          <a
+                            *ngIf="i === 0"
+                            (click)="addSocialMediaGroup()"
+                            class="btn btn-dark-blue-light float-right btn-position"
+                            ><i class="fas fa-plus-circle"></i
+                          ></a>
+                          <a
+                            *ngIf="i > 0"
+                            (click)="deleteSocialMediaGroup(i)"
+                            class="btn btn-info-light float-right btn-position"
+                            ><i class="fas fa-minus-circle"></i
+                          ></a>
+                          <label class="form-row-inner">
+                            <input
+                              type="text"
+                              name="s-media"
+                              id="s-media"
+                              class="form-control"
+                              placeholder="instagram.com/username"
+                              [formControl]="control.controls.socialMediaLink"
+                            />
+                            <span class="label">Social Media link</span>
+                            <span class="border"></span>
+                          </label>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.socialMediaLink.touched &&
+                              control.controls.socialMediaLink.errors &&
+                              (control.controls.socialMediaLink.errors
+                                .required ||
+                                control.controls.socialMediaLink.errors
+                                  .emptyvalidator)
+                            "
+                          >
+                            This field is required if SocialMedia Type is
+                            selected
+                          </div>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.socialMediaLink.touched &&
+                              control.controls.socialMediaLink.errors &&
+                              control.controls.socialMediaLink.errors.pattern
+                            "
+                          >
+                            URL is invalid
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <hr class="hrr" />
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </section>
+                <!-- SECTION 3 END -->
+                <!-- SECTION 4 START -->
+                <section [hidden]="currentStep !== 3">
+                  <div class="inner" formGroupName="registrationDetails">
+                    <h3>Registration Details</h3>
+                    <!-- Registration Document Starts -->
+                    <div class="form-row">
+                      <div class="form-holder col-lg-6 col-sm-12">
+                        <select
+                          name="inventory"
+                          id="inventory"
+                          formControlName="organizationCategory"
+                        >
+                          <option ngValue="" disabled selected>
+                            Organization Category*
+                          </option>
+                          <option
+                            [ngValue]="item"
+                            *ngFor="let item of organizationCategoryList"
+                          >
+                            {{ item }}
+                          </option>
+                        </select>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            registrationDetails.controls.organizationCategory
+                              .touched &&
+                            registrationDetails.controls.organizationCategory
+                              .errors &&
+                            registrationDetails.controls.organizationCategory
+                              .errors.required
+                          "
+                        >
+                          This field is required
+                        </div>
+                      </div>
+                      <div class="form-holder col-lg-6 col-sm-12">
+                        <label class="form-row-inner">
+                          <input
+                            type="text"
+                            name="reg-number"
+                            id="reg-number"
+                            class="form-control"
+                            formControlName="registrationNumber"
+                          />
+                          <span class="label">Registration Number*</span>
+                          <span class="border"></span>
+                        </label>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            registrationDetails.controls.registrationNumber
+                              .touched &&
+                            registrationDetails.controls.registrationNumber
+                              .errors &&
+                            (registrationDetails.controls.registrationNumber
+                              .errors.required ||
+                              registrationDetails.controls.registrationNumber
+                                .errors.emptyvalidator)
+                          "
+                        >
+                          This field is required
+                        </div>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            registrationDetails.controls.registrationNumber
+                              .errors &&
+                            registrationDetails.controls.registrationNumber
+                              .errors.pattern
+                          "
+                        >
+                          Only AlphaNumeric characters and ( - ) are allowed
+                        </div>
+                      </div>
+                      <div class="form-holder col-lg-7 col-sm-12">
+                        <span class=""
+                          ><i class="fas fa-cloud-upload-alt"></i> Registration
+                          Document*</span
+                        >
+                        <label class="form-row-inner">
+                          <input
+                            type="file"
+                            name="doc-upload"
+                            id="doc-upload"
+                            class="form-control"
+                            formControlName="registrationDocument"
+                          />
+                        </label>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            registrationDetails.controls.registrationDocument
+                              .touched &&
+                            registrationDetails.controls.registrationDocument
+                              .errors &&
+                            registrationDetails.controls.registrationDocument
+                              .errors.required
+                          "
+                        >
+                          This field is required
+                        </div>
+                      </div>
+                      <div class="form-holder col-lg-5 col-sm-12">
+                        <span class=""
+                          ><i class="fas fa-calendar-alt"></i> Valid Upto*</span
+                        >
+                        <label class="form-row-inner">
+                          <input
+                            type="date"
+                            name="date"
+                            id="date"
+                            class=""
+                            formControlName="validUpto"
+                          />
+                        </label>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            registrationDetails.controls.validUpto.touched &&
+                            registrationDetails.controls.validUpto.errors &&
+                            registrationDetails.controls.validUpto.errors
+                              .required
+                          "
+                        >
+                          This field is required
+                        </div>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            registrationDetails.controls.validUpto.errors &&
+                            registrationDetails.controls.validUpto.errors
+                              .validuptovalidator
+                          "
+                        >
+                          Your Document has outdated validation
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Registration Document Ends -->
+                    <div class="col-12"><hr class="hrr" /></div>
+                    <!-- Additional Document Starts -->
+                    <div
+                      class="form-row"
+                      formArrayName="additionalDocument"
+                      *ngFor="
+                        let control of additionalDocumentArray['controls'];
+                        let i = index
+                      "
+                    >
+                      <div class="col-12">
+                        <h4>Additional Documents</h4>
+                      </div>
+                      <div class="col-12 form-row">
+                        <div class="form-holder col-lg-6 col-sm-12">
+                          <select
+                            name="doc-type"
+                            id="doc-type"
+                            [formControl]="control.controls.documentType"
+                          >
+                            <option ngValue="" disabled selected>
+                              Document Type*
+                            </option>
+                            <option
+                              [ngValue]="item"
+                              *ngFor="let item of documentTypeList"
+                            >
+                              {{ item }}
+                            </option>
+                          </select>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.documentType.touched &&
+                              control.controls.documentType.errors &&
+                              control.controls.documentType.errors.required
+                            "
+                          >
+                            This field is required
+                          </div>
+                        </div>
+                        <div class="form-holder col-lg-5 col-sm-12">
+                          <label class="form-row-inner">
+                            <input
+                              type="text"
+                              name="doc-number"
+                              id="doc-number"
+                              class="form-control"
+                              [formControl]="control.controls.documentNumber"
+                            />
+                            <span class="label">Document Number*</span>
+                            <span class="border"></span>
+                          </label>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.documentNumber.touched &&
+                              control.controls.documentNumber.errors &&
+                              (control.controls.documentNumber.errors
+                                .required ||
+                                control.controls.documentNumber.errors
+                                  .emptyvalidator)
+                            "
+                          >
+                            This field is required
+                          </div>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.documentNumber.errors &&
+                              control.controls.documentNumber.errors.pattern
+                            "
+                          >
+                            Only AlphaNumeric characters and ( - ) are allowed
+                          </div>
+                        </div>
+                        <div class="form-holder col-lg-6 col-sm-12">
+                          <span class=""
+                            ><i class="fas fa-cloud-upload-alt"></i>
+                            Registration Document*</span
+                          >
+                          <label class="form-row-inner">
+                            <input
+                              type="file"
+                              name="doc-upload"
+                              id="doc-upload"
+                              class="form-control"
+                              [formControl]="
+                                control.controls.registrationDocument
+                              "
+                            />
+                          </label>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.registrationDocument.touched &&
+                              control.controls.registrationDocument.errors &&
+                              control.controls.registrationDocument.errors
+                                .required
+                            "
+                          >
+                            This field is required
+                          </div>
+                        </div>
+                        <div class="form-holder col-lg-5 col-sm-12">
+                          <span class=""
+                            ><i class="fas fa-calendar-alt"></i> Valid
+                            Upto*</span
+                          >
+                          <label class="form-row-inner">
+                            <input
+                              type="date"
+                              name="date"
+                              id="date"
+                              class=""
+                              [formControl]="control.controls.validUpto"
+                            />
+                          </label>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.validUpto.touched &&
+                              control.controls.validUpto.errors &&
+                              control.controls.validUpto.errors.required
+                            "
+                          >
+                            This field is required
+                          </div>
+                          <div
+                            class="m-1 text-danger err"
+                            *ngIf="
+                              control.controls.validUpto.touched &&
+                              control.controls.validUpto.errors &&
+                              control.controls.validUpto.errors
+                                .validuptovalidator
+                            "
+                          >
+                            Your Document has outdated validation
+                          </div>
+                        </div>
+                        <div
+                          class="form-holder col-lg-1 col-sm-12"
+                          *ngIf="i === 0"
+                        >
+                          <a
+                            (click)="addAdditionalDocumentGroup()"
+                            class="btn btn-dark-blue-light"
+                            ><i class="fas fa-plus-circle"></i
+                          ></a>
+                        </div>
+                        <div
+                          class="form-holder col-lg-1 col-sm-12"
+                          *ngIf="i > 0"
+                        >
+                          <a
+                            (click)="deleteAdditionalDocumentGroup(i)"
+                            class="btn btn-info-light"
+                            ><i class="fas fa-minus-circle"></i
+                          ></a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12"><hr class="hrr" /></div>
+                    <!--Additional document END -->
+
+                    <div class="form-row">
+                      <div class="col-12">
+                        <h4 class="mb-4">Affiliation/Accreditation Details</h4>
+                      </div>
+                      <div class="col-lg-4 col-sm-12 pt-lg-5">
+                        <div class="form-check">
+                          <label class="form-check-label" for="check2">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              id="check2"
+                              name="accredition"
+                              formControlName="accredition"
+                            />Accreditation and Affiliation**
+                          </label>
+                        </div>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            registrationDetails.controls.accredition.touched &&
+                            registrationDetails.controls.accredition.errors &&
+                            registrationDetails.controls.accredition.errors
+                              .required
+                          "
+                        >
+                          Mandatory for Organization Type - Institute
+                        </div>
+                      </div>
+                      <div class="form-holder col-lg-4 col-sm-12">
+                        <span class=""
+                          ><i class="fas fa-calendar-alt"></i> From Date**</span
+                        >
+                        <label class="form-row-inner">
+                          <input
+                            type="date"
+                            name="accreditionFrom"
+                            id="form-date"
+                            class=""
+                            formControlName="accreditionFrom"
+                          />
+
+                          <span class="border"></span>
+                        </label>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            registrationDetails.controls.accreditionFrom
+                              .touched &&
+                            registrationDetails.controls.accreditionFrom
+                              .errors &&
+                            registrationDetails.controls.accreditionFrom.errors
+                              .required
+                          "
+                        >
+                          Mandatory for Organization Type - Institute
+                        </div>
+                      </div>
+                      <div class="form-holder col-lg-4 col-sm-12">
+                        <span class=""
+                          ><i class="fas fa-calendar-alt"></i> To Date</span
+                        >
+                        <label class="form-row-inner">
+                          <input
+                            type="date"
+                            name="accreditionTo"
+                            id="to-date"
+                            class=""
+                            formControlName="accreditionTo"
+                          />
+
+                          <span class="border"></span>
+                        </label>
+                      </div>
+                      <div class="form-holder col-lg-5 col-sm-12">
+                        <label class="form-row-inner">
+                          <input
+                            type="text"
+                            name="issuingAuthority"
+                            id="authority"
+                            class="form-control"
+                            formControlName="issuingAuthority"
+                          />
+                          <span class="label">Issuing Authority**</span>
+                          <span class="border"></span>
+                        </label>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            registrationDetails.controls.issuingAuthority
+                              .touched &&
+                            registrationDetails.controls.issuingAuthority
+                              .errors &&
+                            registrationDetails.controls.issuingAuthority.errors
+                              .required
+                          "
+                        >
+                          Mandatory for Organization Type - Institute
+                        </div>
+                      </div>
+                      <div class="form-holder col-lg-5 col-sm-12">
+                        <label class="form-row-inner">
+                          <input
+                            type="text"
+                            name="grade"
+                            id="doc-number"
+                            class="form-control"
+                            formControlName="grade"
+                          />
+                          <span class="label">Grade</span>
+                          <span class="border"></span>
+                        </label>
+                      </div>
+
+                      <div class="form-holder col-lg-11 col-sm-12">
+                        <span class=""
+                          ><i class="fas fa-cloud-upload-alt"></i> Certificate
+                          Document</span
+                        >
+                        <label class="form-row-inner">
+                          <input
+                            type="file"
+                            name="certificateDocument"
+                            id="certificate-upload"
+                            class="form-control"
+                            formControlName="certificateDocument"
+                          />
+                        </label>
+                      </div>
+                      <div class="form-holder col-lg-5 col-sm-12">
+                        <label class="form-row-inner">
+                          <input
+                            type="text"
+                            name="certificateNumber"
+                            id="certificate-number"
+                            class="form-control"
+                            formControlName="certificateNumber"
+                          />
+                          <span class="label">Certificate Number</span>
+                          <span class="border"></span>
+                        </label>
+                      </div>
+                      <div class="col-lg-6 col-sm-12 pt-lg-4">
+                        <div class="form-check">
+                          <label class="form-check-label" for="status">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              id="status"
+                              name="certificateStatus"
+                              formControlName="certificateStatus"
+                            />Status
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <!-- SECTION 4 END -->
+                <!-- SECTION 5 START -->
+                <section [hidden]="currentStep !== 4">
+                  <div class="inner" formGroupName="settings">
+                    <h3>Setting</h3>
+                    <div class="form-row mb-4 mt-2">
+                      <div class="col-lg-6 col-sm-12">
+                        <div class="form-check">
+                          <label class="form-check-label" for="check2">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              id="check2"
+                              name="multifactorAuthentication"
+                              formControlName="multifactorAuthentication"
+                            />Multifactor Authentication*
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-sm-12">
+                        <div class="form-check">
+                          <label class="form-check-label" for="check2">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              id="check2"
+                              name="passwordAuthentication"
+                              formControlName="passwordAuthentication"
+                            />Password Authentication*
+                          </label>
+                        </div>
+                      </div>
+                      <div
+                        class="m-2 text-danger err"
+                        *ngIf="
+                          settings.errors &&
+                          settings.errors.noauthenticationvalidator
+                        "
+                      >
+                        Select atleast one authentication method*
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="col-12"><h4>Modules</h4></div>
+                      <div class="form-holder-2 col-lg-8 col-sm-12">
+                        <button
+                          class="btn-block label-multi-select text-left dropdown-toggle"
+                          type="button"
+                          data-toggle="dropdown"
+                        >
+                          Modules* <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a
+                              ><input
+                                type="checkbox"
+                                id="selectall3"
+                                [checked]="selectAllModules"
+                                (change)="selectAllModulesToggle($event)"
+                              />
+                              Select All</a
+                            >
+                            <ul
+                              class="list-style-none pl-3"
+                              formArrayName="modules"
+                              *ngFor="let item of moduleList; let ind = index"
+                            >
+                              <li>
+                                <a
+                                  ><input
+                                    type="checkbox"
+                                    class="selectedId3"
+                                    name="selectedId3"
+                                    [value]="item.type"
+                                    (change)="onModuleSelectChange(ind, $event)"
+                                    [checked]="item.value"
+                                  />
+                                  {{ item.type }}</a
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            settings.errors && settings.errors.nomodulevalidator
+                          "
+                        >
+                          Select atleast one module*
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end module multiselect section -->
+                  </div>
+                </section>
+                <!-- SECTION 6 -->
+                <section [hidden]="currentStep !== 5">
+                  <div class="inner" formGroupName="userDetails">
+                    <h3>Master User</h3>
+                    <div class="form-row">
+                      <div class="form-holder col-lg-4 col-sm-12">
+                        <label class="form-row-inner">
+                          <input
+                            type="text"
+                            name="firstName"
+                            id="f-name"
+                            class="form-control"
+                            formControlName="firstName"
+                          />
+                          <span class="label">First Name*</span>
+                          <span class="border"></span>
+                        </label>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            userDetails.controls.firstName.touched &&
+                            userDetails.controls.firstName.errors &&
+                            (userDetails.controls.firstName.errors.required ||
+                              userDetails.controls.firstName.errors
+                                .emptyvalidator)
+                          "
+                        >
+                          This field is required
+                        </div>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            userDetails.controls.firstName.errors &&
+                            userDetails.controls.firstName.errors.pattern
+                          "
+                        >
+                          Can have only letters, dots and spaces
+                        </div>
+                      </div>
+                      <div class="form-holder col-lg-4 col-sm-12">
+                        <label class="form-row-inner">
+                          <input
+                            type="text"
+                            name="middleName"
+                            id="m-name"
+                            class="form-control"
+                            formControlName="middleName"
+                          />
+                          <span class="label">Middle Name</span>
+                          <span class="border"></span>
+                        </label>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            userDetails.controls.middleName.errors &&
+                            userDetails.controls.middleName.errors.pattern
+                          "
+                        >
+                          Can have only letters, dots and spaces
+                        </div>
+                      </div>
+                      <div class="form-holder col-lg-4 col-sm-12">
+                        <label class="form-row-inner">
+                          <input
+                            type="text"
+                            name="lastName"
+                            id="l-name"
+                            class="form-control"
+                            formControlName="lastName"
+                          />
+                          <span class="label">Last Name</span>
+                          <span class="border"></span>
+                        </label>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            userDetails.controls.lastName.errors &&
+                            userDetails.controls.lastName.errors.pattern
+                          "
+                        >
+                          Can have only letters, dots and spaces
+                        </div>
+                      </div>
+                      <div class="form-holder col-lg-4 col-sm-12">
+                        <label class="form-row-inner">
+                          <input
+                            type="email"
+                            name="emailAddress"
+                            id="email"
+                            class="form-control"
+                            formControlName="emailAddress"
+                          />
+                          <span class="label">Email Address*</span>
+                          <span class="border"></span>
+                        </label>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            userDetails.controls.emailAddress.touched &&
+                            userDetails.controls.emailAddress.errors &&
+                            (userDetails.controls.emailAddress.errors
+                              .required ||
+                              userDetails.controls.emailAddress.errors
+                                .emptyvalidator)
+                          "
+                        >
+                          This field is required
+                        </div>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            userDetails.controls.emailAddress.errors &&
+                            userDetails.controls.emailAddress.errors.pattern
+                          "
+                        >
+                          Invalid Email Address
+                        </div>
+                      </div>
+                      <div class="form-holder col-lg-4 col-sm-12">
+                        <label class="form-row-inner">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="p-no"
+                            name="phoneNumber"
+                            formControlName="phoneNumber"
+                          />
+                          <span class="label">Phone Number*</span>
+                          <span class="border"></span>
+                        </label>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            userDetails.controls.phoneNumber.touched &&
+                            userDetails.controls.phoneNumber.errors &&
+                            (userDetails.controls.phoneNumber.errors.required ||
+                              userDetails.controls.phoneNumber.errors
+                                .emptyvalidator)
+                          "
+                        >
+                          This field is required
+                        </div>
+                        <div
+                          class="m-1 text-danger err"
+                          *ngIf="
+                            userDetails.controls.phoneNumber.errors &&
+                            userDetails.controls.phoneNumber.errors.pattern
+                          "
+                        >
+                          Invalid Phone Number
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end master section section -->
+                  </div>
+                </section>
+                <!-- SECTION 6 END -->
+                <!-- SECTION 7 START -->
+                <section [hidden]="currentStep !== 6">
+                  <div class="inner">
+                    <h3>Preview</h3>
+                    <div class="form-row">
+                      <div class="bg-light p-4">
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="row">
+                              <div class="col-lg-12 col-sm-12">
+                                <h5
+                                  data-toggle="collapse"
+                                  data-target="#basic"
+                                  class="pt-1 text-blue text-left text-capitalize"
+                                >
+                                  <i class="fas fa-arrows-alt"></i> Basic
+                                  Details
+                                </h5>
+                                <hr />
+                              </div>
+                            </div>
+                            <div
+                              class="row position-relative collapse show"
+                              id="basic"
+                            >
+                              <div class="col-lg-9 col-sm-12">
+                                <div class="row">
+                                  <div
+                                    class="col-lg-4 cl-sm-12 mb-3 form-group"
+                                  >
+                                    <label>Organization Type</label>
+                                    <h5
+                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                    >
+                                      {{
+                                        addOrganizationForm.controls.orgType
+                                          .value
+                                      }}
+                                    </h5>
+                                  </div>
+                                  <div
+                                    class="col-lg-8 cl-sm-12 mb-3 form-group"
+                                  >
+                                    <label>Institute Type</label>
+                                    <h5
+                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                    >
+                                      <span
+                                        *ngFor="
+                                          let item of instituteTypeFormArray.value
+                                        "
+                                        >{{ item }}</span
+                                      >
+                                    </h5>
+                                  </div>
+
+                                  <div class="col-lg-12 col-sm-12">
+                                    <div class="form-group">
+                                      <label for="multipleSelect">
+                                        Organization Name
+                                      </label>
+                                      <h5
+                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                      >
+                                        {{
+                                          addOrganizationForm.controls
+                                            .basicDetails['controls']
+                                            .organizationName.value
+                                        }}
+                                      </h5>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-8 col-sm-12">
+                                    <div class="form-group">
+                                      <label for="multipleSelect">
+                                        Organization Short Code
+                                      </label>
+                                      <h5
+                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                      >
+                                        {{
+                                          addOrganizationForm.controls
+                                            .basicDetails['controls']
+                                            .organizationCode.value
+                                        }}
+                                      </h5>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="col-lg-3 col-sm-12">
+                                <div class="form-group">
+                                  <label for="multipleSelect">
+                                    Organization Picture </label
+                                  ><br />
+                                  <img
+                                    id="imgPlaceholder"
+                                    class="img-fluid"
+                                    src="{{
+                                      addOrganizationForm.controls.basicDetails[
+                                        'controls'
+                                      ].fileChoosen.value
+                                    }}"
+                                    alt="image upload"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- basic details end end-->
+
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="row">
+                              <div class="col-lg-12 col-sm-12">
+                                <hr />
+                                <h5
+                                  data-toggle="collapse"
+                                  data-target="#contactdetails"
+                                  class="pt-1 text-blue text-left text-capitalize"
+                                >
+                                  <i class="fas fa-arrows-alt"></i> Contact
+                                  Details
+                                </h5>
+                                <hr />
+                              </div>
+                            </div>
+                            <div
+                              class="row position-relative collapse"
+                              id="contactdetails"
+                            >
+                              <!-- Address Display -->
+                              <div
+                                class="form-row col-lg-12"
+                                *ngFor="let control of addressArray['controls']"
+                              >
+                                <div class="col-lg-3 cl-sm-12 mb-3 form-group">
+                                  <label for="addressFor">Address For</label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.addressFor.value }}
+                                  </h5>
+                                </div>
+
+                                <div class="col-lg-9 col-sm-12">
+                                  <div class="form-group">
+                                    <label for="address"> Address </label>
+                                    <h5
+                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                    >
+                                      {{ control.controls.address.value }}
+                                    </h5>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- Address Display Ends -->
+                              <!-- Phone Display Starts -->
+                              <div
+                                class="form-row col-lg-12"
+                                *ngFor="
+                                  let control of phoneArray['controls'];
+                                  let i = index
+                                "
+                              >
+                                <div class="col-lg-4 col-sm-12 mb-3 form-group">
+                                  <label for="phoneno">Phone Text</label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.phoneText.value }}
+                                  </h5>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 mb-3 form-group">
+                                  <label for="addressFor">Phone Number</label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.phoneNumber.value }}
+                                  </h5>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 mb-3 form-group">
+                                  <label for="phoneType">Phone Type</label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.phoneType.value }}
+                                  </h5>
+                                </div>
+                                <div class="col-lg-3 col-sm-12 mb-3 form-group">
+                                  <label for="timings">Timings</label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.timing.value }}
+                                  </h5>
+                                </div>
+                                <div class="col-lg-9 col-sm-12 mb-3 form-group">
+                                  <label for="days">Days</label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    <span
+                                      *ngFor="let item of daysArray(i).value"
+                                      >{{ item }}</span
+                                    >
+                                  </h5>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 mb-3 form-group">
+                                  <label for="shift">Shift</label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.shift.value }}
+                                  </h5>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 mb-3 form-group">
+                                  <label for="associatedWith"
+                                    >Associated with</label
+                                  >
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.associatedWith.value }}
+                                  </h5>
+                                </div>
+                              </div>
+                              <!-- Phone Display Ends -->
+                              <hr />
+                              <!-- Email Display -->
+                              <div
+                                class="form-row col-lg-12"
+                                *ngFor="let control of emailArray['controls']"
+                              >
+                                <div class="col-lg-4 col-sm-12 mb-3 form-group">
+                                  <label for="emailText">Email Text</label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.emailText.value }}
+                                  </h5>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 mb-3 form-group">
+                                  <label for="emailAddress"
+                                    >Email Address</label
+                                  >
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.emailAddress.value }}
+                                  </h5>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 mb-3 form-group">
+                                  <label for="emailType">Email Type</label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.emailType.value }}
+                                  </h5>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 mb-3 form-group">
+                                  <label for="shift">Shift</label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.shift.value }}
+                                  </h5>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 mb-3 form-group">
+                                  <label for="associatedWith"
+                                    >Associated with</label
+                                  >
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                  >
+                                    {{ control.controls.associatedWith.value }}
+                                  </h5>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Contact details end end-->
+
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="row">
+                              <div class="col-lg-12 col-sm-12">
+                                <hr />
+                                <h5
+                                  data-toggle="collapse"
+                                  data-target="#regMainDetails"
+                                  class="pt-1 text-blue text-left text-capitalize"
+                                >
+                                  <i class="fas fa-arrows-alt"></i>
+                                  Registration Details
+                                </h5>
+                                <hr />
+                              </div>
+                            </div>
+                            <div
+                              class="row position-relative collapse"
+                              id="regMainDetails"
+                            >
+                              <div class="col-lg-12 col-sm-12">
+                                <div class="row">
+                                  <div
+                                    class="col-lg-4 cl-sm-12 mb-3 form-group"
+                                  >
+                                    <label for="orgCategory"
+                                      >Organization Category</label
+                                    >
+                                    <h5
+                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                    >
+                                      {{
+                                        addOrganizationForm.controls
+                                          .registrationDetails['controls']
+                                          .organizationCategory.value
+                                      }}
+                                    </h5>
+                                  </div>
+                                  <div
+                                    class="col-lg-4 cl-sm-12 mb-3 form-group"
+                                  >
+                                    <label for="regNo"
+                                      >Registration Number</label
+                                    >
+                                    <h5
+                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                    >
+                                      {{
+                                        addOrganizationForm.controls
+                                          .registrationDetails['controls']
+                                          .registrationNumber.value
+                                      }}
+                                    </h5>
+                                  </div>
+
+                                  <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                      <label for="regDoc">
+                                        Registration Document
+                                      </label>
+                                      <h5
+                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                      >
+                                        {{
+                                          addOrganizationForm.controls
+                                            .registrationDetails['controls']
+                                            .registrationDocument.value
+                                        }}
+                                      </h5>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                      <label for="multipleSelect">
+                                        Valid Up to
+                                      </label>
+                                      <h5
+                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                      >
+                                        {{
+                                          addOrganizationForm.controls
+                                            .registrationDetails['controls']
+                                            .validUpto.value
+                                        }}
+                                      </h5>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-12">
+                                    <hr />
+                                  </div>
+                                </div>
+                                <div
+                                  class="row"
+                                  *ngFor="
+                                    let control of additionalDocumentArray[
+                                      'controls'
+                                    ]
+                                  "
+                                >
+                                  <div
+                                    class="col-lg-4 cl-sm-12 mb-3 form-group"
+                                  >
+                                    <label for="docType">Document Type</label>
+                                    <h5
+                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                    >
+                                      {{ control.controls.documentType.value }}
+                                    </h5>
+                                  </div>
+                                  <div
+                                    class="col-lg-4 cl-sm-12 mb-3 form-group"
+                                  >
+                                    <label for="docNo">Document Number</label>
+                                    <h5
+                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                    >
+                                      {{
+                                        control.controls.documentNumber.value
+                                      }}
+                                    </h5>
+                                  </div>
+
+                                  <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                      <label for="regDoc">
+                                        Registration Document
+                                      </label>
+                                      <h5
+                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                      >
+                                        {{
+                                          control.controls.registrationDocument
+                                            .value
+                                        }}
+                                      </h5>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                      <label for="multipleSelect">
+                                        Valid Up to
+                                      </label>
+                                      <h5
+                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                      >
+                                        {{ control.controls.validUpto.value }}
+                                      </h5>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Registration details end -->
+
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="row">
+                              <div class="col-lg-12 col-sm-12">
+                                <hr />
+                                <h5
+                                  data-toggle="collapse"
+                                  data-target="#affiliation"
+                                  class="pt-1 text-blue text-left text-capitalize"
+                                >
+                                  <i class="fas fa-arrows-alt"></i>
+                                  Affiliation/Accreditation Details
+                                </h5>
+                                <hr />
+                              </div>
+                            </div>
+                            <div
+                              class="row position-relative collapse"
+                              id="affiliation"
+                            >
+                              <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                <label>From Date</label>
+                                <h5
+                                  class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                >
+                                  {{
+                                    addOrganizationForm.controls
+                                      .registrationDetails['controls']
+                                      .accreditionFrom.value
+                                  }}
+                                </h5>
+                              </div>
+                              <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                <label>To Date</label>
+                                <h5
+                                  class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                >
+                                  {{
+                                    addOrganizationForm.controls
+                                      .registrationDetails['controls']
+                                      .accreditionTo.value
+                                  }}
+                                </h5>
+                              </div>
+
+                              <div class="col-lg-4 col-sm-12">
+                                <div class="form-group">
+                                  <label> Issuing Authority </label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                  >
+                                    {{
+                                      addOrganizationForm.controls
+                                        .registrationDetails['controls']
+                                        .issuingAuthority.value
+                                    }}
+                                  </h5>
+                                </div>
+                              </div>
+                              <div class="col-lg-2 col-sm-12">
+                                <div class="form-group">
+                                  <label for="grade"> Grade </label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                  >
+                                    {{
+                                      addOrganizationForm.controls
+                                        .registrationDetails['controls'].grade
+                                        .value
+                                    }}
+                                  </h5>
+                                </div>
+                              </div>
+                              <div class="col-lg-4 col-sm-12">
+                                <div class="form-group">
+                                  <label for="grade">
+                                    Certificate Document
+                                  </label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                  >
+                                    {{
+                                      addOrganizationForm.controls
+                                        .registrationDetails['controls']
+                                        .certificateDocument.value
+                                    }}
+                                  </h5>
+                                </div>
+                              </div>
+                              <div class="col-lg-4 col-sm-12">
+                                <div class="form-group">
+                                  <label for="grade">
+                                    Certificate Number
+                                  </label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                  >
+                                    {{
+                                      addOrganizationForm.controls
+                                        .registrationDetails['controls']
+                                        .certificateNumber.value
+                                    }}
+                                  </h5>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Affiliation/Accreditation details end -->
+
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="row">
+                              <div class="col-lg-12 col-sm-12">
+                                <hr />
+                                <h5
+                                  data-toggle="collapse"
+                                  data-target="#setting"
+                                  class="pt-1 text-blue text-left text-capitalize"
+                                >
+                                  <i class="fas fa-arrows-alt"></i> Setting
+                                </h5>
+                                <hr />
+                              </div>
+                            </div>
+                            <div
+                              class="row position-relative collapse"
+                              id="setting"
+                            >
+                              <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                <label>Authentication</label>
+                                <h5
+                                  class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                >
+                                  {{
+                                    addOrganizationForm.controls.settings[
+                                      'controls'
+                                    ].passwordAuthentication.value
+                                      ? ' Password '
+                                      : ''
+                                  }}
+                                  {{
+                                    addOrganizationForm.controls.settings[
+                                      'controls'
+                                    ].multifactorAuthentication.value
+                                      ? ' Multifactor Authentication '
+                                      : ''
+                                  }}
+                                </h5>
+                              </div>
+                              <div class="col-lg-8 col-sm-12">
+                                <div class="form-group">
+                                  <label for="grade"> Modules </label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                  >
+                                    <span
+                                      *ngFor="let item of moduleArray.value"
+                                      >{{ item }}</span
+                                    >
+                                  </h5>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Setting end-->
+
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="row">
+                              <div class="col-lg-12 col-sm-12">
+                                <hr />
+                                <h5
+                                  data-toggle="collapse"
+                                  data-target="#masterUser"
+                                  class="pt-1 text-blue text-left text-capitalize"
+                                >
+                                  <i class="fas fa-arrows-alt"></i> Master User
+                                </h5>
+                                <hr />
+                              </div>
+                            </div>
+                            <div
+                              class="row position-relative collapse"
+                              id="masterUser"
+                            >
+                              <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                <label>First Name</label>
+                                <h5
+                                  class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
+                                >
+                                  {{
+                                    addOrganizationForm.controls.userDetails[
+                                      'controls'
+                                    ].firstName.value
+                                  }}
+                                </h5>
+                              </div>
+                              <div class="col-lg-4 col-sm-12">
+                                <div class="form-group">
+                                  <label> Middle Name </label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                  >
+                                    {{
+                                      addOrganizationForm.controls.userDetails[
+                                        'controls'
+                                      ].middleName.value
+                                    }}
+                                  </h5>
+                                </div>
+                              </div>
+                              <div class="col-lg-4 col-sm-12">
+                                <div class="form-group">
+                                  <label> Last Name </label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                  >
+                                    {{
+                                      addOrganizationForm.controls.userDetails[
+                                        'controls'
+                                      ].lastName.value
+                                    }}
+                                  </h5>
+                                </div>
+                              </div>
+                              <div class="col-lg-4 col-sm-12">
+                                <div class="form-group">
+                                  <label> Email Address </label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                  >
+                                    {{
+                                      addOrganizationForm.controls.userDetails[
+                                        'controls'
+                                      ].emailAddress.value
+                                    }}
+                                  </h5>
+                                </div>
+                              </div>
+                              <div class="col-lg-4 col-sm-12">
+                                <div class="form-group">
+                                  <label> Phone Number </label>
+                                  <h5
+                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
+                                  >
+                                    {{
+                                      addOrganizationForm.controls.userDetails[
+                                        'controls'
+                                      ].phoneNumber.value
+                                    }}
+                                  </h5>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Setting end-->
+                      </div>
+                    </div>
+                  </div>
+                  <!-- end module multiselect section -->
+                </section>
+              </form>
+              <footer class="footer-bottom">
+                <a href="#">
+                  <img
+                    src="/assets/images/float-support.png"
+                    alt="support"
+                    class="float-support"
+                  />
+                </a>
+                <a href="#"
+                  ><img
+                    src="/assets/images/float-chat.png"
+                    alt="chat"
+                    class="float-chat"
+                  />
+                </a>
+              </footer>
+            </div>
+            <div class="actions clearfix">
+              <ul role="menu" aria-label="Pagination">
+                <li class="btn btn-primary" [hidden]="currentStep === 0">
+                  <a role="menuitem" (click)="previousStep()">Back Step</a>
+                </li>
+                <li class="btn btn-primary" [hidden]="currentStep === 6">
+                  <a role="menuitem" (click)="nextStep()">Next Step</a>
+                </li>
+                <li class="btn btn-success" [hidden]="currentStep !== 6">
+                  <a role="menuitem" (click)="onSubmit()">Submit</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

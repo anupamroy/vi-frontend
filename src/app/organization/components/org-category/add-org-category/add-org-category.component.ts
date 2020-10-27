@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrganizationCategoryService } from '../Services/organization-category.service'
 import Swal from 'sweetalert2'
-
+import { OrganizationCategory } from '../../../../shared/models/org-catagory';
 @Component({
   selector: 'app-add-org-category',
   templateUrl: './add-org-category.component.html',
@@ -32,10 +32,11 @@ export class AddOrgCategoryComponent implements OnInit {
   }
   
   onSubmit(){
-    const orgCategoryObj = {
-      orgCategory : this.orgCategory,
-      isActivated: true
-    }
+    const orgCategoryObj = new OrganizationCategory();
+    orgCategoryObj.organizationCategory = this.orgCategory;
+    orgCategoryObj.isActivated = true;
+    orgCategoryObj.isDeleted = false;
+    
 
     console.log(orgCategoryObj)
 

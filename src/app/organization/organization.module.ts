@@ -10,7 +10,7 @@ import { EditInstituteTypeComponent } from './components/institute-type/edit-ins
 import { ListInstituteTypeComponent } from './components/institute-type/list-institute-type/list-institute-type.component';
 import { ViewMastersComponent } from './components/view-masters/view-masters.component';
 import { EditMastersComponent } from './components/edit-masters/edit-masters.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddAssociatedPostComponent } from './components/associated-post/add-associated-post/add-associated-post.component';
 import { EditAssociatedPostComponent } from './components/associated-post/edit-associated-post/edit-associated-post.component';
 import { ListAssociatedPostComponent } from './components/associated-post/list-associated-post/list-associated-post.component';
@@ -31,6 +31,8 @@ import { AddPackageComponent } from './components/packages-master/add-package/ad
 import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
 import { ListPackageComponent } from './components/packages-master/list-package/list-package.component';
 import { ListDetailOrganizationComponent } from './components/list-detail-organization/list-detail-organization.component';
+import { AddOrganizationComponent } from './components/add-organization/add-organization.component';
+import { EditOrganizationComponent } from './components/edit-organization/edit-organization.component';
 
 @NgModule({
     declarations: [
@@ -61,8 +63,10 @@ import { ListDetailOrganizationComponent } from './components/list-detail-organi
         AddPackageComponent,
         EditPackageComponent,
         ListPackageComponent,
-        ListDetailOrganizationComponent
+        ListDetailOrganizationComponent,
+        AddOrganizationComponent,
+        EditOrganizationComponent
     ],
-    imports: [CommonModule, OrganizationRoutingModule, FormsModule],
+    imports: [CommonModule, OrganizationRoutingModule, FormsModule, ReactiveFormsModule],
 })
 export class OrganizationModule {}

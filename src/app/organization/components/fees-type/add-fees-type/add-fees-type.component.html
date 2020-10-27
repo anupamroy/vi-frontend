@@ -1,4 +1,85 @@
 <div class="bg-light-blue" style="height:100%">
+    <!-- Navigation -->
+    <nav
+        class="navbar navbar-expand-lg navbar-light bg-light-yellow navbar-nav p-0"
+        id="mainNav"
+    >
+        <a
+            class="navbar-brand js-scroll-trigger pl-5 pr-3 pt-0 pb-0 dx-block"
+            href="#page-top"
+        >
+            <img src="/assets/images/mtjh.png" class="logo" alt="logo" />
+        </a>
+        <div class="container-fluid">
+            <a
+                class="navbar-brand js-scroll-trigger mb-block pl-1"
+                href="#page-top"
+            >
+                <img src="/assets/images/mtjh.png" class="logo" alt="logo" />
+            </a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse pl-lg-0" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <span class="nav-link institute-title" href="#"
+                            >DUM DUM MOTIJHEEL COLLEGE
+                            <span class="sr-only">(current)</span></span
+                        >
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdownMenuLink"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            ><img
+                                src="/assets/images/profile-pic.jpg"
+                                alt="profile pic"
+                                class="img-stu-profile"
+                            />
+                            Pritam Deb Nath
+                        </a>
+                        <small class="regNo">Department : Accounts</small>
+                        <div
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <a class="dropdown-item" href="#"
+                                >Sign Out <i class="fas fa-sign-out-alt"></i
+                            ></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- <section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 dashboard-logo mt-3 text-center cus-wave">
+                <img src="assest/images/logo.png" alt="Logo" class="img-nta-logo">
+                <span class="nta-logo-text">NTA e Solutions Private Limited</span>
+            </div>
+        </div>
+    </div>
+</section> -->
+
     <section class="stu-dashboard mt-5">
         <div class="container">
             <div class="row">
@@ -19,83 +100,75 @@
                         <form class="bg-light p-4" action="">
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
-                                    <h5
-                                        class="pb-3 pt-1 text-blue text-left text-capitalize"
-                                    >
+                                    <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
                                         <i class="fas fa-arrows-alt"></i>
                                         Add Fees Type
-                                        <span class="float-right"
-                                            ><a
-                                                class="btn mb-3"
-                                                routerLink="../list-fees-type"
-
-                                            >
-                                                <i 
-                                                class="fas fa-eye"
-                                                ></i> View
+                                        <span class="float-right"><a class="btn mb-3" routerLink="../list-fees-type">
+                                                <i class="fas fa-eye"></i> View
                                             </a>
                                         </span>
                                     </h5>
-                                    <div [hidden]="enableAlert()" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
-                                        Special Characters and Numbers are not Allowed
-                                     </div>
-                                     
-                                     <div [hidden]="!enableButton()||!feesTypeControl.dirty" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
-                                        Fees Type cannot be blank
-                                     </div>
                                 </div>
-                                <!--  <div class="col-lg-3 col-sm-12">
-                            <button type="submit" class="btn-mat"><span>View Department</span></button>
-                        </div> -->
                             </div>
 
-                            
-                            
+                            <div [hidden]="!enableButton()||!feesTypeControl.dirty" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
+                                Fees Type cannot be blank
+                             </div>
+                             <div [hidden]="enableAlert()" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
+                                Special Characters and Numbers are not Allowed
+                             </div>
+
+                             <div [hidden]="true" class="m-1 p-2 alert alert-success" id="alert" role="alert">
+                                Data Saved Successfully!!
+                             </div>
+
+                             
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
-                                    <div
-                                        class="bg-light-yellow ml-1 mr-1 p-3 row position-relative"
-                                    >
-                                        <div
-                                            class="col-lg-9 cl-sm-12 mb-3 form-group"
-                                        >
-                                            <label for="instituteType"
-                                                >Fees Type</label
-                                            >
-                                            <input
-                                                data-toggle="tooltip"
-                                                data-placement="bottom"
-                                                title="Demo tooltip text"
-                                                type="text"
-                                                name="feesType"
-                                                id="instituteType"
-                                                class="form-control inputFocus"
-                                                placeholder="Fees Type"
-                                                required
-                                                minlength="1"
-                                                maxlength="25"
-                                                [(ngModel)]="feesType"
-                                                #feesTypeControl="ngModel"
-                                                 
-                                            />
+                                    <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
+                                        <div class="col-lg-12 col-sm-12 mb-3 form-group">
+                                            <label for="instituteType">Fees Type</label>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <input
+                                                        data-toggle="tooltip"
+                                                        data-placement="bottom"
+                                                        title="Demo tooltip text"
+                                                        type="text"
+                                                        name="feesType"
+                                                        id="instituteType"
+                                                        class="form-control inputFocus"
+                                                        placeholder="Fees Type"
+                                                        required
+                                                        minlength="1"
+                                                        maxlength="25"
+                                                        [(ngModel)]="feesType"
+                                                        #feesTypeControl="ngModel"
+                         
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <div class="button-container mt-3 text-center float-right">
+                                                        <button [disabled]="enableButton()||!enableAlert()"
+                        type="button"
+                        id="cusEdit"
+                        class="btn btn-warning btn-common-color btn-lg mt-3 text-white"
+                        (click) = 'onSubmit()'
+                    >
+                        <span>
+                            Add
+                            <i
+                                class="fas fa-caret-right btn-style1"
+                            ></i
+                        ></span>
+                    </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div
-                                            class="col-lg-3 button-container mt-3 text-center"
-                                        >
-                                            <button [disabled]="enableButton()||!enableAlert()"
-                                                type="button"
-                                                id="cusEdit"
-                                                class="btn btn-warning btn-common-color btn-lg mt-3 text-white"
-                                                (click) = 'onSubmit()'
-                                            >
-                                                <span>
-                                                    Add
-                                                    <i
-                                                        class="fas fa-caret-right btn-style1"
-                                                    ></i
-                                                ></span>
-                                            </button>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
